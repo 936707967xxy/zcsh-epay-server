@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+  
+<mapper namespace="com.froad.agre.modules.user.mapper.FrMgSessionMapper">  
+    <select id="loadSessByLoginName" parameterType="string" resultType="FrMgSession">
+		select ID as id ,LOGIN_NAME as loginName,TOKEN as token,DATA as data,CREATE_TIME as createTime 
+		from FR_MG_SESSION WHERE LOGIN_NAME=#{loginName}
+    </select>
+    <select id="loadSessionByToken" parameterType="string" resultType="FrMgSession">
+		select ID as id ,LOGIN_NAME as loginName,TOKEN as token,DATA as data,CREATE_TIME as createTime 
+		from FR_MG_SESSION WHERE TOKEN=#{token}
+    </select>
+    <select id="loadSessionByUserId" parameterType="string" resultType="FrMgSession">
+		select fms.ID as id ,fms.LOGIN_NAME as loginName,fms.TOKEN as token 
+		from FR_MG_SESSION fms
+		left join FR_MG_USER fmu on fms.LOGIN_NAME=fmu.LOGIN_NAME
+		WHERE fmu.id=#{id}
+    </select>
+	<insert id="insertSession">
+		insert into FR_MG_SESSION (LOGIN_NAME, TOKEN, DATA,CREATE_TIME)
+		values(#{loginName},#{token},#{data},#{createTime})
+	</insert>
+	<delete id="delSession" parameterType="string">
+    	delete from FR_MG_SESSION where token = #{token}
+  	</delete>
+	<update id="updateSessByLoginName" parameterType="FrMgSession">
+		UPDATE FR_MG_SESSION
+		<set>
+			<if test="token!=null">TOKEN=#{token},</if>
+          	<if test="createTime!=null">CREATE_TIME=#{createTime},</if>
+          	<if test="data!=null">DATA=#{data}</if>
+        </set>
+		WHERE LOGIN_NAME=#{loginName}
+	</update>
+	<update id="updateSessByToken" parameterType="FrMgSession">
+		UPDATE FR_MG_SESSION set CREATE_TIME=#{createTime}
+		WHERE token=#{token}
+	</update>
+	<!-- 根据法人行生成管理员用户 -->
+	<select id="queryData" resultType="java.util.HashMap">
+		select org_name || '管理员' as name, 'arcu'|| left(t.org_code,6) as loginName,org_code as orgCode from FR_ORG t where ((t.PRO_ORG_CODE is not null and t.PRO_ORG_CODE!='') and (t.CITY_ORG_CODE is null or t.CITY_ORG_CODE='')) and t.org_name not like '%村镇银行%'
+	</select>
+</mapper>  

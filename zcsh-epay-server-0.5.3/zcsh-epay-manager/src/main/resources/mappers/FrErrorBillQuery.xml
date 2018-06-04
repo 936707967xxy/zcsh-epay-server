@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.froad.agre.modules.bill.mapper.ErrorBillQueryMapper">
+
+ <!-- 下载差错账单信息 -->
+  <select id="queryDownloadErrorBillList" parameterType="com.froad.agre.modules.bill.vo.req.ErrorBillQueryVoReq" resultType="com.froad.agre.modules.bill.vo.resp.ErrorBillQueryVoResp">
+		<include refid="coreSql"/>
+    </select>
+    <sql id="coreSql">
+       SELECT 
+		fr.CHN_PAY_NO AS payChannelNO,
+		fr.ORDER_ID AS systemNO,
+		fr.THIRD_AMOUNT AS payChannelMoney,
+		fr.FROAD_AMOUNT AS systemMoney,
+		fr.TYPE AS billType,
+		fr.RECON_STATUS AS reconResult,
+		fr.RECON_STATUS AS errorMessage,
+		fr.DEAL_STATUS AS cerrentStatus,
+		fr.DEAL_REMARK AS apare,
+        fr.PAY_CHANNEL AS tradeType,
+        fo.SOURCE_CHANNEL AS requestChannelNo,
+        fr.FILE_DATE AS billDate
+         <if test="queryType!=null and queryType!='' ">
+		    <if test='queryType=="1"'>
+		       FROM FR_RECON fr
+               LEFT JOIN FR_ORDER fo ON fr.ORDER_ID=fo.ORDER_ID
+		   </if>
+		    <if test='queryType=="2"'>
+		       FROM FR_RECON_NINETY fr
+               LEFT JOIN FR_ORDER_NINETY fo ON fr.ORDER_ID=fo.ORDER_ID
+		   </if>
+		    <if test='queryType=="3"'>
+		      FROM FR_RECON_HIS fr
+              LEFT JOIN FR_ORDER_HIS fo ON fr.ORDER_ID=fo.ORDER_ID
+		   </if>
+		 </if>
+		<where>
+		1=1 
+		<if test="billDate !=null and billDate!=''">
+		    AND fr.FILE_DATE = #{billDate}
+		</if>
+		<if test="billType !=null and billType!='' ">
+			AND fr.TYPE =#{billType}
+		</if>
+		<if test="payChannelNO !=null and payChannelNO!=''">
+		  AND fr.CHN_PAY_NO =#{payChannelNO}
+		</if>
+		<if test="systemNO !=null and systemNO!=''" >
+			AND fr.ORDER_ID =#{systemNO}
+		</if>
+		 <if test="reconResult!=null or reconResult!='' ">
+			 <if test='reconResult=="1"'>
+			     AND fr.RECON_STATUS ='OK'
+			  </if>
+			  <if test='reconResult=="0"' >
+		         AND fr.RECON_STATUS !='OK'
+		  </if>
+		 </if>
+		<if test="errorMessage !=null and errorMessage!='' ">
+		 <if test='errorMessage=="00" '>
+			     AND fr.RECON_STATUS ='OK'
+			  </if>
+			  <if test='errorMessage=="01" ' >
+		         AND fr.RECON_STATUS = 'EF'
+		      </if>
+			  <if test='errorMessage=="02"' >
+		         AND fr.RECON_STATUS = 'ET'
+		      </if>
+			  <if test='errorMessage=="03"' >
+		         AND fr.RECON_STATUS = 'EL'
+		      </if>
+			  <if test='errorMessage=="04"' >
+		         AND fr.RECON_STATUS ='ES'
+		      </if>
+		</if>
+		<if test="tradeType !=null and tradeType!='' ">
+			AND fr.PAY_CHANNEL =#{tradeType}
+		</if>
+		<if test="requestChannelNo !=null and requestChannelNo!='' ">
+		     AND fo.SOURCE_CHANNEL IN('02','03')
+			AND  fo.SOURCE_CHANNEL =#{requestChannelNo}
+		</if>
+		<if test="cerrentStatus !=null and cerrentStatus!='' ">
+			AND fr.DEAL_STATUS =#{cerrentStatus}
+		</if>
+		ORDER BY fr.CREATE_TIME,fr.ORDER_ID DESC
+		</where>
+	</sql>
+	
+	
+	
+	<!-- 日账单-详情-差错处理 -->
+	<update id="dealErrorBillList" parameterType="com.froad.agre.modules.bill.vo.req.ErrorBillQueryVoReq">
+     UPDATE  
+     <if test="queryType!=null and queryType!='' ">
+		    <if test='queryType=="1"'>
+		        FR_RECON fr
+		   </if>
+		    <if test='queryType=="2"'>
+		        FR_RECON_NINETY fr
+		   </if>
+		    <if test='queryType=="3"'>
+		       FR_RECON_HIS fr
+		   </if>
+		 </if>
+     SET fr.DEAL_STATUS ='1' ,
+     fr.UPDATE_TIME=#{updateTime},
+     fr.DEAL_REMARK=#{apare}
+      <where>
+      fr.ORDER_ID = #{systemNO} AND fr.CHN_PAY_NO=#{payChannelNO}
+      </where>
+  </update>
+  
+  
+  </mapper>

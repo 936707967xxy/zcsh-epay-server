@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.froad.agre.modules.merchant.mapper.FrMerchantMapper">
+
+     <select id="queryMerchantList" parameterType="com.froad.agre.modules.merchant.vo.req.QueryMerchantReq" resultType="com.froad.agre.modules.merchant.vo.resp.QueryMerchantRes">
+		<include refid="coreSql"/>
+		<include refid="queryDynSql" /> 
+		<include refid="desc" /> 
+    </select>  
+    
+    
+    <sql id="coreSql">
+    	    SELECT
+    	    distinct
+		    fm.MERCHANT_ID                                        AS merchantId,
+		    fm.MERCHANT_FULLNAME                                  AS merchantName,
+		    fm.BAK2 AS wechantBankRate,
+            fm.BAK3 AS alipayBankRate,
+            fm.BAK4 AS settleCycle,
+            fm.CITY_ORG_CODE AS orgCodeBank,
+            (SELECT IS_SUPPORT  FROM FR_MERCHANT_INTO  WHERE MERCHANT_ID=fm.MERCHANT_ID AND INTO_CHANNEL='00' AND STATUS='1') AS wechatSuportChannel,
+            (SELECT IS_SUPPORT  FROM FR_MERCHANT_INTO  WHERE MERCHANT_ID=fm.MERCHANT_ID AND INTO_CHANNEL='01' AND STATUS='1') AS alipaySuportChannel,
+		    (SELECT distinct a.CHANNEL  FROM FR_MERCHANT_CHANNEL a
+            WHERE a.MERCHANT_ID=fc.MERCHANT_ID  and a.CHANNEL='01') AS intoIsBank, 
+            (SELECT distinct a.CHANNEL  FROM FR_MERCHANT_CHANNEL a
+            WHERE a.MERCHANT_ID=fc.MERCHANT_ID  and a.CHANNEL='00') AS intoIsPOS, 
+            (SELECT a.CHANNEL  FROM FR_MERCHANT_CHANNEL a
+            WHERE a.MERCHANT_ID=fc.MERCHANT_ID  and a.INTO_SUCCESS_TIME is not null) AS intoChannelType, 
+		    TO_CHAR((SELECT a.INTO_SUCCESS_TIME   FROM FR_MERCHANT_CHANNEL a 
+            WHERE a.MERCHANT_ID=fc.MERCHANT_ID and a.INTO_SUCCESS_TIME is not null),'yyyy-MM-dd HH24:mi:ss') AS intoTime,
+		    fm.LIC_NO                                             AS businessNO,
+		    wechat.SUB_MERCHANT_ID AS wechatPayMerchantNO,
+		    alipay.SUB_MERCHANT_ID AS alipayMerchantNO,
+		    fm.ORG_CODE           AS orgCode,
+		    fc.STATUS             AS Status,
+		    fma.ACCOUNT_NAME      AS settlName,
+		    fma.ACCOUNT_NO        AS settlAccount,
+		    fm.CITY_ORG_NAME      AS OrgName,
+		    fm.ORG_NAME           AS orgBank
+		    FROM
+		    FR_MERCHANT_CHANNEL fc
+		    LEFT JOIN
+		    FR_MERCHANT fm
+		    ON
+		    fc.MERCHANT_ID=fm.MERCHANT_ID
+		    LEFT JOIN
+		    FR_MERCHANT_ACCOUNT fma
+		    ON
+		    fma.MERCHANT_ID=fm.MERCHANT_ID
+		    LEFT JOIN 
+		    (SELECT
+		    o.MERCHANT_ID,  o.SUB_MERCHANT_ID
+		    FROM
+		    FR_MERCHANT_INTO o
+		    WHERE o.STATUS='1' and o.INTO_CHANNEL=#{inToChannelWechat}) wechat
+			on wechat.MERCHANT_ID=fc.MERCHANT_ID
+			LEFT JOIN 
+			(SELECT
+		    o.MERCHANT_ID,  o.SUB_MERCHANT_ID
+		    FROM
+		    FR_MERCHANT_INTO o
+		    WHERE o.STATUS='1' and o.INTO_CHANNEL=#{inToChannelAlipay}) alipay 
+		     on alipay.MERCHANT_ID=fc.MERCHANT_ID
+	</sql>
+	<sql id = "queryDynSql">
+		<where>
+			fm.IS_DELETE='0' AND fm.status='1' 
+			and (fm.ORG_CODE = #{JGM}
+		 		or fm.CITY_ORG_CODE = #{JGM}
+		 		or fm.PRO_ORG_CODE = #{JGM})
+			<!-- AND fm.ORG_CODE IN (
+		    	SELECT ORG_CODE FROM FR_ORG
+		        WHERE ENABLE='0' AND ( 
+		        	ORG_CODE = #{JGM} OR CITY_ORG_CODE=#{JGM} OR PRO_ORG_CODE=#{JGM})
+        	) -->
+			<if test="merchantName != null and merchantName!=''">
+				and fm.MERCHANT_FULLNAME  LIKE '%' || #{merchantName} || '%'
+			</if>
+			<if test="intoChannelType != null and intoChannelType!='' " >
+				and fc.CHANNEL = #{intoChannelType}
+				and fc.INTO_SUCCESS_TIME is not null
+			</if>
+			<if test="intoSDate != null and intoSDate!='' ">
+				<![CDATA[ and fc.INTO_SUCCESS_TIME >= #{intoSDate}||' 00:00:00' ]]>
+			</if>
+			<if test="intoEDate != null and intoEDate!='' ">
+			  	<![CDATA[ and fc.INTO_SUCCESS_TIME <=#{intoEDate}||' 23:59:59' ]]>
+			</if>
+			<if test="status != null and status!='' ">
+				and fc.status = #{status}
+			</if>
+			<if test="businessNO != null and businessNO!='' " >
+				and fm.LIC_NO = #{businessNO}
+			</if>
+			<if test="settlAccount != null and settlAccount!='' " >
+			   AND fma.ACCOUNT_NO=#{settlAccount}
+			</if>
+			<if test="settlName != null and settlName!='' " >
+			  AND fma.ACCOUNT_NAME  LIKE '%' || #{settlName} || '%'
+			</if>
+		</where>
+	</sql>
+	
+	<!-- 根据商户统一编码获取全部门店信息以及二维码 -->
+	<select id="queryQrCodeList" parameterType="com.froad.agre.modules.merchant.vo.req.QueryMerchantReq" resultType="com.froad.agre.modules.merchant.vo.resp.QueryMerchantRes">
+		SELECT 
+		fmo.OUTLET_NAME as outletName,
+		fq.URI as qrCodePath,
+		fq.BGURL as qrCodeImagePath
+		FROM FR_MERCHANT_OUTLET fmo 
+        LEFT JOIN FR_QRCODE fq ON fmo.OUTLET_ID=fq.OUTLET_ID
+		WHERE 
+        fmo.STATUS='1'
+        AND fmo.IS_DELETE='0'
+		AND  fmo.MERCHANT_ID= #{merchantId}
+    </select>  
+	
+	<!-- 商户收单状态查询 -->
+	<select id="getMerchantInfo" parameterType="com.froad.agre.modules.merchant.vo.req.OpenMerchantVoReq" resultType="com.froad.agre.modules.merchant.vo.resp.OpenMerchantVoResp">
+         SELECT 
+         distinct
+         TO_CHAR((SELECT a.UPDATE_TIME   FROM FR_MERCHANT_CHANNEL a 
+         WHERE a.MERCHANT_ID=fc.MERCHANT_ID and a.INTO_SUCCESS_TIME is not null),'yyyy-MM-dd HH24:mi:ss') AS openDate,
+         fc.STATUS as status,
+         fc.BAK1 as openUserName,
+         (SELECT IS_SUPPORT  FROM FR_MERCHANT_INTO 
+         WHERE MERCHANT_ID=fc.MERCHANT_ID AND  INTO_CHANNEL='00' AND STATUS='1') as wechatSuportChannel,
+         (SELECT IS_SUPPORT  FROM FR_MERCHANT_INTO 
+         WHERE MERCHANT_ID=fc.MERCHANT_ID AND  INTO_CHANNEL='01' AND STATUS='1') as alipaySuportChannel
+         FROM FR_MERCHANT_CHANNEL fc
+         LEFT JOIN FR_MERCHANT_INTO fmi ON fc.MERCHANT_ID=fmi.MERCHANT_ID
+         WHERE 
+         fc.MERCHANT_ID=#{merchantId}
+         and  fc.INTO_SUCCESS_TIME is not null
+    </select> 
+    
+    
+	<!-- 进件商户开通 -->
+	<update id="openMerchantKey" parameterType="com.froad.agre.modules.merchant.vo.req.OpenMerchantVoReq">
+      update FR_MERCHANT 
+      SET UPDATE_TIME = #{updateTime} , STATUS = #{status}
+      <where>
+      MERCHANT_ID = #{merchantId}
+      </where>
+  </update>
+  
+   <!--机构管理中更新机构信息的同时同步更新商户表中对应的机构名称信息  -->
+	<update id="MerchantOrgInfoKey" parameterType="com.froad.agre.modules.merchant.vo.req.QueryMerchantReq">
+      update FR_MERCHANT 
+      SET 
+      <if test="orgType != null and orgType!='' " >
+			  <if test='orgType=="00"'>
+	   		    CITY_ORG_NAME=#{orgName},ORG_NAME = #{orgName} 
+	   	       </if>
+			  <if test='orgType=="01"'>
+	   		    ORG_NAME = #{orgName} 
+	   	       </if>
+	  </if>
+      <where>
+          ORG_CODE = #{orgCode}
+      </where>
+  </update>
+  
+  
+  <!-- 下载进件商户信息 -->
+   <select id="downloadMerchantList" parameterType="com.froad.agre.modules.merchant.vo.req.QueryMerchantReq" resultType="com.froad.agre.modules.merchant.vo.resp.QueryMerchantRes">
+		<include refid="coreSql"/>
+		<include refid="queryDynSql" /> 
+		<include refid="desc" /> 
+    </select>  
+	
+    <sql id="desc">
+      ORDER BY intoTime DESC
+    </sql>
+    
+    <!-- 根据登录用户的角色判断是否有修改进件商户贷记卡的权限 -->
+    <select id="queryUserPowerUpdate" parameterType="com.froad.agre.modules.merchant.vo.req.OpenMerchantVoReq" resultType="java.lang.String">
+	    SELECT t.ID as powerShow  FROM FR_MG_PERMISSION t LEFT JOIN FR_MG_ROLE_PREM o on T.ID=o.PERM_ID 
+		WHERE T.TYPE!=0 and t.HREF=#{operationUrl} 
+		AND o.ROLD_ID=(
+		SELECT fmr.ROLD_ID 
+		FROM FR_MG_USER fu
+		LEFT JOIN FR_MG_USER_ROLE fmr ON fu.ID=fmr.USER_ID
+		WHERE fu.LOGIN_NAME=#{loginName} 
+		)
+    </select>
+    
+    
+    <!-- 进件商户  收单业务参数查询 -->
+    <select id="merchantParamInfo" parameterType="com.froad.agre.modules.merchant.vo.req.QueryMerchantReq" resultType="com.froad.agre.modules.merchant.vo.resp.BillMerchantParamResp">
+	    SELECT 
+		(SELECT OPEN_DEBITNOTE_TIME  FROM FR_MERCHANT_INTO
+		WHERE MERCHANT_ID=fm.MERCHANT_ID AND INTO_CHANNEL='01'AND STATUS='1' )as openDate,
+		fm.BAK2 AS wechantBankRate,
+		fm.BAK3 AS alipayBankRate,
+		fm.BAK4 AS settleCycle,
+		(SELECT VALUE FROM FR_CONFIG WHERE KEY='FEE_ALIPAY_CHANNEL_SCALE')AS alipayRate,
+		(SELECT VALUE FROM FR_CONFIG WHERE KEY='FEE_WECHAT_CHANNEL_SCALE')AS wechantRate
+		FROM  FR_MERCHANT fm
+		WHERE fm.MERCHANT_ID=#{merchantId}
+    </select>
+    
+    
+    <!-- 进件商户导出  若不是特殊商户则查询商户对应的法人行业务参数 -->
+    <select id="merchantDownloadParam" parameterType="com.froad.agre.modules.merchant.vo.req.QueryMerchantReq" resultType="com.froad.agre.modules.merchant.vo.resp.BillMerchantParamResp">
+	    SELECT
+		fc.BANK_ALIPAY_RATE as alipayBankRate,
+		fc.BANK_WECHAT_RATE as wechantBankRate,
+		fc.SETTLE_CYCLE_TYPE as settleCycle
+		FROM FR_BRANCH_CONFIG fc
+		WHERE fc.ORG_CODE=#{orgCodeBank}
+    </select>
+    
+  </mapper>

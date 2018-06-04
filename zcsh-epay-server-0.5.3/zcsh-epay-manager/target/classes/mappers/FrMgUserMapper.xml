@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+  
+<mapper namespace="com.froad.agre.modules.user.mapper.FrMgUserMapper">  
+	<sql id = "queryDynSql">
+		<where>
+			 t.STATUS='1'
+			<if test="userOrgCode != null and userOrgCode != ''">
+				and (r.ORG_CODE = #{userOrgCode}
+			 		or r.CITY_ORG_CODE = #{userOrgCode}
+			 		or r.PRO_ORG_CODE = #{userOrgCode})
+			</if>
+			<if test="id != null and id != ''">
+				and t.ID = #{id}
+			</if>
+			<if test="loginName != null and loginName != ''">
+				and t.LOGIN_NAME  LIKE '%' || #{loginName} || '%'
+			</if>
+			<if test="createSdate != null and createSdate != ''">
+				<![CDATA[ and t.CREATE_TIME>=#{createSdate}||' 00:00:00' ]]>
+			</if>
+			<if test="createEdate != null and createEdate != ''">
+				<![CDATA[  and t.CREATE_TIME<=#{createEdate}||' 23:59:59' ]]>
+			</if>
+			<if test="orgCode != null and orgCode != ''">
+				and (r.ORG_CODE =#{orgCode} or r.CITY_ORG_CODE = #{orgCode}
+			 		or r.PRO_ORG_CODE = #{orgCode})
+			</if>
+			
+		</where>
+	</sql>
+	<sql id = "loadUser">
+		<where>
+			<if test="status != null and status != ''">
+				and t.STATUS=#{status}
+			</if>
+			<if test="id != null and id != ''">
+				and t.ID = #{id}
+			</if>
+			<if test="loginName != null and loginName != ''">
+				and t.LOGIN_NAME = #{loginName}
+			</if>
+		</where>
+	</sql>
+	<sql id="coreSql">
+		select t.ID as id,t.NAME as name,t.LOGIN_NAME as loginName,t.PASSWORD as password,t.LOCK_TIME as lockTime,
+		t.ORG_CODE as orgCode,r.org_name as orgName,t.PHONE as phone,t.IS_FIRST as isFirst,t.ERROR_TIMES as errorTimes,
+		q.ID as roleId,q.NAME as roleName FROM FR_MG_USER t
+		left join FR_ORG r on t.ORG_CODE = r.ORG_CODE
+		left join FR_MG_USER_ROLE p on t.ID = p.USER_ID
+		left join FR_MG_ROLE q on p.ROLD_ID = q.ID
+	</sql>
+    <select id="queryUserList" parameterType="UserVoReq" resultType="QueryUserListVoResp">
+		<include refid="coreSql"/>
+		<include refid="queryDynSql" />
+    </select>  
+    <select id="loadUserData" parameterType="UserVoReq" resultType="FrMgUser">
+		select t.ID as id,t.NAME as name,t.LOGIN_NAME as loginName,t.PASSWORD as password,t.LOCK_TIME as lockTime,
+		t.ORG_CODE as orgCode,r.org_name as orgName,t.PHONE as phone,t.IS_FIRST as isFirst,t.ERROR_TIMES as errorTimes,
+		q.ID as roleId,q.NAME as roleName,r.CITY_ORG_CODE as cityOrgCode,r.PRO_ORG_CODE as proOrgCode FROM FR_MG_USER t
+		left join FR_ORG r on t.ORG_CODE = r.ORG_CODE
+		left join FR_MG_USER_ROLE p on t.ID = p.USER_ID
+		left join FR_MG_ROLE q on p.ROLD_ID = q.ID
+		<include refid="loadUser" />
+    </select> 
+    <select id="checkUrl" parameterType="java.util.HashMap" resultType="int">
+    	SELECT count(*) as n FROM FR_MG_PERMISSION t 
+		LEFT JOIN FR_MG_ROLE_PREM o on T.ID=o.PERM_ID
+		WHERE o.ROLD_ID=#{roleId} and T.TYPE!=0 and t.HREF=#{href}
+    </select>
+    <insert id="insert" parameterType="FrMgUser">
+        insert into FR_MG_USER(CREATE_TIME,NAME,LOGIN_NAME,PASSWORD,ORG_CODE,PHONE,STATUS,REMARK,IS_FIRST,ERROR_TIMES)
+		values(#{createTime},#{name},#{loginName},#{password},#{orgCode},#{phone},#{status},#{remark,jdbcType=CLOB},#{isFirst},#{errorTimes})
+    </insert>
+    <!-- 添加用户角色配置信息 -->
+    <insert id="insertURConf" parameterType="FrMgUser">
+        insert into FR_MG_USER_ROLE(ROLD_ID,USER_ID,CREATE_TIME)
+		values(#{roleId},#{id},#{createTime})
+    </insert>
+     <!-- 删除用户（逻辑删除） -->
+    <update id="deleteById" parameterType="string">
+        UPDATE FR_MG_USER set STATUS=0
+        WHERE ID=#{id}
+    </update>
+	<!-- 删除用户角色配置信息 -->
+	<update id="delURConf" parameterType="string">
+	    DELETE FROM FR_MG_USER_ROLE
+	    WHERE USER_ID=#{id}
+	</update>
+    <!-- 锁定用户 -->
+    <update id="lockUser" parameterType="FrMgUser">
+       UPDATE FR_MG_USER SET LOCK_TIME=#{lockTime},ERROR_TIMES=#{errorTimes}
+       WHERE ID=#{id}
+    </update>
+    <update id="updateById" parameterType="java.util.HashMap">
+            UPDATE FR_MG_USER
+            <set>
+                <if test="createTime!=null">CREATE_TIME=#{createTime},</if>
+                <if test="updateTime!=null">UPDATE_TIME=#{updateTime},</if>
+                <if test="name!=null">NAME=#{name},</if>
+                <if test="loginName!=null">LOGIN_NAME=#{loginName},</if>
+                <if test="password!=null">PASSWORD=#{password},</if>
+                <if test="orgCode!=null">ORG_CODE=#{orgCode},</if>
+                <if test="phone!=null">phone=#{phone},</if>
+                <if test="status!=null">status=#{status},</if>
+                <if test="remark!=null">remark=#{remark},</if>
+                <if test="isFirst!=null">IS_FIRST=#{isFirst}</if>
+                <if test="errorTimes!=null">ERROR_TIMES=#{errorTimes}</if>
+            </set>
+            where ID=#{id}
+     </update>
+     <update id="updateErrorTimes" parameterType="string">
+            UPDATE FR_MG_USER SET ERROR_TIMES=ERROR_TIMES+1
+            WHERE ID=#{id}
+     </update>
+     <update id="resetErrorTimes" parameterType="string">
+            UPDATE FR_MG_USER SET ERROR_TIMES=0
+            WHERE ID=#{id}
+     </update>
+     <!-- 重置用户密码 -->
+     <update id="resetPwdById" parameterType="FrMgUser">
+	    update FR_MG_USER SET PASSWORD = #{password},LOCK_TIME=null
+	    <if test="isFirst!=null and isFirst != ''">
+	    ,IS_FIRST=#{isFirst}
+	    </if>
+	    where ID = #{id}
+	 </update>
+	
+</mapper>  

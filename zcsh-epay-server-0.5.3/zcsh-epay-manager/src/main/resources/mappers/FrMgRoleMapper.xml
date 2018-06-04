@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.froad.agre.modules.role.mapper.FrMgRoleMapper">
+  <resultMap id="BaseResultMap" type="FrMgRole">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="STATUS" jdbcType="CHAR" property="status" />
+    <result column="BAK1" jdbcType="VARCHAR" property="bak1" />
+    <result column="BAK2" jdbcType="VARCHAR" property="bak2" />
+    <result column="BAK3" jdbcType="VARCHAR" property="bak3" />
+    <result column="BAK4" jdbcType="VARCHAR" property="bak4" />
+    <result column="BAK5" jdbcType="VARCHAR" property="bak5" />
+    <result column="BAK6" jdbcType="VARCHAR" property="bak6" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="FrMgRole">
+    <result column="REMARK" jdbcType="CLOB" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, CREATE_TIME, UPDATE_TIME, NAME, STATUS, BAK1, BAK2, BAK3, BAK4, BAK5, BAK6
+  </sql>
+  <sql id="Blob_Column_List">
+    REMARK
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from FR_MG_ROLE
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="queryRoleList" resultType="FrMgRole"  parameterType="string">
+    SELECT ID as id,NAME as name
+    FROM FR_MG_ROLE WHERE STATUS='1' and LEVEL=#{level}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from FR_MG_ROLE
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="FrMgRole">
+    insert into FR_MG_ROLE (ID, CREATE_TIME, UPDATE_TIME, 
+      NAME, STATUS, BAK1, BAK2, 
+      BAK3, BAK4, BAK5, BAK6, 
+      REMARK)
+    values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{name,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{bak1,jdbcType=VARCHAR}, #{bak2,jdbcType=VARCHAR}, 
+      #{bak3,jdbcType=VARCHAR}, #{bak4,jdbcType=VARCHAR}, #{bak5,jdbcType=VARCHAR}, #{bak6,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="FrMgRole">
+    insert into FR_MG_ROLE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="bak1 != null">
+        BAK1,
+      </if>
+      <if test="bak2 != null">
+        BAK2,
+      </if>
+      <if test="bak3 != null">
+        BAK3,
+      </if>
+      <if test="bak4 != null">
+        BAK4,
+      </if>
+      <if test="bak5 != null">
+        BAK5,
+      </if>
+      <if test="bak6 != null">
+        BAK6,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="bak1 != null">
+        #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null">
+        #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null">
+        #{bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="bak4 != null">
+        #{bak4,jdbcType=VARCHAR},
+      </if>
+      <if test="bak5 != null">
+        #{bak5,jdbcType=VARCHAR},
+      </if>
+      <if test="bak6 != null">
+        #{bak6,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="FrMgRole">
+    update FR_MG_ROLE
+    <set>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=CHAR},
+      </if>
+      <if test="bak1 != null">
+        BAK1 = #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="bak2 != null">
+        BAK2 = #{bak2,jdbcType=VARCHAR},
+      </if>
+      <if test="bak3 != null">
+        BAK3 = #{bak3,jdbcType=VARCHAR},
+      </if>
+      <if test="bak4 != null">
+        BAK4 = #{bak4,jdbcType=VARCHAR},
+      </if>
+      <if test="bak5 != null">
+        BAK5 = #{bak5,jdbcType=VARCHAR},
+      </if>
+      <if test="bak6 != null">
+        BAK6 = #{bak6,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=CLOB},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="FrMgRole">
+    update FR_MG_ROLE
+    set CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      NAME = #{name,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=CHAR},
+      BAK1 = #{bak1,jdbcType=VARCHAR},
+      BAK2 = #{bak2,jdbcType=VARCHAR},
+      BAK3 = #{bak3,jdbcType=VARCHAR},
+      BAK4 = #{bak4,jdbcType=VARCHAR},
+      BAK5 = #{bak5,jdbcType=VARCHAR},
+      BAK6 = #{bak6,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=CLOB}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="FrMgRole">
+    update FR_MG_ROLE
+    set CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      NAME = #{name,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=CHAR},
+      BAK1 = #{bak1,jdbcType=VARCHAR},
+      BAK2 = #{bak2,jdbcType=VARCHAR},
+      BAK3 = #{bak3,jdbcType=VARCHAR},
+      BAK4 = #{bak4,jdbcType=VARCHAR},
+      BAK5 = #{bak5,jdbcType=VARCHAR},
+      BAK6 = #{bak6,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

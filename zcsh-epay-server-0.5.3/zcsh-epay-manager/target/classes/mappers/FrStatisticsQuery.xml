@@ -1,0 +1,1015 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.froad.agre.modules.statistics.mapper.StatisticsQueryMapper">
+
+   <!-- 按照法人行统计列表-->
+    <sql id = "dateSql">
+		<if test="createSTime != null and createSTime != ''">
+			<![CDATA[and o.CREATE_TIME>=CONCAT(#{createSTime},' 00:00:00')]]> 
+		</if>
+		<if test="createETime != null and createETime != ''">
+			<![CDATA[and o.CREATE_TIME<=CONCAT(#{createETime},' 23:59:59')]]>
+		</if>
+	</sql>
+	<sql id = "orgSql">
+		<if test="orgName != null and orgName != ''">
+			and org_name  LIKE '%'||#{orgName}||'%'
+		</if>
+		<if test="orgCode != null and orgCode != ''">
+			and (ORG_CODE = #{orgCode} or CITY_ORG_CODE = #{orgCode} or PRO_ORG_CODE = #{orgCode})
+		</if>
+	</sql>
+	<!-- 按法人行统计 -->
+	<select id="queryStatisticsList" resultType="SQVoResp" parameterType="SQVoReq">
+		SELECT
+		    A.orgCode,
+		    A.corBankNAME,
+		    COALESCE(A.payTotalNum,0)       AS payTotalNum,
+		    COALESCE(A.payTotalMoney, 0)    AS payTotalMoney,
+		    COALESCE(A.chargeMoney,0)       AS rateTotal,
+		    COALESCE(B.alipayTotalNum,0)    AS alipayTotalNum,
+		    COALESCE(B.alipayTotalMoney, 0) AS alipayTotalMoney,
+		    COALESCE(B.aliChargeMoney,0)    AS alipayRate,
+		    COALESCE(C.wxpayTotalNum,0)     AS wxpayTotalNum,
+		    COALESCE(C.wxpayTotalMoney, 0)  AS wxpayTotalMoney,
+		    COALESCE(C.wxChargeMoney,0)     AS wexRate,
+		    COALESCE(D.bankTotalNum,0) AS bankTotalNum,
+		    COALESCE(D.bankTotalMoney, 0) AS bankTotalMoney,
+		    COALESCE(E.refundTotalNum,0) AS refundTotalNum,
+		    COALESCE(E.refundTotalMoey,0) AS refundTotalMoey,
+		    COALESCE(F.integralDecu,0)    AS integralDecu,
+		    COALESCE(G.merchantNum,0) AS merchantNum,
+		    COALESCE(H.newMerchantNum,0) AS newAddMerchantNum
+		FROM
+		    (
+		        SELECT
+		            t.org_code AS orgCode,t.org_name AS corBankNAME,
+		            SUM(a.payTotalNum)   AS payTotalNum,
+		            SUM(a.payTotalMoney) AS payTotalMoney,
+		            SUM(a.chargeMoney)   AS chargeMoney
+		        FROM
+		            (
+		                SELECT
+		                    o.order_id,
+		                    o.THE_ORG_CODE,
+		                    o.CITY_ORG_CODE,
+		                    SUM(p.BANK_CHARGE-NVL(q.REFUND_CHANNEL_CHARGE,0)) AS chargeMoney ,
+		                    COUNT(o.order_id)                AS payTotalNum ,
+		                    SUM(o.TOTAL_MONEY)               AS payTotalMoney
+		                FROM
+		                    fr_order o
+		                left join (select order_id,COALESCE(sum(BANK_CHARGE),0) as BANK_CHARGE from fr_order_bill where type ='1' group by order_id) p on o.order_id = p.order_id
+		                left join (select order_id,COALESCE(sum(BANK_CHARGE),0) as REFUND_CHANNEL_CHARGE from fr_order_bill where type ='3' group by order_id) q on o.order_id = q.order_id
+		                WHERE
+		                     (o.ORDER_STATUS = #{orderSuccess}
+		                    OR  o.order_status=#{orderSurefund})
+                             <include refid="dateSql"/>
+		                    
+		                GROUP BY
+		                    o.order_id,
+		                    o.THE_ORG_CODE,
+		                    o.CITY_ORG_CODE ) a
+		        RIGHT JOIN
+		            (
+		                SELECT
+		                    *
+		                FROM
+		                    fr_org
+		                WHERE
+		                    ENABLE='0'
+		                AND ((
+		                            PRO_ORG_CODE IS NOT NULL
+		                        AND PRO_ORG_CODE!='')
+		                    AND (
+		                            CITY_ORG_CODE IS NULL
+		                        OR  CITY_ORG_CODE=''))
+		                AND (
+		                        ORG_CODE = #{JGM}
+		                    OR  CITY_ORG_CODE=#{JGM}
+		                    OR  PRO_ORG_CODE=#{JGM}) <include refid="orgSql"/> ) t
+		        ON
+		            (
+		                a.THE_ORG_CODE = t.org_code)
+		        OR  (
+		                A.CITY_ORG_CODE=T.ORG_CODE)
+		        GROUP BY
+		            org_code, ORG_NAME ) A
+		LEFT JOIN
+		    (
+		        SELECT
+		            t.org_code           AS orgCode,
+		            t.org_name           AS corBankNAME,
+		            SUM(a.payTotalNum)   AS alipayTotalNum,
+		            SUM(a.payTotalMoney) AS alipayTotalMoney,
+		            SUM(a.chargeMoney)   AS aliChargeMoney
+		        FROM
+		            (
+		                SELECT
+		                    o.order_id,
+		                    o.THE_ORG_CODE,
+		                    o.CITY_ORG_CODE,
+		                    SUM(p.BANK_CHARGE-NVL(q.REFUND_CHANNEL_CHARGE,0)) AS chargeMoney ,
+		                    COUNT(o.order_id)                AS payTotalNum ,
+		                    SUM(o.TOTAL_MONEY)               AS payTotalMoney
+		                FROM
+		                    fr_order o
+		                left join (select order_id,COALESCE(sum(BANK_CHARGE),0) as BANK_CHARGE from fr_order_bill where type ='1' group by order_id) p on o.order_id = p.order_id
+		                left join (select order_id,COALESCE(sum(BANK_CHARGE),0) as REFUND_CHANNEL_CHARGE from fr_order_bill where type ='3' group by order_id) q on o.order_id = q.order_id
+		                WHERE
+		                    (
+		                        o.ORDER_STATUS = #{orderSuccess}
+		                    OR  o.order_status=#{orderSurefund})
+		                AND o.TRADE_CHANNEL=#{alipayPayChannel} <include refid="dateSql"/>
+		                GROUP BY
+		                    o.order_id,
+		                    o.THE_ORG_CODE,
+		                    o.CITY_ORG_CODE ) a
+		        RIGHT JOIN
+		            (
+		                SELECT
+		                    *
+		                FROM
+		                    fr_org
+		                WHERE
+		                    ENABLE='0'
+		                AND ((
+		                            PRO_ORG_CODE IS NOT NULL
+		                        AND PRO_ORG_CODE!='')
+		                    AND (
+		                            CITY_ORG_CODE IS NULL
+		                        OR  CITY_ORG_CODE='')) <include refid="orgSql"/> ) t
+		        ON
+		            (
+		                a.THE_ORG_CODE = t.org_code)
+		        OR  (
+		                A.CITY_ORG_CODE=T.ORG_CODE)
+		        GROUP BY
+		            t.org_code,
+		            T.ORG_NAME ) B
+		ON
+		    A.orgCode = B.orgCode
+		LEFT JOIN
+		    (
+		        SELECT
+		            t.org_code           AS orgCode,
+		            t.org_name           AS corBankNAME,
+		            SUM(a.payTotalNum)   AS wxpayTotalNum,
+		            SUM(a.payTotalMoney) AS wxpayTotalMoney,
+		            SUM(a.chargeMoney)   AS wxChargeMoney
+		        FROM
+		            (
+		                SELECT
+		                    o.order_id,
+		                    o.THE_ORG_CODE,
+		                    o.CITY_ORG_CODE,
+		                    SUM(p.BANK_CHARGE-NVL(q.REFUND_CHANNEL_CHARGE,0)) AS chargeMoney ,
+		                    COUNT(o.order_id)                AS payTotalNum ,
+		                    SUM(o.TOTAL_MONEY)               AS payTotalMoney
+		                FROM
+		                    fr_order o
+		                    left join (select order_id,COALESCE(sum(BANK_CHARGE),0) as BANK_CHARGE from fr_order_bill where type ='1' group by order_id) p on o.order_id = p.order_id
+		                	left join (select order_id,COALESCE(sum(BANK_CHARGE),0) as REFUND_CHANNEL_CHARGE from fr_order_bill where type ='3' group by order_id) q on o.order_id = q.order_id
+		                WHERE
+		                    (
+		                        o.ORDER_STATUS = #{orderSuccess}
+		                    OR  o.order_status= #{orderSurefund})
+		                AND o.TRADE_CHANNEL=#{wxpayChannel} <include refid="dateSql"/>
+		                GROUP BY
+		                    o.order_id,
+		                    o.THE_ORG_CODE,
+		                    o.CITY_ORG_CODE ) a
+		        RIGHT JOIN
+		            (
+		                SELECT
+		                    *
+		                FROM
+		                    fr_org
+		                WHERE
+		                    ENABLE='0'
+		                AND ((
+		                            PRO_ORG_CODE IS NOT NULL
+		                        AND PRO_ORG_CODE!='')
+		                    AND (
+		                            CITY_ORG_CODE IS NULL
+		                        OR  CITY_ORG_CODE='')) <include refid="orgSql"/> ) t
+		        ON
+		            (
+		                a.THE_ORG_CODE = t.org_code)
+		        OR  (
+		                A.CITY_ORG_CODE=T.ORG_CODE)
+		        GROUP BY
+		            t.org_code,
+		            t.ORG_NAME ) C
+		ON
+		    A.orgCode = C.orgCode
+		LEFT JOIN
+		    (
+		        SELECT
+		            org_code       AS orgCode,
+		            org_name       AS corBankNAME,
+		            COUNT(id)        AS bankTotalNum,
+		            SUM(CASH_MONEY) AS bankTotalMoney
+		        FROM
+		            (
+		                SELECT
+		                    t.ORG_CODE,
+		                    o.CITY_ORG_CODE,
+		                    t.ORG_NAME,
+		                    o.id,
+		                    o.CASH_MONEY
+		                FROM
+		                    FR_ORDER o
+		                RIGHT JOIN
+		                    (
+		                        SELECT
+		                            *
+		                        FROM
+		                            fr_org
+		                        WHERE
+		                            ENABLE='0'
+		                        AND ((
+		                                    PRO_ORG_CODE IS NOT NULL
+		                                AND PRO_ORG_CODE!='')
+		                            AND (
+		                                    CITY_ORG_CODE IS NULL
+		                                OR  CITY_ORG_CODE='')) <include refid="orgSql"/> ) t
+		                ON
+		                    (
+		                        o.THE_ORG_CODE = t.org_code )
+		                OR  (
+		                        o.CITY_ORG_CODE=T.ORG_CODE)
+		                WHERE
+		                    (
+		                        o.ORDER_STATUS = #{orderSuccess}
+		                    OR  o.order_status = #{orderSurefund})
+		                AND o.TRADE_CHANNEL=#{bankChannel} <include refid="dateSql"/> )
+		        GROUP BY
+		            org_Code,
+		            ORG_NAME ) D
+		ON
+		    A.orgCode = D.orgCode
+		LEFT JOIN
+		    (
+		        SELECT
+		            org_code           AS orgCode,
+		            org_name           AS corBankNAME,
+		            COUNT(id)            AS refundTotalNum,
+		            SUM(refundTotalMoey) AS refundTotalMoey
+		        FROM
+		            (
+		                SELECT
+		                    t.ORG_CODE,
+		                    a.CITY_ORG_CODE,
+		                    t.ORG_NAME,
+		                    a.id,
+		                    a.REFUND_MONEY AS refundTotalMoey
+		                FROM
+		                    (
+		                        SELECT
+		                            o.the_org_code,
+		                            o.CITY_ORG_CODE,
+		                            p.REFUND_MONEY,
+		                            p.id
+		                        FROM
+		                            FR_REFUND p
+		                        LEFT JOIN
+		                            FR_ORDER o
+		                        ON
+		                            p.order_id = o.order_id
+		                        WHERE
+		                            o.order_status = #{orderSurefund}
+		                        AND p.status=#{refundStatus} <include refid="dateSql"/> ) a
+		                RIGHT JOIN
+		                    (
+		                        SELECT
+		                            *
+		                        FROM
+		                            fr_org
+		                        WHERE
+		                            ENABLE='0'
+		                        AND ((
+		                                    PRO_ORG_CODE IS NOT NULL
+		                                AND PRO_ORG_CODE!='')
+		                            AND (
+		                                    CITY_ORG_CODE IS NULL
+		                                OR  CITY_ORG_CODE='')) <include refid="orgSql"/> ) t
+		                ON
+		                    (
+		                        t.org_code = a.the_org_code)
+		                OR  (
+		                        a.CITY_ORG_CODE=T.ORG_CODE) )
+		        GROUP BY
+		            org_Code,
+		            org_name ) E
+		ON
+		    a.orgCode = E.orgCode
+		LEFT JOIN
+		    (
+		        SELECT
+		            org_code AS orgCode,
+		            org_name AS corBankNAME,
+		            SUM(point) AS integralDecu
+		        FROM
+		            (
+		                SELECT
+		                    t.ORG_CODE,
+		                    o.CITY_ORG_CODE,
+		                    t.ORG_NAME,
+		                    o.POINT AS point
+		                FROM
+		                    FR_ORDER o
+		                RIGHT JOIN
+		                    (
+		                        SELECT
+		                            ORG_CODE,
+		                            ORG_NAME
+		                        FROM
+		                            fr_org
+		                        WHERE
+		                            ENABLE='0'
+		                        AND ((
+		                                    PRO_ORG_CODE IS NOT NULL
+		                                AND PRO_ORG_CODE!='')
+		                            AND (
+		                                    CITY_ORG_CODE IS NULL
+		                                OR  CITY_ORG_CODE='')) <include refid="orgSql"/> ) t
+		                ON
+		                    (
+		                        o.THE_ORG_CODE = t.org_code)
+		                OR  (
+		                        o.CITY_ORG_CODE=t.ORG_CODE)
+		                WHERE
+		                    (
+		                        o.ORDER_STATUS = #{orderSuccess}
+		                    OR  o.order_status = #{orderSurefund})
+		                AND (
+		                        o.POINT_NO IS NOT NULL
+		                    AND o.POINT_NO!='') <include refid="dateSql"/> )
+		        GROUP BY
+		            org_Code,
+		            org_name ) F
+		ON
+		    a.orgCode = F.orgCode
+		LEFT JOIN
+		    (
+		        SELECT
+		            org_code         AS orgCode,
+		            org_name         AS corBankNAME,
+		            COUNT(merchant_id) AS merchantNum
+		        FROM
+		            (
+		                SELECT
+		                    t.ORG_CODE,
+		                    t.ORG_NAME,
+		                    a.merchant_id
+		                FROM
+		                    (
+		                        SELECT
+		                            o.org_code ,
+		                            o.merchant_id,
+		                            o.CITY_ORG_CODE
+		                        FROM
+		                            FR_MERCHANT_CHANNEL p
+		                        LEFT JOIN
+		                            FR_MERCHANT o
+		                        ON
+		                            p.MERCHANT_ID = o.MERCHANT_ID
+		                        WHERE
+		                            p.STATUS=#{merchantStatus}
+		                        AND o.status=#{merchantStatus}
+		                        AND o.IS_DELETE=#{merchantDelStatus} ) a
+		                RIGHT JOIN
+		                    (
+		                        SELECT
+		                            *
+		                        FROM
+		                            fr_org
+		                        WHERE
+		                            ENABLE='0'
+		                        AND ((
+		                                    PRO_ORG_CODE IS NOT NULL
+		                                AND PRO_ORG_CODE!='')
+		                            AND (
+		                                    CITY_ORG_CODE IS NULL
+		                                OR  CITY_ORG_CODE='')) <include refid="orgSql"/> ) t
+		                ON
+		                    (
+		                        t.org_code = a.org_code)
+		                OR  (
+		                        a.CITY_ORG_CODE=t.ORG_CODE) )
+		        GROUP BY
+		            org_code,
+		            org_name ) G
+		ON
+		    a.orgCode = G.orgCode
+		LEFT JOIN
+		    (
+		        SELECT
+		            org_code         AS orgCode,
+		            org_name         AS corBankNAME,
+		            COUNT(merchant_id) AS newMerchantNum
+		        FROM
+		            (
+		                SELECT
+		                    t.ORG_CODE,
+		                    t.ORG_NAME,
+		                    a.merchant_id
+		                FROM
+		                    (
+		                        SELECT
+		                            o.org_code ,
+		                            o.merchant_id,
+		                            o.CITY_ORG_CODE
+		                        FROM
+		                            FR_MERCHANT_CHANNEL p
+		                        LEFT JOIN
+		                            FR_MERCHANT o
+		                        ON
+		                            p.MERCHANT_ID = o.MERCHANT_ID
+		                        WHERE
+		                            p.STATUS=#{merchantStatus}
+		                        AND o.status=#{merchantStatus}
+		                        AND o.IS_DELETE=#{merchantDelStatus} <include refid="dateSql"/> ) a
+		                RIGHT JOIN
+		                    (
+		                        SELECT
+		                            *
+		                        FROM
+		                            fr_org
+		                        WHERE
+		                            ENABLE='0'
+		                        AND ((
+		                                    PRO_ORG_CODE IS NOT NULL
+		                                AND PRO_ORG_CODE!='')
+		                            AND (
+		                                    CITY_ORG_CODE IS NULL
+		                                OR  CITY_ORG_CODE='')) <include refid="orgSql"/> ) t
+		                ON
+		                    (
+		                        t.org_code = a.org_code)
+		                OR  (
+		                        a.CITY_ORG_CODE=t.ORG_CODE) )
+		        GROUP BY
+		            org_code,
+		            org_name ) H
+		ON
+		    a.orgCode = H.orgCode
+	</select>
+	<!-- 按支行统计 -->
+	<select id="getDataByBranch" resultType="SQVoResp" parameterType="SQVoReq">
+		SELECT
+		    A.orgCode,A.corBankNAME,
+		    COALESCE(A.payTotalNum,0) AS payTotalNum,COALESCE(A.payTotalMoney,0) AS payTotalMoney,COALESCE(A.chargeMoney,0) AS rateTotal,
+		    COALESCE(B.alipayTotalNum,0) AS alipayTotalNum,COALESCE(B.alipayTotalMoney,0) AS alipayTotalMoney,COALESCE(B.aliChargeMoney,0) AS alipayRate,
+		    COALESCE(C.wxpayTotalNum,0) AS wxpayTotalNum,COALESCE(C.wxpayTotalMoney,0) AS wxpayTotalMoney,COALESCE(C.wxChargeMoney,0) AS wexRate,
+		    D.bankTotalNum,COALESCE(D.bankTotalMoney, 0) AS bankTotalMoney,
+		    E.refundTotalNum,COALESCE(E.refundTotalMoey,0) AS refundTotalMoey,
+		    COALESCE(F.integralDecu,0) AS integralDecu, G.merchantNum,H.newMerchantNum as newAddMerchantNum
+		FROM
+		    (
+		        SELECT
+		            t.org_code AS orgCode,
+		            t.org_name AS corBankNAME,
+		            SUM(a.payTotalNum)   AS payTotalNum,
+		            SUM(a.payTotalMoney) AS payTotalMoney,
+		            SUM(a.chargeMoney)   AS chargeMoney
+		        FROM
+		            (
+		                SELECT
+		                    o.order_id,
+		                    o.THE_ORG_CODE,
+		                    SUM(p.BANK_CHARGE-NVL(q.REFUND_CHANNEL_CHARGE,0)) AS chargeMoney ,
+		                    COUNT(o.order_id)                AS payTotalNum ,
+		                    SUM(o.TOTAL_MONEY)               AS payTotalMoney
+		                FROM
+		                    fr_order o
+		                    left join (select order_id,COALESCE(sum(BANK_CHARGE),0) as BANK_CHARGE from fr_order_bill where type ='1' group by order_id) p on o.order_id = p.order_id
+		                    left join (select order_id,COALESCE(sum(BANK_CHARGE),0) as REFUND_CHANNEL_CHARGE from fr_order_bill where type ='3' group by order_id) q on o.order_id = q.order_id
+		                WHERE
+		                    (
+		                        o.ORDER_STATUS =#{orderSuccess}
+		                    OR  o.order_status=#{orderSurefund})
+		                      <include refid="dateSql"/>
+		                GROUP BY
+		                    o.order_id,
+		                    o.THE_ORG_CODE ) a
+		        RIGHT JOIN
+		            (
+		                SELECT
+		                    *
+		                FROM
+		                    fr_org
+		                WHERE
+		                    ENABLE='0'
+		                AND ((
+		                            PRO_ORG_CODE IS NOT NULL
+		                        AND PRO_ORG_CODE!='')
+		                    AND (
+		                            CITY_ORG_CODE IS NOT NULL
+		                        AND CITY_ORG_CODE!='')) 
+                        and (ORG_CODE = #{JGM} or CITY_ORG_CODE=#{JGM} or PRO_ORG_CODE=#{JGM})
+                        <include refid="orgSql"/>
+		                        ) t
+		        ON
+		            (
+		                a.THE_ORG_CODE = t.org_code)
+		        GROUP BY
+		            t.org_code,
+		            ORG_NAME ) A
+		LEFT JOIN
+		    (
+		        SELECT
+		            t.org_code AS orgCode,
+		            t.org_name AS corBankNAME,
+		            SUM(a.payTotalNum)   AS alipayTotalNum,
+		            SUM(a.payTotalMoney) AS alipayTotalMoney,
+		            SUM(a.chargeMoney) AS aliChargeMoney
+		        FROM
+		            (
+		                SELECT
+		                    o.order_id,
+		                    o.THE_ORG_CODE,
+		                    SUM(p.BANK_CHARGE-NVL(q.REFUND_CHANNEL_CHARGE,0)) AS chargeMoney ,
+		                    COUNT(o.order_id)                AS payTotalNum ,
+		                    SUM(o.TOTAL_MONEY)               AS payTotalMoney
+		                FROM
+		                    fr_order o
+		                	left join (select order_id,COALESCE(sum(BANK_CHARGE),0) as BANK_CHARGE from fr_order_bill where type ='1' group by order_id) p on o.order_id = p.order_id
+		                    left join (select order_id,COALESCE(sum(BANK_CHARGE),0) as REFUND_CHANNEL_CHARGE from fr_order_bill where type ='3' group by order_id) q on o.order_id = q.order_id
+		                WHERE
+		                    (
+		                        o.ORDER_STATUS = #{orderSuccess}
+		                    OR  o.order_status= #{orderSurefund})
+		                AND o.TRADE_CHANNEL=#{alipayPayChannel}
+		                <include refid="dateSql"/>
+		                GROUP BY
+		                    o.order_id,
+		                    o.THE_ORG_CODE ) a
+		        RIGHT JOIN
+		            (
+		                SELECT
+		                    *
+		                FROM
+		                    fr_org
+		                WHERE
+		                    ENABLE='0'
+		                AND ((
+		                            PRO_ORG_CODE IS NOT NULL
+		                        AND PRO_ORG_CODE!='')
+		                    AND (
+		                            CITY_ORG_CODE IS NOT NULL
+		                        AND CITY_ORG_CODE!='')) ) t
+		        ON
+		            (
+		                a.THE_ORG_CODE = t.org_code)
+		        GROUP BY
+		            t.org_code,
+		            ORG_NAME ) B
+		ON
+		    A.orgCode = B.orgCode
+		LEFT JOIN
+		    (
+		        SELECT
+		            t.org_code AS orgCode,
+		            t.org_name AS corBankNAME,
+		            SUM(a.payTotalNum)   AS wxpayTotalNum,
+		            SUM(a.payTotalMoney) AS wxpayTotalMoney,
+		            SUM(a.chargeMoney)   AS wxChargeMoney
+		        FROM
+		            (
+		                SELECT
+		                    o.order_id,
+		                    o.THE_ORG_CODE,
+		                    SUM(p.BANK_CHARGE-NVL(q.REFUND_CHANNEL_CHARGE,0)) AS chargeMoney ,
+		                    COUNT(o.order_id)                AS payTotalNum ,
+		                    SUM(o.TOTAL_MONEY)               AS payTotalMoney
+		                FROM
+		                    fr_order o
+		                	left join (select order_id,COALESCE(sum(BANK_CHARGE),0) as BANK_CHARGE from fr_order_bill where type ='1' group by order_id) p on o.order_id = p.order_id
+		                    left join (select order_id,COALESCE(sum(BANK_CHARGE),0) as REFUND_CHANNEL_CHARGE from fr_order_bill where type ='3' group by order_id) q on o.order_id = q.order_id
+		                WHERE
+		                    (
+		                        o.ORDER_STATUS = #{orderSuccess}
+		                    OR  o.order_status= #{orderSurefund})
+		                AND o.TRADE_CHANNEL=#{wxpayChannel}
+		                <include refid="dateSql"/>
+		                GROUP BY
+		                    o.order_id,
+		                    o.THE_ORG_CODE ) a
+		        RIGHT JOIN
+		            (
+		                SELECT
+		                    *
+		                FROM
+		                    fr_org
+		                WHERE
+		                    ENABLE='0'
+		                AND ((
+		                            PRO_ORG_CODE IS NOT NULL
+		                        AND PRO_ORG_CODE!='')
+		                    AND (
+		                            CITY_ORG_CODE IS NOT NULL
+		                        AND CITY_ORG_CODE!='')) ) t
+		        ON
+		            (
+		                a.THE_ORG_CODE = t.org_code)
+		        GROUP BY
+		            t.org_code,
+		            ORG_NAME ) C
+		ON
+		    A.orgCode = C.orgCode
+		LEFT JOIN
+		    (
+		        SELECT
+		            ORG_CODE AS orgCode,
+		            ORG_NAME AS corBankNAME,
+		            COUNT(id)        AS bankTotalNum,
+		            SUM(TOTAL_MONEY) AS bankTotalMoney
+		        FROM
+		            (
+		                SELECT
+		                    t.ORG_CODE,
+		                    t.ORG_NAME,
+		                    o.id,
+		                    o.TOTAL_MONEY
+		                FROM
+		                    FR_ORDER o
+		                RIGHT JOIN
+		                    (
+		                        SELECT
+		                            *
+		                        FROM
+		                            fr_org
+		                        WHERE
+		                            ENABLE='0'
+		                        AND ((
+		                                    PRO_ORG_CODE IS NOT NULL
+		                                AND PRO_ORG_CODE!='')
+		                            AND (
+		                                    CITY_ORG_CODE IS NOT NULL
+		                                AND CITY_ORG_CODE!='')) ) t
+		                ON
+		                    (
+		                        o.THE_ORG_CODE = t.org_code )
+		                AND (
+		                         o.ORDER_STATUS = #{orderSuccess}
+		                    OR  o.order_status= #{orderSurefund})
+		                AND o.TRADE_CHANNEL=#{bankChannel}
+		                <include refid="dateSql"/>
+		        )GROUP BY
+		            org_Code,
+		            ORG_NAME ) D
+		ON
+		    A.orgCode = D.orgCode
+		LEFT JOIN
+		    (
+		        SELECT
+		            ORG_CODE AS orgCode,
+		            ORG_NAME AS corBankNAME,
+		            COUNT(id)            AS refundTotalNum,
+		            SUM(refundTotalMoey) AS refundTotalMoey
+		        FROM
+		            (
+		                SELECT
+		                    t.ORG_CODE,
+		                    t.ORG_NAME,
+		                    a.id,
+		                    a.REFUND_MONEY AS refundTotalMoey
+		                FROM
+		                    (
+		                        SELECT
+		                            o.the_org_code,
+		                            p.REFUND_MONEY,
+		                            p.id
+		                        FROM
+		                            FR_REFUND p
+		                        LEFT JOIN
+		                            FR_ORDER o
+		                        ON
+		                            p.order_id = o.order_id
+		                        WHERE
+		                            o.order_status=#{orderSurefund}
+		                        AND p.status=#{refundStatus}
+		                        
+		                       <include refid="dateSql"/> ) a
+		                RIGHT JOIN
+		                    (
+		                        SELECT
+		                            *
+		                        FROM
+		                            fr_org
+		                        WHERE
+		                            ENABLE='0'
+		                        AND ((
+		                                    PRO_ORG_CODE IS NOT NULL
+		                                AND PRO_ORG_CODE!='')
+		                            AND (
+		                                    CITY_ORG_CODE IS NOT NULL
+		                                AND CITY_ORG_CODE!='')) ) t
+		                ON
+		                    (
+		                        t.org_code = a.the_org_code) 
+                )GROUP BY
+		            org_Code,
+		            org_name ) E
+		ON
+		    a.orgCode = E.orgCode
+		LEFT JOIN
+		    (
+		        SELECT
+		            ORG_CODE AS orgCode,
+		            ORG_NAME AS corBankNAME,
+		            SUM(point) AS integralDecu
+		        FROM
+		            (
+		                SELECT
+		                    t.ORG_CODE,
+		                    t.ORG_NAME,
+		                    o.POINT AS point
+		                FROM
+		                    FR_ORDER o
+		                RIGHT JOIN
+		                    (
+		                        SELECT
+		                            ORG_CODE,
+		                            ORG_NAME
+		                        FROM
+		                            fr_org
+		                        WHERE
+		                            ENABLE='0'
+		                        AND ((
+		                                    PRO_ORG_CODE IS NOT NULL
+		                                AND PRO_ORG_CODE!='')
+		                            AND (
+		                                    CITY_ORG_CODE IS NOT NULL
+		                                AND CITY_ORG_CODE!=''))) t
+		                ON
+		                    (
+		                        o.THE_ORG_CODE = t.org_code)
+		                AND (
+		                        o.ORDER_STATUS = #{orderSuccess}
+		                    OR  o.order_status = #{orderSurefund})
+		                AND (
+		                        o.POINT_NO IS NOT NULL
+		                    AND o.POINT_NO!='')
+		                <include refid="dateSql"/> )
+		        GROUP BY
+		            org_Code,
+		            org_name ) F
+		ON
+		    a.orgCode = F.orgCode
+		LEFT JOIN
+		    (
+		        SELECT
+		            ORG_CODE AS orgCode,
+		            ORG_NAME AS corBankNAME,
+		            COUNT(merchant_id) AS merchantNum
+		        FROM
+		            (
+		                SELECT
+		                    t.ORG_CODE,
+		                    t.ORG_NAME,
+		                    a.merchant_id
+		                FROM
+		                    (
+		                        SELECT
+		                            o.org_code ,
+		                            o.merchant_id
+		                        FROM
+		                            FR_MERCHANT_CHANNEL p
+		                        LEFT JOIN
+		                            FR_MERCHANT o
+		                        ON
+		                            p.MERCHANT_ID = o.MERCHANT_ID
+		                        WHERE
+		                            p.STATUS=#{merchantStatus}
+		                        AND o.status=#{merchantStatus}
+		                        AND o.IS_DELETE=#{merchantDelStatus} ) a
+		                RIGHT JOIN
+		                    (
+		                        SELECT
+		                            *
+		                        FROM
+		                            fr_org
+		                        WHERE
+		                            ENABLE='0'
+		                        AND ((
+		                                    PRO_ORG_CODE IS NOT NULL
+		                                AND PRO_ORG_CODE!='')
+		                            AND (
+		                                    CITY_ORG_CODE IS NOT NULL
+		                                AND CITY_ORG_CODE!='')) ) t
+		                ON
+		                    (
+		                        t.org_code = a.org_code) )
+		        GROUP BY
+		            org_Code,
+		            org_name ) G
+		ON
+		    a.orgCode = G.orgCode
+		LEFT JOIN
+		    (
+		        SELECT
+		            ORG_CODE AS orgCode,
+		            ORG_NAME AS corBankNAME,
+		            COUNT(merchant_id) AS newMerchantNum
+		        FROM
+		            (
+		                SELECT
+		                    t.ORG_CODE,
+		                    t.ORG_NAME,
+		                    a.merchant_id
+		                FROM
+		                    (
+		                        SELECT
+		                            o.org_code ,
+		                            o.merchant_id
+		                        FROM
+		                            FR_MERCHANT_CHANNEL p
+		                        LEFT JOIN
+		                            FR_MERCHANT o
+		                        ON
+		                            p.MERCHANT_ID = o.MERCHANT_ID
+		                        WHERE
+		                            p.STATUS=#{merchantStatus}
+		                        AND o.status=#{merchantStatus}
+		                        AND o.IS_DELETE=#{merchantDelStatus}
+		                        <include refid="dateSql"/> ) a
+		                RIGHT JOIN
+		                    (
+		                        SELECT
+		                            *
+		                        FROM
+		                            fr_org
+		                        WHERE
+		                            ENABLE='0'
+		                        AND ((
+		                                    PRO_ORG_CODE IS NOT NULL
+		                                AND PRO_ORG_CODE!='')
+		                            AND (
+		                                    CITY_ORG_CODE IS NOT NULL
+		                                AND CITY_ORG_CODE!='')) ) t
+		                ON
+		                    (
+		                        t.org_code = a.org_code) )
+		        GROUP BY
+		            org_Code,
+		            org_name ) H
+		ON
+		    a.orgCode = H.orgCode
+	
+	</select>
+	
+	<!-- 按照商户统计查询 -->
+		<select id="queryStaticsMerchantList" resultType="com.froad.agre.modules.statistics.vo.resp.StatisticMerchantQueryResp" parameterType="com.froad.agre.modules.statistics.vo.req.StatisticMerchantQueryReq">
+		<include refid="merchantCoreSql" /> 
+		<include refid="query_desc" /> 
+		</select>
+		<sql id="merchantCoreSql">
+		SELECT fm.MERCHANT_FULLNAME AS MerchantName,
+		(SELECT count(fo.ID) FROM FR_ORDER  fo WHERE fo.MERCHANT_ID=fc.MERCHANT_ID 
+		AND (fo.ORDER_STATUS='3' OR fo.ORDER_STATUS='6')
+		<include refid="dateSqlMerchant"/>
+		)AS payTotalNum,
+		nvl((SELECT sum(nvl(fo.TOTAL_MONEY,0)) FROM FR_ORDER  fo WHERE fo.MERCHANT_ID=fc.MERCHANT_ID 
+		AND (fo.ORDER_STATUS='3' OR fo.ORDER_STATUS='6')
+		<include refid="dateSqlMerchant"/>
+		),0)AS payTotalMoney,
+		(SELECT count(fo.ID) FROM FR_ORDER  fo WHERE fo.MERCHANT_ID=fc.MERCHANT_ID 
+		AND (fo.ORDER_STATUS='3' OR fo.ORDER_STATUS='6') AND fo.TRADE_CHANNEL='00'
+		<include refid="dateSqlMerchant"/>
+		)AS wechantTotalNum,
+		nvl((SELECT sum(nvl(fo.TOTAL_MONEY,0)) FROM FR_ORDER  fo WHERE fo.MERCHANT_ID=fc.MERCHANT_ID 
+		AND (fo.ORDER_STATUS='3' OR fo.ORDER_STATUS='6') AND fo.TRADE_CHANNEL='00'
+		<include refid="dateSqlMerchant"/>
+		),0)AS wechantTotalMoney,
+		(SELECT count(fo.ID) FROM FR_ORDER  fo WHERE fo.MERCHANT_ID=fc.MERCHANT_ID 
+		AND (fo.ORDER_STATUS='3' OR fo.ORDER_STATUS='6') AND fo.TRADE_CHANNEL='01'
+		<include refid="dateSqlMerchant"/>
+		)AS alipayTotalNum,
+		nvl((SELECT sum(nvl(fo.TOTAL_MONEY,0)) FROM FR_ORDER  fo WHERE fo.MERCHANT_ID=fc.MERCHANT_ID 
+		AND (fo.ORDER_STATUS='3' OR fo.ORDER_STATUS='6') AND fo.TRADE_CHANNEL='01'
+		<include refid="dateSqlMerchant"/>
+		),0)AS alipayTotalMoney,
+		(SELECT count(fo.ID) FROM FR_ORDER  fo WHERE fo.MERCHANT_ID=fc.MERCHANT_ID 
+		AND (fo.ORDER_STATUS='3' OR fo.ORDER_STATUS='6') AND fo.TRADE_CHANNEL='02'
+		<include refid="dateSqlMerchant"/>
+		)AS bankTotalNum,
+		nvl((SELECT sum(nvl(fo.TOTAL_MONEY,0)) FROM FR_ORDER  fo WHERE fo.MERCHANT_ID=fc.MERCHANT_ID 
+		AND (fo.ORDER_STATUS='3' OR fo.ORDER_STATUS='6') AND fo.TRADE_CHANNEL='02'
+		AND  (fo.POINT_NO is  null)
+		<include refid="dateSqlMerchant"/>
+		),0)AS bankTotalMoney,
+		nvl((SELECT sum(nvl(fo.POINT,0)) FROM FR_ORDER fo WHERE fo.MERCHANT_ID=fc.MERCHANT_ID 
+		AND (fo.ORDER_STATUS='3' OR fo.ORDER_STATUS='6')
+		AND  (fo.POINT_NO is not null and fo.POINT_NO!='')
+		 <include refid="dateSqlMerchant"/>
+		),0)AS integralDecu,
+		nvl((SELECT count(fo.id) from FR_REFUND fo 
+		LEFT JOIN FR_ORDER d on d.order_id = fo.order_id 
+		WHERE d.order_status = '6' AND  fo.status='01' AND  fo.MERCHANT_ID=fc.MERCHANT_ID 
+		 <include refid="dateSqlMerchant"/>
+		),0)AS refundTotalNum,
+		nvl((SELECT sum(nvl(fo.REFUND_MONEY,0)) from FR_REFUND fo 
+		LEFT JOIN FR_ORDER d on d.order_id = fo.order_id 
+		WHERE d.order_status = '6' AND  fo.status='01' AND  fo.MERCHANT_ID=fc.MERCHANT_ID 
+		 <include refid="dateSqlMerchant"/>
+		),0)AS refundTotalMoey,
+		(
+		nvl((
+		SELECT sum(nvl(fob.BANK_CHARGE,0)) 
+		FROM FR_ORDER fo
+		LEFT JOIN FR_ORDER_BILL fob ON fo.ORDER_ID=fob.ORDER_ID
+		WHERE  fo.MERCHANT_ID=fc.merchant_id 
+		 <include refid="dateSqlMerchant"/>
+		AND (fob.PAY_CHANNEL='00' OR fob.PAY_CHANNEL='01')
+		AND fo.ORDER_STATUS in ('6','3')
+		and fob.type = '1'),0)-
+		nvl((SELECT sum(nvl(fob.BANK_CHARGE,0)) 
+		FROM FR_ORDER fo
+		LEFT JOIN FR_ORDER_BILL fob ON fo.ORDER_ID=fob.ORDER_ID
+		WHERE  fo.MERCHANT_ID=fc.merchant_id 
+		 <include refid="dateSqlMerchant"/>
+		AND (fob.PAY_CHANNEL='00' OR fob.PAY_CHANNEL='01')
+		AND fo.ORDER_STATUS in ('6','3') and fob.type = '3'),0)
+		)AS rateTotal,
+		
+		(
+		nvl((
+		SELECT sum(nvl(fob.BANK_CHARGE,0)) 
+		FROM FR_ORDER fo
+		LEFT JOIN FR_ORDER_BILL fob ON fo.ORDER_ID=fob.ORDER_ID
+		WHERE  fo.MERCHANT_ID=fc.merchant_id 
+		 <include refid="dateSqlMerchant"/>
+		AND fob.PAY_CHANNEL='01'
+		AND fo.ORDER_STATUS in ('6','3')
+		and fob.type = '1'),0)-
+		nvl((SELECT sum(nvl(fob.BANK_CHARGE,0)) 
+		FROM FR_ORDER fo
+		LEFT JOIN FR_ORDER_BILL fob ON fo.ORDER_ID=fob.ORDER_ID
+		WHERE  fo.MERCHANT_ID=fc.merchant_id 
+		 <include refid="dateSqlMerchant"/>
+		AND fob.PAY_CHANNEL='01'
+		AND fo.ORDER_STATUS in ('6','3') and fob.type = '3'),0)
+		)AS alipayRate,
+		
+		 (
+		nvl((
+		SELECT sum(nvl(fob.BANK_CHARGE,0)) 
+		FROM FR_ORDER fo
+		LEFT JOIN FR_ORDER_BILL fob ON fo.ORDER_ID=fob.ORDER_ID
+		WHERE  fo.MERCHANT_ID=fc.merchant_id 
+		 <include refid="dateSqlMerchant"/>
+		AND fob.PAY_CHANNEL='00'
+		AND fo.ORDER_STATUS in ('6','3')
+		and fob.type = '1'),0)-
+		nvl((SELECT sum(nvl(fob.BANK_CHARGE,0)) 
+		FROM FR_ORDER fo
+		LEFT JOIN FR_ORDER_BILL fob ON fo.ORDER_ID=fob.ORDER_ID
+		WHERE  fo.MERCHANT_ID=fc.merchant_id 
+		 <include refid="dateSqlMerchant"/>
+		AND fob.PAY_CHANNEL='00'
+		AND fo.ORDER_STATUS in ('6','3') and fob.type = '3'),0)
+		)AS wexRate
+		 
+		FROM FR_MERCHANT_CHANNEL fc
+		LEFT JOIN FR_MERCHANT fm
+		ON fc.MERCHANT_ID=fm.MERCHANT_ID
+		<where>
+		       fm.IS_DELETE='0' AND fm.status='1' AND fc.STATUS='1'
+		       AND fc.INTO_SUCCESS_TIME is not null
+		       AND fm.ORG_CODE IN(
+		    	SELECT ORG_CODE FROM FR_ORG
+		        WHERE ENABLE='0' AND ( 
+		        	ORG_CODE = #{jgm} OR CITY_ORG_CODE=#{jgm} OR PRO_ORG_CODE=#{jgm})
+                  )
+		<if test="merchantName !=null and merchantName !='' ">
+		       and fm.MERCHANT_FULLNAME  LIKE '%' || #{merchantName} || '%'
+		</if>
+		</where>
+		</sql>
+		<!-- 导出排序 最大5000条记录 -->
+		<sql id="load_desc">
+	      ORDER BY fm.CREATE_TIME DESC FETCH FIRST 5000 ROW ONLY
+	    </sql>
+	    <!-- 查询商户统计排序 -->
+		<sql id="query_desc">
+	      ORDER BY fm.CREATE_TIME DESC
+	    </sql>
+	    
+	    <sql id = "dateSqlMerchant">
+		<if test="createSTime != null and createSTime != ''">
+			<![CDATA[and fo.CREATE_TIME>=CONCAT(#{createSTime},' 00:00:00')]]> 
+		</if>
+		<if test="createETime != null and createETime != ''">
+			<![CDATA[and fo.CREATE_TIME<=CONCAT(#{createETime},' 23:59:59')]]>
+		</if>
+	</sql>
+	    
+		<!-- 商户统计导出 -->
+		<select id="getStaticsMerchantList" resultType="com.froad.agre.modules.statistics.vo.resp.StatisticMerchantQueryResp" parameterType="com.froad.agre.modules.statistics.vo.req.StatisticMerchantQueryReq">
+		<include refid="merchantCoreSql" /> 
+		<include refid="load_desc" /> 
+		</select>
+		
+  </mapper>

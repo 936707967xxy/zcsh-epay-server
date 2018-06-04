@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.froad.agre.modules.trade.mapper.RefundQueryMapper">
+
+   <!-- 退款交易订单查询 -->
+     <select id="queryRefundList" parameterType="com.froad.agre.modules.trade.vo.req.RefundQueryVoReq" resultType="com.froad.agre.modules.trade.vo.resp.RefundQueryVoResp">
+		<include refid="coreSql"/>
+		<include refid="queryDynSql" />
+		ORDER BY fu.UPDATE_TIME DESC 
+    </select>  
+    
+    
+    <sql id="coreSql">
+      SELECT
+        fu.ID as indexId,
+		fu.ORDER_ID as orderNO,
+		fm.MERCHANT_FULLNAME as merchantName,
+		to_char(fu.CREATE_TIME,'YYYY-MM-DD HH24:MI:SS') as refundSubmitTime,
+		to_char(fu.UPDATE_TIME,'YYYY-MM-DD HH24:MI:SS') as refundFinishTime,
+		fu.REFUND_MONEY as refundMoney,
+		fu.STATUS as refundStatus,
+		fu.PAY_CHANNEL as tradeType,
+		fo.SOURCE_CHANNEL as requestChannelNo,
+        fu.TRADE_NO as trandNo,
+        fu.REFUND_NO as refundNo,
+        org.ORG_NAME as orgName,
+        fo.OUTLET_ID as outletId,
+        fmo.OUTLET_NAME as outletName
+         <if test="queryType!=null and queryType!='' ">
+		    <if test='queryType=="1"'>
+		        FROM FR_REFUND fu
+		        LEFT JOIN FR_ORDER fo ON fu.ORDER_ID=fo.ORDER_ID
+		   </if>
+		    <if test='queryType=="2"'>
+		        FROM FR_REFUND_NINETY fu
+		        LEFT JOIN FR_ORDER_NINETY fo ON fu.ORDER_ID=fo.ORDER_ID
+		   </if>
+		    <if test='queryType=="3"'>
+		        FROM FR_REFUND_HIS fu
+		        LEFT JOIN FR_ORDER_HIS fo ON fu.ORDER_ID=fo.ORDER_ID
+		   </if>
+		 </if>
+		LEFT JOIN FR_MERCHANT fm ON fo.MERCHANT_ID=fm.MERCHANT_ID
+        LEFT JOIN FR_MERCHANT_OUTLET fmo ON fo.OUTLET_ID=fmo.OUTLET_ID
+        LEFT JOIN FR_ORG org ON fm.ORG_CODE=org.ORG_CODE
+	</sql>
+	<sql id = "queryDynSql">
+		<where>
+		   fm.ORG_CODE IN(
+		   SELECT ORG_CODE 
+			FROM  FR_ORG 
+			WHERE ENABLE='0' 
+			AND (ORG_CODE = #{JGM} OR CITY_ORG_CODE=#{JGM} OR PRO_ORG_CODE=#{JGM})
+			)
+		 <if test="orderNO!=null and orderNO!='' ">
+		    AND fu.ORDER_ID = #{orderNO}
+		 </if>
+		 <if test="payChannelNO!=null and payChannelNO!='' ">
+		    AND fu.TRADE_NO = #{payChannelNO}
+		 </if>
+		 <if test="tradeType!=null and tradeType!='' ">
+		   AND  fu.PAY_CHANNEL = #{tradeType}
+		 </if>
+		 <if test="requestChannelNo!=null and requestChannelNo!='' ">
+		   AND fo.SOURCE_CHANNEL IN('02','03') 
+		   AND  fo.SOURCE_CHANNEL = #{requestChannelNo}
+		 </if>
+		 <if test="tradeStatus!=null  and tradeStatus!='' ">
+		  AND  fu.STATUS = #{tradeStatus}
+		 </if>
+		  <if test="totalSMoney !=null and totalSMoney!='' ">
+		   AND fu.REFUND_MONEY >=#{ totalSMoney}
+		 </if>
+		 <if test="totalEMoney !=null and totalEMoney!='' ">
+		   	<![CDATA[AND fu.REFUND_MONEY <=#{ totalEMoney}]]>
+		 </if>
+		 <if test="intoSDate != null and intoSDate!='' ">
+				<![CDATA[ AND  fu.CREATE_TIME  >= #{intoSDate} ]]>
+		</if>
+			<if test="intoEDate != null and intoEDate!='' ">
+			  	<![CDATA[ AND fu.CREATE_TIME <=#{intoEDate} ]]>
+		</if>
+			<if test="subJgmName != null and subJgmName!='' ">
+			   AND(org.ORG_CODE =#{subJgmName}
+	          OR ORG.CITY_ORG_CODE=#{subJgmName}
+	          OR ORG.PRO_ORG_CODE=#{subJgmName})
+			</if>
+			<if test="merchantName != null and merchantName!='' ">
+			  	AND fm.MERCHANT_FULLNAME  LIKE '%'||#{merchantName}||'%'
+			</if>
+		 
+		 
+		</where>
+	</sql>
+	
+	<!-- 退款订单详细信息查询 -->
+	<select id="queryRefundDetails" parameterType="com.froad.agre.modules.trade.vo.req.RefundQueryVoReq" resultType="com.froad.agre.modules.trade.vo.resp.RefundQueryVoResp">
+		SELECT 
+		fu.TRADE_NO as payChannelRefundNO,
+		fo.THIRD_ORDER_ID as payChannelTradeNO,
+		fo.SOURCE_CHANNEL as requestChannelNo,
+		fu.SEQ_ID as merchantRefundNO,
+		fu.ORDER_ID as merchantOrderNO,
+		fu.AMOUNT as originalMoney,
+		fu.REFUND_MONEY as refundMoney,
+		fu.STATUS as refundStatus,
+		to_char(fu.CREATE_TIME,'YYYY-MM-DD HH24:MI:SS') as refundSubmitTime,
+		to_char(fu.UPDATE_TIME,'YYYY-MM-DD HH24:MI:SS') as refundFinishTime,
+		fm.MERCHANT_FULLNAME as cormerchantName,
+		org.ORG_NAME as corBank,
+		fo.TERMINAL_ID as terminalId,
+		fmo.OUTLET_NAME as corStore,
+		fmo.OUTLET_ID as outletName
+		<if test="queryType!=null and queryType!='' ">
+		    <if test='queryType=="1"'>
+		        FROM FR_REFUND fu
+		        LEFT JOIN FR_ORDER fo ON fu.ORDER_ID=fo.ORDER_ID
+		   </if>
+		    <if test='queryType=="2"'>
+		        FROM FR_REFUND_NINETY fu
+		        LEFT JOIN FR_ORDER_NINETY fo ON fu.ORDER_ID=fo.ORDER_ID
+		   </if>
+		    <if test='queryType=="3"'>
+		        FROM FR_REFUND_HIS fu
+		        LEFT JOIN FR_ORDER_HIS fo ON fu.ORDER_ID=fo.ORDER_ID
+		   </if>
+		 </if>
+		LEFT JOIN FR_MERCHANT fm ON fo.MERCHANT_ID=fm.MERCHANT_ID
+		LEFT JOIN FR_MERCHANT_OUTLET fmo ON fo.OUTLET_ID=fmo.OUTLET_ID
+		LEFT JOIN FR_ORG org ON fm.ORG_CODE=org.ORG_CODE
+	   WHERE 
+	     <if test="orderNO!=null and orderNO!='' ">
+	      fu.ORDER_ID= #{orderNO} 
+	     </if>
+	     <if test="indexId!=null and indexId!='' ">
+	     AND fu.ID=#{indexId}
+	     </if>
+    </select> 
+    
+    <!-- 下载退款报表 -->
+     <select id="downloadRefundList" parameterType="com.froad.agre.modules.trade.vo.req.RefundQueryVoReq" resultType="com.froad.agre.modules.trade.vo.resp.RefundQueryVoResp">
+		<include refid="coreSql"/>
+		<include refid="queryDynSql" /> 
+		<include refid="desc" /> 
+    </select>  
+    <!-- 导出结果按照退款提交时间倒叙排列 -->
+    <sql id="desc">
+      ORDER BY fu.CREATE_TIME DESC FETCH FIRST 5000 ROW ONLY
+    </sql>
+  </mapper>

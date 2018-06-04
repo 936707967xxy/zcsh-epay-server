@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.froad.agre.modules.menu.mapper.FrMgPermissionMapper">
+  <resultMap id="BaseResultMap" type="FrMgPermission">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="menuName" />
+    <result column="CODE" jdbcType="VARCHAR" property="menuId" />
+    <result column="PARENT_ID" jdbcType="BIGINT" property="parentId" />
+    <result column="URL" jdbcType="VARCHAR" property="url" />
+    <result column="TYPE" jdbcType="CHAR" property="type" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="STATUS" jdbcType="CHAR" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, CREATE_TIME, UPDATE_TIME, NAME, CODE, URL, TYPE, PARENT_ID, STATUS
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="string" resultType="FrMgPermission">
+    
+  </select>
+  <select id="queryMenusByRoleId" parameterType="string" resultType="FrMgPermission">
+  	select O.NAME AS menuName,O.CODE AS menuCode,O.URL AS url,O.TYPE AS type,O.PARENT_ID AS parentId FROM FR_MG_ROLE_PREM T
+		LEFT JOIN FR_MG_PERMISSION O ON T.PERM_ID=O.ID
+		WHERE O.STATUS='1' AND T.ROLD_ID=#{roleId} ORDER BY O.CODE ASC
+  </select>
+  <select id="queryMenus" parameterType="string" resultType="FrMgPermission">
+  	select O.NAME AS menuName,O.CODE AS menuCode,O.URL AS url,O.TYPE AS type,O.PARENT_ID AS parentId FROM FR_MG_ROLE_PREM T
+		LEFT JOIN FR_MG_PERMISSION O ON T.PERM_ID=O.ID
+		WHERE O.STATUS='1' ORDER BY T.CODE ASC
+  </select>
+  <select id="queryAllMenus" parameterType="string" resultType="FrMgPermission">
+  	 SELECT T.NAME AS MENUNAME,T.CODE AS MENUCODE,T.URL AS URL,T.TYPE AS TYPE,T.PARENT_ID AS PARENTID FROM FR_MG_PERMISSION T
+		WHERE T.STATUS='1' ORDER BY T.CODE ASC
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from FR_MG_PERMISSION
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="FrMgPermission">
+    insert into FR_MG_PERMISSION (ID, CREATE_TIME, UPDATE_TIME, 
+      NAME, CODE, URL, TYPE, 
+      PARENT_ID, STATUS)
+    values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{menuName,jdbcType=VARCHAR}, #{menuCode,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{type,jdbcType=CHAR}, 
+      #{parentId,jdbcType=BIGINT}, #{status,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="FrMgPermission">
+    insert into FR_MG_PERMISSION
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="menuName != null">
+        NAME,
+      </if>
+      <if test="menuCode != null">
+        CODE,
+      </if>
+      <if test="url != null">
+        URL,
+      </if>
+      <if test="type != null">
+        TYPE,
+      </if>
+      <if test="parentId != null">
+        PARENT_ID,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="menuName != null">
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuCode != null">
+        #{menuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="FrMgPermission">
+    update FR_MG_PERMISSION
+    <set>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="menuName != null">
+        NAME = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuCode != null">
+        CODE = #{menuCode,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        URL = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=CHAR},
+      </if>
+      <if test="parentId != null">
+        PARENT_ID = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=CHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="FrMgPermission">
+    update FR_MG_PERMISSION
+    set CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      NAME = #{menuName,jdbcType=VARCHAR},
+      CODE = #{menuCode,jdbcType=VARCHAR},
+      URL = #{url,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=CHAR},
+      PARENT_ID = #{parentId,jdbcType=BIGINT},
+      STATUS = #{status,jdbcType=CHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
