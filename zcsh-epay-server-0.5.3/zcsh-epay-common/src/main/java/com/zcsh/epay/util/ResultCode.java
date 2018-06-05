@@ -19,6 +19,7 @@ public enum ResultCode {
 	nopermission("9300","无请求权限"),
 	badRequest("4000", "无法处理的请求"),
 	resetSelf("9400","当前登录用户已重置，请重新登录"),
+	notAllParameters("6666","参数不全"),
 	userOnline("9500","当前用户已登录，是否强制登录？");
 	private String code;
 	

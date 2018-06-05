@@ -14,9 +14,9 @@
 	
 	<dependencies>
 		<dependency>
-		    <groupId>org.slf4j</groupId>
-		    <artifactId>slf4j-api</artifactId>
-		    <version>1.7.5</version>
+			<groupId>com.zcsh.epay</groupId>
+			<artifactId>zcsh-epay-common</artifactId>
+			<version>0.5.3-SNAPSHOT</version>
 		</dependency>
 				
 	</dependencies>

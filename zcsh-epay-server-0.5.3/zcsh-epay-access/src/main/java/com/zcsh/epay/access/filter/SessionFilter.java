@@ -1,7 +1,7 @@
 /**
- * Copyright www.hoomsun.com ºìÉÏ½ğÈÚĞÅÏ¢·şÎñ£¨ÉÏº££©ÓĞÏŞ¹«Ë¾
+ * Copyright www.hoomsun.com çº¢ä¸Šé‡‘èä¿¡æ¯æœåŠ¡ï¼ˆä¸Šæµ·ï¼‰æœ‰é™å…¬å¸
  */
-package com.zcsh.epay.framework.filter;
+package com.zcsh.epay.access.filter;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -16,64 +16,66 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.ibatis.session.SqlSession;
+
 import com.zcsh.epay.log.LogCvt;
 import com.zcsh.epay.util.PropertiesUtil;
 import com.zcsh.epay.util.ResponseUtil;
 import com.zcsh.epay.util.ResultCode;
 
 /**
- * ×÷Õß£ºAdministrator <br>
- * ´´½¨Ê±¼ä£º2018Äê6ÔÂ4ÈÕ <br>
- * ÃèÊö£º
+ * ä½œè€…ï¼šAdministrator <br>
+ * åˆ›å»ºæ—¶é—´ï¼š2018å¹´6æœˆ5æ—¥ <br>
+ * æè¿°ï¼š
  */
 public class SessionFilter implements Filter {
 
 	private Pattern[] regPatterns = new Pattern[0];
 	public void init(FilterConfig filterConfig) throws ServletException {
 		// TODO Auto-generated method stub
-		LogCvt.debug("¹ıÂËÆ÷³õÊ¼»¯......");
+		LogCvt.debug("è¿‡æ»¤å™¨åˆå§‹åŒ–......");
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
-		LogCvt.debug("==============¹ıÂËÆ÷Æô¶¯À¹½Ø===============");
+		LogCvt.debug("==============è¿‡æ»¤å™¨å¯åŠ¨æ‹¦æˆª===============");
 		//FrMgSession session =  null;
 		HttpServletRequest req = (HttpServletRequest) request;
 		String href = req.getRequestURI().replaceAll(req.getContextPath(), "");
-		LogCvt.debug("ÕıÔÚ¼ìË÷ÅÅ³ıÏîÊÇ·ñ°üº¬URL["+href+"]...");
-		//³ıexclude urlÄÚµÄÇëÇóµØÖ·£¬ÆäËûÇëÇó¾ùÒªĞ£ÑéÊÇ·ñµÇÂ¼
+		LogCvt.debug("æ­£åœ¨æ£€ç´¢æ’é™¤é¡¹æ˜¯å¦åŒ…å«URL["+href+"]...");
+		//é™¤exclude urlå†…çš„è¯·æ±‚åœ°å€ï¼Œå…¶ä»–è¯·æ±‚å‡è¦æ ¡éªŒæ˜¯å¦ç™»å½•
 		try{
 			
 			if(this.checkExclude(href)){
-				LogCvt.debug("¼ìË÷½á¹û£ºÅÅ³ıÏî°üº¬¸ÃURLÇëÇó");
+				LogCvt.debug("æ£€ç´¢ç»“æœï¼šæ’é™¤é¡¹åŒ…å«è¯¥URLè¯·æ±‚");
 				filterChain.doFilter(request, response);
 			}else{
 				String token = "0";
-				LogCvt.debug("ÕıÔÚ¼ìË÷ÏÂÔØÏîÊÇ·ñ°üº¬URL["+href+"]...");
+				LogCvt.debug("æ­£åœ¨æ£€ç´¢ä¸‹è½½é¡¹æ˜¯å¦åŒ…å«URL["+href+"]...");
 				if(this.checkDownExclude(href)){
-					LogCvt.debug("¼ìË÷½á¹û£ºÏÂÔØÏî°üº¬¸ÃURLÇëÇó£¬Í¨¹ı²ÎÊı»ñÈ¡token,¼ÌĞø½øĞĞµÇÂ¼Ğ£Ñé...");
+					LogCvt.debug("æ£€ç´¢ç»“æœï¼šä¸‹è½½é¡¹åŒ…å«è¯¥URLè¯·æ±‚ï¼Œé€šè¿‡å‚æ•°è·å–token,ç»§ç»­è¿›è¡Œç™»å½•æ ¡éªŒ...");
 					token=req.getParameter("token");
-					LogCvt.debug("»á»°token:"+token);
+					LogCvt.debug("ä¼šè¯token:"+token);
 				}else{
-					LogCvt.debug("¼ìË÷½á¹û£ºÏÂÔØÏî²»°üº¬¸ÃURLÇëÇó£¬Í¨¹ıheader»ñÈ¡token,¼ÌĞø½øĞĞµÇÂ¼Ğ£Ñé...");
+					LogCvt.debug("æ£€ç´¢ç»“æœï¼šä¸‹è½½é¡¹ä¸åŒ…å«è¯¥URLè¯·æ±‚ï¼Œé€šè¿‡headerè·å–token,ç»§ç»­è¿›è¡Œç™»å½•æ ¡éªŒ...");
 					if(null!=req.getHeader("token")){
 						token=req.getHeader("token");
 					}
-					LogCvt.debug("»á»°token:"+token);
+					LogCvt.debug("ä¼šè¯token:"+token);
 					filterChain.doFilter(request, response);
 				}
 				
 			}
 		}catch(Exception e){
-			LogCvt.error("¹ıÂËÆ÷À¹½ØÒì³££º" + e.getMessage(),e);
+			LogCvt.error("è¿‡æ»¤å™¨æ‹¦æˆªå¼‚å¸¸ï¼š" + e.getMessage(),e);
 			Map<String, Object> resultMap = new HashMap<String, Object>();
 			resultMap.put("code", ResultCode.badRequest.getCode());
 			resultMap.put("message", ResultCode.badRequest.getMsg());
 			ResponseUtil.returnJSONResponse((HttpServletResponse)response, resultMap);
 			return;
 		}finally{
-			LogCvt.debug("==============¹ıÂËÆ÷À¹½ØÍê³É===============");
+			LogCvt.debug("==============è¿‡æ»¤å™¨æ‹¦æˆªå®Œæˆ===============");
 		}
 	}
 
@@ -83,9 +85,9 @@ public class SessionFilter implements Filter {
 	}
 	
 	/**
-	 * ÅĞ¶ÏÅÅ³ıÏîÄÚÊÇ·ñ°üº¬µ±Ç°ÇëÇóurl
+	 * åˆ¤æ–­æ’é™¤é¡¹å†…æ˜¯å¦åŒ…å«å½“å‰è¯·æ±‚url
 	 * @param params
-	 * @return true:°üº¬ false:²»°üº¬ 
+	 * @return true:åŒ…å« false:ä¸åŒ…å« 
 	 */
 	private boolean checkExclude(String url){
 		String exclude =PropertiesUtil.getValue("exclude_filter_url");
@@ -100,10 +102,10 @@ public class SessionFilter implements Filter {
 		return false;
 	}
 	/**
-	 * ÓÉÓÚµ¼³ö¹¦ÄÜÊÇform±íµ¥Ìá½»·½Ê½£¬tokenÊÇÒÔ²ÎÊıµÄĞÎÊ½´«Öµ
-	 * Òò´Ë½øĞĞ¶ş´ÎĞ£Ñéurl
+	 * ç”±äºå¯¼å‡ºåŠŸèƒ½æ˜¯formè¡¨å•æäº¤æ–¹å¼ï¼Œtokenæ˜¯ä»¥å‚æ•°çš„å½¢å¼ä¼ å€¼
+	 * å› æ­¤è¿›è¡ŒäºŒæ¬¡æ ¡éªŒurl
 	 * @param params
-	 * @return true:°üº¬ false:²»°üº¬ 
+	 * @return true:åŒ…å« false:ä¸åŒ…å« 
 	 */
 	private boolean checkDownExclude(String url){
 		String exclude =PropertiesUtil.getValue("exclude_filter_downurl");
@@ -111,7 +113,7 @@ public class SessionFilter implements Filter {
 		if(null!=filterUrl){
 			for(String fu : filterUrl){
 				if(fu.equals(url)){
-					LogCvt.debug("¼ìË÷·¢ÏÖÅÅ³ıÏî°üº¬¸ÃURL:"+url);
+					LogCvt.debug("æ£€ç´¢å‘ç°æ’é™¤é¡¹åŒ…å«è¯¥URL:"+url);
 					return true;
 				}
 			}
@@ -119,9 +121,9 @@ public class SessionFilter implements Filter {
 		return false;
 	}
 	/**
-	 * ÅĞ¶Ïµ±Ç°ÓÃ»§ÊÇ·ñÓµÓĞ¸ÃÇëÇóÈ¨ÏŞ
+	 * åˆ¤æ–­å½“å‰ç”¨æˆ·æ˜¯å¦æ‹¥æœ‰è¯¥è¯·æ±‚æƒé™
 	 * @param params
-	 * @return true:ÓµÓĞÈ¨ÏŞ false:ÎŞÈ¨ÏŞ
+	 * @return true:æ‹¥æœ‰æƒé™ false:æ— æƒé™
 	 */
 	private boolean checkUrl(Map<String,Object> params){
 		int n = 0;
@@ -135,7 +137,7 @@ public class SessionFilter implements Filter {
 				n = userMapper.checkUrl(params);
 			}
 		}catch(Exception e){
-			LogCvt.error("¼ì²éURLÈ¨ÏŞÒì³££º" + e.getMessage(),e);
+			LogCvt.error("æ£€æŸ¥URLæƒé™å¼‚å¸¸ï¼š" + e.getMessage(),e);
 		}finally{
 			if(null!=session)
 				session.close();
@@ -145,3 +147,4 @@ public class SessionFilter implements Filter {
 		return false;
 	}
 }
+
