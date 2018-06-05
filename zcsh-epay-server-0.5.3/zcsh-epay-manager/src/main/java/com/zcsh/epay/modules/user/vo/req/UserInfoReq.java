@@ -13,6 +13,8 @@ public class UserInfoReq {
 	private String userId;
 	
 	private String userName;
+	public int  pageNumber;
+	public int pageSize;
 
 	public String getUserId() {
 		return userId;
@@ -29,5 +31,20 @@ public class UserInfoReq {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
+
+	public int getPageNumber() {
+		return pageNumber;
+	}
+
+	public void setPageNumber(int pageNumber) {
+		this.pageNumber = pageNumber;
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
 }

@@ -81,6 +81,17 @@
 		    <artifactId>mybatis</artifactId>
 		    <version>3.3.0</version>
 		</dependency>
+		
+		<dependency>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>druid</artifactId>
+		    <version>1.0.13</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.hoomsun.oracle</groupId>
+		    <artifactId>ojdbc6</artifactId>
+		    <version>1.0</version>
+		</dependency>
 
 	</dependencies>
 </project>
