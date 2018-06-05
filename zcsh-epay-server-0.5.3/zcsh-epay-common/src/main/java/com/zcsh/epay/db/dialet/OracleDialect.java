@@ -18,7 +18,7 @@ public class OracleDialect extends Dialect{
 		StringBuilder pageSql = new StringBuilder();
 
 		if (offset > 0) {
-			pageSql.append("select * from ( select temp.*,ROWNUMBER() OVER() as row_id from ( ");
+			pageSql.append("select * from ( select temp.*,ROWNUM as row_id from ( ");
 			pageSql.append(sql);
 			pageSql.append(" ) temp ");
 			pageSql.append(") where row_id <= ").append(offset + limit).append(" and row_id > ")
@@ -27,7 +27,7 @@ public class OracleDialect extends Dialect{
 
 			// return sql + " limit "+offsetPlaceholder+","+limitPlaceholder;
 		} else {
-			pageSql.append("select * from ( select temp.*, ROWNUMBER() OVER() as row_id from ( ");
+			pageSql.append("select * from ( select temp.*, ROWNUM as row_id from ( ");
 			pageSql.append(sql);
 			pageSql.append(" ) temp ) temp where row_id <= ").append(limitPlaceholder);
 			return pageSql.toString();

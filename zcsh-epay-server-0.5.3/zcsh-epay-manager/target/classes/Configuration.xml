@@ -25,7 +25,7 @@
 				<property name="timeBetweenEvictionRunsMillis" value="30000" />
 				<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
 				<property name="minEvictableIdleTimeMillis" value="60000" />
-				<property name="validationQuery" value="select 1 from sysibm.sysdummy1" />
+				<property name="validationQuery" value="${validationQuery}" />
 				<property name="testWhileIdle" value="true" />
 				<property name="testOnBorrow" value="true" />
 				<property name="testOnReturn" value="false" />
@@ -52,9 +52,9 @@
 				<property name="timeBetweenEvictionRunsMillis" value="30000" />
 				<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
 				<property name="minEvictableIdleTimeMillis" value="60000" />
-				<property name="validationQuery" value="select 1 from sysibm.sysdummy1" />
+				<property name="validationQuery" value="${validationQuery}" />
 				<property name="testWhileIdle" value="true" />
-				<property name="testOnBorrow" value="true" />
+				<property name="testOnBorrow" value="false" />
 				<property name="testOnReturn" value="false" />
 
 				<!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
