@@ -22,7 +22,6 @@ public final class ReflectHelper {
 	 * 获取对象指定属性信息
 	* <p>Function: getField</p>
 	* <p>Description: 取消安全机制限制，如果当前类不存在，则获取父类属性信息，未找到则返回NULL</p>
-	* @author zhaoxy@thankjava.com
 	* @date 2014-12-16 上午11:27:07
 	* @version 1.0
 	* @param obj
@@ -39,9 +38,7 @@ public final class ReflectHelper {
 				field = clazz.getDeclaredField(fieldName);
 				break;
 			} catch (NoSuchFieldException e) {
-				continue;//第一次进入该异常，则clazz为obj  
-						 //第二次进入该异常，则clazz为obj父类
-						 //不考虑子类
+				continue;
 			}
 		}
 		return field;
@@ -51,7 +48,6 @@ public final class ReflectHelper {
 	 * 获取指定对象的所有属性，包含父类属性
 	* <p>Function: getFieldArrayExcludeUID</p>
 	* <p>Description: 不抓取serialVersionUID属性</p>
-	* @author zhaoxy@thankjava.com
 	* @date 2014-12-16 上午11:27:44
 	* @version 1.0
 	* @param clazz
@@ -88,7 +84,6 @@ public final class ReflectHelper {
 	 * 获取指定类字段属性值
 	* <p>Function: getFieldVal</p>
 	* <p>Description: 取消安全访问限制，如果当前类不存在，则获取父类属性值  发生异常则返回NULL</p>
-	* @author zhaoxy@thankjava.com
 	* @date 2014-12-16 上午11:28:20
 	* @version 1.0
 	* @param obj
@@ -120,7 +115,6 @@ public final class ReflectHelper {
 	 * 为字段属性设置属性值
 	* <p>Function: setFieldVal</p>
 	* <p>Description: </p>
-	* @author zhaoxy@thankjava.com
 	* @date 2014-12-18 上午9:52:18
 	* @version 1.0
 	* @param obj

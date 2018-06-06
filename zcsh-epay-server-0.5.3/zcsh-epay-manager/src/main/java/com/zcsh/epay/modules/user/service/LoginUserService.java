@@ -38,8 +38,10 @@ public class LoginUserService {
 			res = new ResBody(ResBody.SUCCESS_CODE, "查询成功");
 			res.setData(list);
 			res.setPage(page);
+			//session.commit(true);
 		} catch (Exception e) {
 			// TODO: handle exception
+			//session.rollback(true);
 			res = new ResBody(ResBody.ERROR_CODE, "查询失败");
 			LogCvt.error("信息查询异常：" + e.getMessage(),e);
 		}finally {

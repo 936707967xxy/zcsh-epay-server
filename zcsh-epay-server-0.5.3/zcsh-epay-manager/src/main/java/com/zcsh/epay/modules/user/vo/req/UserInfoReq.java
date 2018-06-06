@@ -13,6 +13,8 @@ public class UserInfoReq {
 	private String userId;
 	
 	private String userName;
+	private String loginName;
+	private String loginPwd;
 	public int  pageNumber;
 	public int pageSize;
 
@@ -46,5 +48,21 @@ public class UserInfoReq {
 
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
+	}
+
+	public String getLoginName() {
+		return loginName;
+	}
+
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
+	}
+
+	public String getLoginPwd() {
+		return loginPwd;
+	}
+
+	public void setLoginPwd(String loginPwd) {
+		this.loginPwd = loginPwd;
 	}
 }
