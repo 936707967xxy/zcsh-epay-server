@@ -1,5 +1,4 @@
 /**
- * Copyright www.hoomsun.com ºìÉÏ½ğÈÚĞÅÏ¢·şÎñ£¨ÉÏº££©ÓĞÏŞ¹«Ë¾
  */
 package com.zcsh.epay.action;
 
@@ -10,9 +9,10 @@ import java.util.Properties;
 import com.zcsh.epay.util.EmptyChecker;
 
 /**
- * ×÷Õß£ºAdministrator <br>
- * ´´½¨Ê±¼ä£º2018Äê6ÔÂ4ÈÕ <br>
- * ÃèÊö£ºServlet¶¯×÷¹¤³§Àà
+ * ä½œè€…ï¼šAdministrator <br>
+ * åˆ›å»ºæ—¶é—´ï¼š2018å¹´6æœˆ7æ—¥ <br>
+ * æè¿°ï¼šServletåŠ¨ä½œå·¥å‚ç±» 
+ *
  */
 public class ActionFactory {
 

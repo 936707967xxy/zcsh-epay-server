@@ -1,6 +1,3 @@
-/**
- * Copyright www.hoomsun.com 红上金融信息服务（上海）有限公司
- */
 package com.zcsh.epay.db;
 
 import org.apache.ibatis.datasource.unpooled.UnpooledDataSourceFactory;

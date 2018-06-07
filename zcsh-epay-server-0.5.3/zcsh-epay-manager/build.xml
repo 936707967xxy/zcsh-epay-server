@@ -2,8 +2,10 @@
 <project name="zcsh-epay-manager" default="post-clean" basedir=".">
 	<!--
 ====================================================================== 
-	project		    :	zcsh-agre-manager
-	description	:	管理平台后端
+Project		    :zcsh-epay-manager
+Description	    :管理平台
+Author          :xxy
+Date            :2018-06-07
 ======================================================================
 -->
 
@@ -14,7 +16,7 @@
 
 	<property name="target" value="1.6" />
 	<property name="source" value="1.6" />
-	<property name="version" value="0.0.1-SNAPSHOT" />
+	<property name="version" value="0.5.3-SNAPSHOT" />
 	<property name="vendor" value="zcsh" />
 	<property name="author" value="zcsh" />
 	<property name="project" value="zcsh-epay-manager" />
@@ -73,9 +75,9 @@
 	<!-- common工程执行编译 -->
 	<target name="common-build-project" depends="common-init">
 		<echo message="${ant.project.name}: ${ant.file}" />
-		<javac srcdir="${common.src.home}" destdir="${common.dist.home}/classes" debug="${debuglevel}" encoding="utf-8" includes="**/*.java" source="${source}" target="${target}">
-			<compilerarg line="-Xlint:unchecked " />
-			<compilerarg line="-Xlint:deprecation" />
+		<javac srcdir="${common.src.home}" destdir="${common.dist.home}/classes" debug="${debuglevel}" encoding="utf-8" includes="**/*.java" source="${source}" target="${target}" includeantruntime="on">
+			<compilerarg line="-encoding UTF-8 " />
+			<compilerarg line="-encoding UTF-8" />
 			<classpath refid="common-classpath" />
 		</javac>
 	</target>

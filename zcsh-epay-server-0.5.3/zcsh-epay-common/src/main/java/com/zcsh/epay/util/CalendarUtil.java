@@ -1,6 +1,3 @@
-/**
- * Copyright www.hoomsun.com ºìÉÏ½ğÈÚĞÅÏ¢·şÎñ£¨ÉÏº££©ÓĞÏŞ¹«Ë¾
- */
 package com.zcsh.epay.util;
 
 import java.text.SimpleDateFormat;
@@ -13,105 +10,105 @@ import java.util.Map.Entry;
 import com.zcsh.epay.log.LogCvt;
 
 /**
- * ×÷Õß£ºAdministrator <br>
- * ´´½¨Ê±¼ä£º2018Äê6ÔÂ4ÈÕ <br>
- * ÃèÊö£º
+ * ä½œè€…ï¼šAdministrator <br>
+ * åˆ›å»ºæ—¶é—´ï¼š2018å¹´6æœˆ4æ—¥ <br>
+ * æè¿°ï¼š
  */
 public final class CalendarUtil {
 	
 	/**
-	 * @Fields format1 : yyyy-MM-dd£¨¸ñÊ½£© 
+	 * @Fields format1 : yyyy-MM-ddï¼ˆæ ¼å¼ï¼‰ 
 	 */
 	public static final String YYYY_MM_DD = "yyyy-MM-dd";
 	/**
-	 * @Fields format2 : yyyy/MM/dd£¨¸ñÊ½£© 
+	 * @Fields format2 : yyyy/MM/ddï¼ˆæ ¼å¼ï¼‰ 
 	 */
 	public static final String YYYYIMMIDD = "yyyy/MM/dd";
 	/**
-	 * @Fields format3 : yyyyÄêMÔÂdÈÕ£¨¸ñÊ½£© 
+	 * @Fields format3 : yyyyå¹´Mæœˆdæ—¥ï¼ˆæ ¼å¼ï¼‰ 
 	 */
-	public static final String YYYY_YEAR_M_MONTH_D_DAY = "yyyyÄêMÔÂdÈÕ";
+	public static final String YYYY_YEAR_M_MONTH_D_DAY = "yyyyå¹´Mæœˆdæ—¥";
 	/**
-	 * @Fields format4 : yyyyMMdd£¨¸ñÊ½£© 
+	 * @Fields format4 : yyyyMMddï¼ˆæ ¼å¼ï¼‰ 
 	 */
 	public static final String YYYYMMDD = "yyyyMMdd";
 	/**
-	 * @Fields format5 : yyyy-MM-dd HH:mm:ss£¨¸ñÊ½£© 
+	 * @Fields format5 : yyyy-MM-dd HH:mm:ssï¼ˆæ ¼å¼ï¼‰ 
 	 */
 	public static final String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
 	/**
-	 * @Fields format6 : HH:mm:ss SSS£¨¸ñÊ½£© 
+	 * @Fields format6 : HH:mm:ss SSSï¼ˆæ ¼å¼ï¼‰ 
 	 */
 	public static final String HHMMSSSSS = "HH:mm:ss SSS";
 	/**
-	 * @Fields format7 : MMddHHmmss£¨¸ñÊ½£© 
+	 * @Fields format7 : MMddHHmmssï¼ˆæ ¼å¼ï¼‰ 
 	 */
 	public static final String MMDDHHMMSS = "MMddHHmmss";
 	/**
-	 * @Fields format8 : ddHHmmssSSS£¨¸ñÊ½£© 
+	 * @Fields format8 : ddHHmmssSSSï¼ˆæ ¼å¼ï¼‰ 
 	 */
 	public static final String DDHHMMSSSSS = "ddHHmmssSSS";
 	/**
-	 * @Fields format9 : yyyyMMddHHmmssSSS£¨¸ñÊ½£© 
+	 * @Fields format9 : yyyyMMddHHmmssSSSï¼ˆæ ¼å¼ï¼‰ 
 	 */
 	public static final String YYYYMMDDHHMMSSSSS = "yyyyMMddHHmmssSSS";
 	/**
-	 * @Fields format10 : yyyy-MM-dd HH:mm:ss E£¨¸ñÊ½£© 
+	 * @Fields format10 : yyyy-MM-dd HH:mm:ss Eï¼ˆæ ¼å¼ï¼‰ 
 	 */
 	public static final String YYYY_MM_DD_HH_MM_SS_E = "yyyy-MM-dd HH:mm:ss E";
 	/**
-	 * @Fields format11 : yyyy-MM-dd HH:mm:ss SSS£¨¸ñÊ½£© 
+	 * @Fields format11 : yyyy-MM-dd HH:mm:ss SSSï¼ˆæ ¼å¼ï¼‰ 
 	 */
 	public static final String YYYY_MM_DD_HH_MM_SS_SSS = "yyyy-MM-dd HH:mm:ss SSS";
 	/**
-	 * @Fields HH : HH£¨¸ñÊ½£© 
+	 * @Fields HH : HHï¼ˆæ ¼å¼ï¼‰ 
 	 */
 	public static final String HH = "HH";
 	/**
-	 * @Fields HHmmss : HH:mm:ss£¨¸ñÊ½£© 
+	 * @Fields HHmmss : HH:mm:ssï¼ˆæ ¼å¼ï¼‰ 
 	 */
 	public static final String HH_MM_SS = "HH:mm:ss";
 	/**
-	 * @Fields HHmmss1 : HHmmss£¨¸ñÊ½£© 
+	 * @Fields HHmmss1 : HHmmssï¼ˆæ ¼å¼ï¼‰ 
 	 */
 	public static final String HHMMSS = "HHmmss"; 
 	/**
-	 * @Fields HHmm : HHmm£¨¸ñÊ½£© 
+	 * @Fields HHmm : HHmmï¼ˆæ ¼å¼ï¼‰ 
 	 */
 	public static final String HHMM = "HHmm";
 	
 	/**
-	 * @Fields yyyyMMddHHmmss : yyyyMMddHHmmss£¨¸ñÊ½£© 
+	 * @Fields yyyyMMddHHmmss : yyyyMMddHHmmssï¼ˆæ ¼å¼ï¼‰ 
 	 */
 	public static final String YYYYMMDDHHMMSS = "yyyyMMddHHmmss";
 	/**
-	 * @Fields YYYYMM : YYYYMM£¨¸ñÊ½£© 
+	 * @Fields YYYYMM : YYYYMMï¼ˆæ ¼å¼ï¼‰ 
 	 */
 	public static final String YYYYMM = "yyyyMM";
 	/**
-	 * @Fields format12 : MÔÂdÈÕHH:mm£¨¸ñÊ½£© 
+	 * @Fields format12 : Mæœˆdæ—¥HH:mmï¼ˆæ ¼å¼ï¼‰ 
 	 */
-	public static final String M_MONTH_D_DAY_HH_MM = "MÔÂdÈÕHH:mm";
+	public static final String M_MONTH_D_DAY_HH_MM = "Mæœˆdæ—¥HH:mm";
 	
 	public static final String YYYY_MM_DD_HH_MM_SS_DOT_SSS = "yyyy-MM-dd HH:mm:ss.SSS";
 	
 	/**
-	  * ´´½¨Ò»¸öĞÂµÄÊµÀı CalendarUtil. 
-	  * <p>Title: ¹¹Ôì·½·¨</p>
-	  * <p>Description: ¹¹ÔìÕâ¸öÈÕÀú´¦ÀíÀà</p>
+	  * åˆ›å»ºä¸€ä¸ªæ–°çš„å®ä¾‹ CalendarUtil. 
+	  * <p>Title: æ„é€ æ–¹æ³•</p>
+	  * <p>Description: æ„é€ è¿™ä¸ªæ—¥å†å¤„ç†ç±»</p>
 	 */
 	private CalendarUtil() {
 	}
 	/**
-	  * formatDateByFormat(Í¨¹ıÈÕÆÚ¶ÔÏó£¬°´ÕÕÖ¸¶¨¸ñÊ½¸ñÊ½»¯ÈÕÆÚÎªStringĞÎÊ½)
+	  * formatDateByFormat(é€šè¿‡æ—¥æœŸå¯¹è±¡ï¼ŒæŒ‰ç…§æŒ‡å®šæ ¼å¼æ ¼å¼åŒ–æ—¥æœŸä¸ºStringå½¢å¼)
 	  *
 	  * @Title: formatDateByFormat
-	  * @Description: Í¨¹ıÈÕÆÚ¶ÔÏó£¬°´ÕÕÖ¸¶¨¸ñÊ½¸ñÊ½»¯ÈÕÆÚÎªStringĞÎÊ½
+	  * @Description: é€šè¿‡æ—¥æœŸå¯¹è±¡ï¼ŒæŒ‰ç…§æŒ‡å®šæ ¼å¼æ ¼å¼åŒ–æ—¥æœŸä¸ºStringå½¢å¼
 	  * @Date May 3, 2012 1:23:41 PM
 	  * @modifyDate May 3, 2012 1:23:41 PM
-	  * @param date ÈÕÆÚ¶ÔÏó java.util.Date
-	  * @param format ×ª»»µÄ¸ñÊ½ java.lang.String
-	  * @return String ×ª»»ºóµÄStringÈÕÆÚ
+	  * @param date æ—¥æœŸå¯¹è±¡ java.util.Date
+	  * @param format è½¬æ¢çš„æ ¼å¼ java.lang.String
+	  * @return String è½¬æ¢åçš„Stringæ—¥æœŸ
 	 */
 	public static String formatDateByFormat(java.util.Date date, String format) {
 		String result = "";
@@ -126,18 +123,18 @@ public final class CalendarUtil {
 		return result;
 	}
 	/**
-	  * addMonth(½«StringÈÕÆÚÖĞ°´ÕÕ¸ñÊ½Ìí¼ÓÔÂ)
-	  * TODO(×¢Òâ£ºÄÚ²¿²¶×½ÁËÒì³££¬ÓÃe.printStackTrace()Êä³öÁË¶ÑÕ»ĞÅÏ¢)
-	  * TODO(×¢Òâ£ºÕâÀïµÄÌí¼ÓÊÇÔÚÔ­À´µÄÔÂ·İÉÏ¼ÓÉÏĞèÒªÌí¼ÓµÄÔÂÊı)
+	  * addMonth(å°†Stringæ—¥æœŸä¸­æŒ‰ç…§æ ¼å¼æ·»åŠ æœˆ)
+	  * TODO(æ³¨æ„ï¼šå†…éƒ¨æ•æ‰äº†å¼‚å¸¸ï¼Œç”¨e.printStackTrace()è¾“å‡ºäº†å †æ ˆä¿¡æ¯)
+	  * TODO(æ³¨æ„ï¼šè¿™é‡Œçš„æ·»åŠ æ˜¯åœ¨åŸæ¥çš„æœˆä»½ä¸ŠåŠ ä¸Šéœ€è¦æ·»åŠ çš„æœˆæ•°)
 	  *
 	  * @Title: addMonth
-	  * @Description: ½«StringÈÕÆÚÖĞ°´ÕÕ¸ñÊ½Ìí¼ÓÔÂ
+	  * @Description: å°†Stringæ—¥æœŸä¸­æŒ‰ç…§æ ¼å¼æ·»åŠ æœˆ
 	  * @Date May 3, 2012 1:26:41 PM
 	  * @modifyDate May 3, 2012 1:26:41 PM
-	  * @param dateStr ĞèÒªÌí¼ÓÔÂ·İµÄÈÕÆÚ java.lang.String
-	  * @param month Ìí¼ÓÔÂÊı int
-	  * @param format ¸ñÊ½ java.String
-	  * @return String ×îºóµÃµ½µÄ½á¹û java.lang.String
+	  * @param dateStr éœ€è¦æ·»åŠ æœˆä»½çš„æ—¥æœŸ java.lang.String
+	  * @param month æ·»åŠ æœˆæ•° int
+	  * @param format æ ¼å¼ java.String
+	  * @return String æœ€åå¾—åˆ°çš„ç»“æœ java.lang.String
 	 */
 	public static String addMonth(String dateStr, int month, String format) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat(format);
@@ -154,13 +151,13 @@ public final class CalendarUtil {
 		return dateFormat.format(nowDate);
 	}
 	/**
-	  * pkDate(»ñÈ¡Åú¿ÛÈÕÆÚ)
+	  * pkDate(è·å–æ‰¹æ‰£æ—¥æœŸ)
 	  *
 	  * @Title: pkDate
-	  * @Description: »ñÈ¡Åú¿ÛÈÕÆÚ
+	  * @Description: è·å–æ‰¹æ‰£æ—¥æœŸ
 	  * @Date May 3, 2012 1:34:02 PM
 	  * @modifyDate May 3, 2012 1:34:02 PM
-	  * @return String Åú¿ÛÈÕÆÚ java.lang.String
+	  * @return String æ‰¹æ‰£æ—¥æœŸ java.lang.String
 	 */
 	public static String pkDate() {
 		Calendar cal1 = Calendar.getInstance();
@@ -170,29 +167,29 @@ public final class CalendarUtil {
 	}
 
 	/**
-	  * formatDate(¸ñÊ½»¯ÈÕÆÚ ¸ñÊ½Îª yyyy-MM-dd)
+	  * formatDate(æ ¼å¼åŒ–æ—¥æœŸ æ ¼å¼ä¸º yyyy-MM-dd)
 	  *
 	  * @Title: formatDate
-	  * @Description: ¸ñÊ½»¯ÈÕÆÚ ¸ñÊ½Îª yyyy-MM-dd
+	  * @Description: æ ¼å¼åŒ–æ—¥æœŸ æ ¼å¼ä¸º yyyy-MM-dd
 	  * @Date May 3, 2012 1:36:11 PM
 	  * @modifyDate May 3, 2012 1:36:11 PM
-	  * @param date ĞèÒª¸ñÊ½»¯µÄÊ±¼ä¶ÔÏó
-	  * @return String ¸ñÊ½»¯ºóµÄString java.lang.String
+	  * @param date éœ€è¦æ ¼å¼åŒ–çš„æ—¶é—´å¯¹è±¡
+	  * @return String æ ¼å¼åŒ–åçš„String java.lang.String
 	 */
 	public static String formatDate(java.util.Date date) {
 		return formatDateByFormat(date, "yyyy-MM-dd");
 	}
 	/**
-	  * getDate(Í¨¹ı×Ö·ûÀàĞÍµÄÈÕÆÚ¸ú¸ñÊ½µÃµ½¸ÃÊ±¼äµÄºÁÃëÊı)
-	  * TODO(×¢Òâ£ºÈç¹û¸ñÊ½»¯´íÎóµÄ»°£¬·µ»ØµÄÎªnull£¬²¢e.printStackTrace()´òÓ¡Òì³£¶ÑÕ»ĞÅÏ¢)
+	  * getDate(é€šè¿‡å­—ç¬¦ç±»å‹çš„æ—¥æœŸè·Ÿæ ¼å¼å¾—åˆ°è¯¥æ—¶é—´çš„æ¯«ç§’æ•°)
+	  * TODO(æ³¨æ„ï¼šå¦‚æœæ ¼å¼åŒ–é”™è¯¯çš„è¯ï¼Œè¿”å›çš„ä¸ºnullï¼Œå¹¶e.printStackTrace()æ‰“å°å¼‚å¸¸å †æ ˆä¿¡æ¯)
 	  *
 	  * @Title: getDate
-	  * @Description: Í¨¹ı×Ö·ûÀàĞÍµÄÈÕÆÚ¸ú¸ñÊ½µÃµ½¸ÃÊ±¼äµÄºÁÃëÊı
+	  * @Description: é€šè¿‡å­—ç¬¦ç±»å‹çš„æ—¥æœŸè·Ÿæ ¼å¼å¾—åˆ°è¯¥æ—¶é—´çš„æ¯«ç§’æ•°
 	  * @Date May 3, 2012 1:37:13 PM
 	  * @modifyDate May 3, 2012 1:37:13 PM
-	  * @param date StringµÄÈÕÆÚ java.lang.String
-	  * @param format ¸ñÊ½ java.lang.String
-	  * @return long Ê±¼äµÄºÁÃëÊı long
+	  * @param date Stringçš„æ—¥æœŸ java.lang.String
+	  * @param format æ ¼å¼ java.lang.String
+	  * @return long æ—¶é—´çš„æ¯«ç§’æ•° long
 	 */
 	public static Long getDate(String date, String format) {
 
@@ -207,15 +204,15 @@ public final class CalendarUtil {
 
 	}
 	/**
-	  * getLongD(½«dateÀàĞÍµÄÈÕÆÚ×ª»»ÎªyyyyMMdd¸ñÊ½µÄlongÀàĞÍµÄÊ±¼ä)
-	  * TODO(×¢Òâ£ºÈç¹û¸ñÊ½»¯´íÎóµÄ»°£¬·µ»ØµÄÎªnull£¬²¢e.printStackTrace()´òÓ¡Òì³£¶ÑÕ»ĞÅÏ¢)
+	  * getLongD(å°†dateç±»å‹çš„æ—¥æœŸè½¬æ¢ä¸ºyyyyMMddæ ¼å¼çš„longç±»å‹çš„æ—¶é—´)
+	  * TODO(æ³¨æ„ï¼šå¦‚æœæ ¼å¼åŒ–é”™è¯¯çš„è¯ï¼Œè¿”å›çš„ä¸ºnullï¼Œå¹¶e.printStackTrace()æ‰“å°å¼‚å¸¸å †æ ˆä¿¡æ¯)
 	  *
 	  * @Title: getLongD
-	  * @Description: ½«dateÀàĞÍµÄÈÕÆÚ×ª»»ÎªyyyyMMdd¸ñÊ½µÄlongÀàĞÍµÄÊ±¼ä
+	  * @Description: å°†dateç±»å‹çš„æ—¥æœŸè½¬æ¢ä¸ºyyyyMMddæ ¼å¼çš„longç±»å‹çš„æ—¶é—´
 	  * @Date May 3, 2012 1:39:23 PM
 	  * @modifyDate May 3, 2012 1:39:23 PM
-	  * @param date ĞèÒª×ª»»µÄÈÕÆÚ java.util.Date
-	  * @return Long µÃµ½µÄlongÈÕÆÚ java.lang.Long
+	  * @param date éœ€è¦è½¬æ¢çš„æ—¥æœŸ java.util.Date
+	  * @return Long å¾—åˆ°çš„longæ—¥æœŸ java.lang.Long
 	 */
 	public static Long getLongD(java.util.Date date) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
@@ -229,28 +226,28 @@ public final class CalendarUtil {
 		}
 	}
 	/**
-	  * getLongD_s(¸ù¾İÈÕÆÚµÃµ½ºÁÃëÊı)
+	  * getLongD_s(æ ¹æ®æ—¥æœŸå¾—åˆ°æ¯«ç§’æ•°)
 	  *
 	  * @Title: getLongD_s
-	  * @Description: ¸ù¾İÈÕÆÚµÃµ½ºÁÃëÊı
+	  * @Description: æ ¹æ®æ—¥æœŸå¾—åˆ°æ¯«ç§’æ•°
 	  * @Date May 3, 2012 1:41:49 PM
 	  * @modifyDate May 3, 2012 1:41:49 PM
-	  * @param date ÈÕÆÚ¶ÔÏó java.util.Date
-	  * @return Long µÃµ½µÄLongÈÕÆÚ java.lang.Long
+	  * @param date æ—¥æœŸå¯¹è±¡ java.util.Date
+	  * @return Long å¾—åˆ°çš„Longæ—¥æœŸ java.lang.Long
 	 */
 	public static Long getLongDs(java.util.Date date) {
 		return new Long(date.getTime());
 	}
 	/**
-	  * getLongD_t(½«dateÀàĞÍµÄÈÕÆÚ×ª»»ÎªHH:mm:ss SSS¸ñÊ½µÄlongÀàĞÍµÄÊ±¼ä)
-	  * TODO(×¢Òâ£ºÈç¹û¸ñÊ½»¯´íÎóµÄ»°£¬·µ»ØµÄÎªnull£¬²¢e.printStackTrace()´òÓ¡Òì³£¶ÑÕ»ĞÅÏ¢)
+	  * getLongD_t(å°†dateç±»å‹çš„æ—¥æœŸè½¬æ¢ä¸ºHH:mm:ss SSSæ ¼å¼çš„longç±»å‹çš„æ—¶é—´)
+	  * TODO(æ³¨æ„ï¼šå¦‚æœæ ¼å¼åŒ–é”™è¯¯çš„è¯ï¼Œè¿”å›çš„ä¸ºnullï¼Œå¹¶e.printStackTrace()æ‰“å°å¼‚å¸¸å †æ ˆä¿¡æ¯)
 	  *
 	  * @Title: getLongD_t
-	  * @Description: ½«dateÀàĞÍµÄÈÕÆÚ×ª»»ÎªHH:mm:ss SSS¸ñÊ½µÄlongÀàĞÍµÄÊ±¼ä
+	  * @Description: å°†dateç±»å‹çš„æ—¥æœŸè½¬æ¢ä¸ºHH:mm:ss SSSæ ¼å¼çš„longç±»å‹çš„æ—¶é—´
 	  * @Date May 3, 2012 1:39:23 PM
 	  * @modifyDate May 3, 2012 1:39:23 PM
-	  * @param date ĞèÒª×ª»»µÄÈÕÆÚ java.util.Date
-	  * @return Long µÃµ½µÄlongÈÕÆÚ java.lang.Long
+	  * @param date éœ€è¦è½¬æ¢çš„æ—¥æœŸ java.util.Date
+	  * @return Long å¾—åˆ°çš„longæ—¥æœŸ java.lang.Long
 	 */
 	public static Long getLongDt(java.util.Date date) {
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss SSS");
@@ -265,15 +262,15 @@ public final class CalendarUtil {
 	}
 
 	/**
-	  * getDate_d(°´ÕÕ¸ñÊ½½«LongÀàĞÍµÄÈÕÆÚ×ª»»ÎªStringÎªÈÕÆÚ)
+	  * getDate_d(æŒ‰ç…§æ ¼å¼å°†Longç±»å‹çš„æ—¥æœŸè½¬æ¢ä¸ºStringä¸ºæ—¥æœŸ)
 	  *
 	  * @Title: getDate_d
-	  * @Description: °´ÕÕ¸ñÊ½½«LongÀàĞÍµÄÈÕÆÚ×ª»»ÎªStringÎªÈÕÆÚ
+	  * @Description: æŒ‰ç…§æ ¼å¼å°†Longç±»å‹çš„æ—¥æœŸè½¬æ¢ä¸ºStringä¸ºæ—¥æœŸ
 	  * @Date May 3, 2012 1:43:59 PM
 	  * @modifyDate May 3, 2012 1:43:59 PM
-	  * @param ld LongÀàĞÍµÄÈÕÆÚ java.lang.Long
-	  * @param format ¸ñÊ½ java.lang.String
-	  * @return String µÃµ½µÄStringÈÕÆÚ java.lang.String
+	  * @param ld Longç±»å‹çš„æ—¥æœŸ java.lang.Long
+	  * @param format æ ¼å¼ java.lang.String
+	  * @return String å¾—åˆ°çš„Stringæ—¥æœŸ java.lang.String
 	 */
 	public static String getDateD(Long ld, String format) {
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
@@ -281,14 +278,14 @@ public final class CalendarUtil {
 		return sdf.format(dd);
 	}
 	/**
-	  * getLong_d(¸ù¾İStringÈÕÆÚµÃµ½LongÀàĞÍÈÕÆÚ)
+	  * getLong_d(æ ¹æ®Stringæ—¥æœŸå¾—åˆ°Longç±»å‹æ—¥æœŸ)
 	  *
 	  * @Title: getLong_d
-	  * @Description: ¸ù¾İStringÈÕÆÚµÃµ½LongÀàĞÍÈÕÆÚ
+	  * @Description: æ ¹æ®Stringæ—¥æœŸå¾—åˆ°Longç±»å‹æ—¥æœŸ
 	  * @Date May 3, 2012 1:46:12 PM
 	  * @modifyDate May 3, 2012 1:46:12 PM
-	  * @param date StringÈÕÆÚ java.lang.String
-	  * @return Long LongÀàĞÍÈÕÆÚ java.lang.Long
+	  * @param date Stringæ—¥æœŸ java.lang.String
+	  * @return Long Longç±»å‹æ—¥æœŸ java.lang.Long
 	 */
 	public static Long getLongD(String date) {
 
@@ -327,28 +324,28 @@ public final class CalendarUtil {
 
 	}
 	/**
-	  * getMonthBegin(¸ù¾İ´«ÈëµÄÈÕÆÚ£¬µÃµ½¸ÃÔÂµÄµÚÒ»Ìì£¨Ò²¾ÍÊÇÒ»ºÅ£©)
+	  * getMonthBegin(æ ¹æ®ä¼ å…¥çš„æ—¥æœŸï¼Œå¾—åˆ°è¯¥æœˆçš„ç¬¬ä¸€å¤©ï¼ˆä¹Ÿå°±æ˜¯ä¸€å·ï¼‰)
 	  *
 	  * @Title: getMonthBegin
-	  * @Description: ¸ù¾İ´«ÈëµÄÈÕÆÚ£¬µÃµ½¸ÃÔÂµÄµÚÒ»Ìì£¨Ò²¾ÍÊÇÒ»ºÅ£©
+	  * @Description: æ ¹æ®ä¼ å…¥çš„æ—¥æœŸï¼Œå¾—åˆ°è¯¥æœˆçš„ç¬¬ä¸€å¤©ï¼ˆä¹Ÿå°±æ˜¯ä¸€å·ï¼‰
 	  * @Date May 3, 2012 1:47:57 PM
 	  * @modifyDate May 3, 2012 1:47:57 PM
-	  * @param strdate ´«ÈëµÄÈÕÆÚ java.lang.String
-	  * @return String µÃµ½µÄÈÕÆÚ java.lang.String
+	  * @param strdate ä¼ å…¥çš„æ—¥æœŸ java.lang.String
+	  * @return String å¾—åˆ°çš„æ—¥æœŸ java.lang.String
 	 */
 	public static String getMonthBegin(String strdate) {
 		java.util.Date date = parseFormatDate(strdate);
 		return formatDateByFormat(date, "yyyy-MM") + "-01";
 	}
 	/**
-	  * getMonthEnd(¸ù¾İ´«ÈëµÄÈÕÆÚ£¬µÃµ½¸ÃÔÂµÄ×îºóÒ»Ìì)
+	  * getMonthEnd(æ ¹æ®ä¼ å…¥çš„æ—¥æœŸï¼Œå¾—åˆ°è¯¥æœˆçš„æœ€åä¸€å¤©)
 	  *
 	  * @Title: getMonthEnd
-	  * @Description: ¸ù¾İ´«ÈëµÄÈÕÆÚ£¬µÃµ½¸ÃÔÂµÄ×îºóÒ»Ìì
+	  * @Description: æ ¹æ®ä¼ å…¥çš„æ—¥æœŸï¼Œå¾—åˆ°è¯¥æœˆçš„æœ€åä¸€å¤©
 	  * @Date May 3, 2012 1:48:34 PM
 	  * @modifyDate May 3, 2012 1:48:34 PM
-	  * @param strdate ´«ÈëµÄÈÕÆÚ java.lang.String
-	  * @return String µÃµ½µÄÈÕÆÚ java.lang.String
+	  * @param strdate ä¼ å…¥çš„æ—¥æœŸ java.lang.String
+	  * @return String å¾—åˆ°çš„æ—¥æœŸ java.lang.String
 	 */
 	public static String getMonthEnd(String strdate) {
 		java.util.Date date = parseFormatDate(getMonthBegin(strdate));
@@ -360,21 +357,21 @@ public final class CalendarUtil {
 	}
 	
 	/**
-	 * ¸ù¾İÈÕÆÚ¼ÆËãËùÔÚÖÜµÄÖÜÒ»ºÍÖÜÈÕ
-	 * @param time Ö¸¶¨µÄÈÕÆÚ
+	 * æ ¹æ®æ—¥æœŸè®¡ç®—æ‰€åœ¨å‘¨çš„å‘¨ä¸€å’Œå‘¨æ—¥
+	 * @param time æŒ‡å®šçš„æ—¥æœŸ
 	 * @return
 	 */
 	public static String[] convertWeekByDate(Date time) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(time);
-		//ÅĞ¶ÏÒª¼ÆËãµÄÈÕÆÚÊÇ·ñÊÇÖÜÈÕ£¬Èç¹ûÊÇÔò¼õÒ»Ìì¼ÆËãÖÜÁùµÄ£¬·ñÔò»á³öÎÊÌâ£¬¼ÆËãµ½ÏÂÒ»ÖÜÈ¥ÁË
-		int dayWeek = calendar.get(Calendar.DAY_OF_WEEK); //»ñµÃµ±Ç°ÈÕÆÚÊÇÒ»¸öĞÇÆÚµÄµÚ¼¸Ìì
+		//åˆ¤æ–­è¦è®¡ç®—çš„æ—¥æœŸæ˜¯å¦æ˜¯å‘¨æ—¥ï¼Œå¦‚æœæ˜¯åˆ™å‡ä¸€å¤©è®¡ç®—å‘¨å…­çš„ï¼Œå¦åˆ™ä¼šå‡ºé—®é¢˜ï¼Œè®¡ç®—åˆ°ä¸‹ä¸€å‘¨å»äº†
+		int dayWeek = calendar.get(Calendar.DAY_OF_WEEK); //è·å¾—å½“å‰æ—¥æœŸæ˜¯ä¸€ä¸ªæ˜ŸæœŸçš„ç¬¬å‡ å¤©
 		if (dayWeek == 1){
 			calendar.add(Calendar.DAY_OF_MONTH, -1);
 		}
-		calendar.setFirstDayOfWeek(Calendar.MONDAY); //ÉèÖÃÒ»¸öĞÇÆÚµÄµÚÒ»Ìì£¬°´ÖĞ¹úµÄÏ°¹ßÒ»¸öĞÇÆÚµÄµÚÒ»ÌìÊÇĞÇÆÚÒ»
-		int day = calendar.get(Calendar.DAY_OF_WEEK); //»ñµÃµ±Ç°ÈÕÆÚÊÇÒ»¸öĞÇÆÚµÄµÚ¼¸Ìì
-		calendar.add(Calendar.DATE, calendar.getFirstDayOfWeek()-day); //¸ù¾İÈÕÀúµÄ¹æÔò£¬¸øµ±Ç°ÈÕÆÚ¼õÈ¥ĞÇÆÚ¼¸ÓëÒ»¸öĞÇÆÚµÚÒ»ÌìµÄ²îÖµ
+		calendar.setFirstDayOfWeek(Calendar.MONDAY); //è®¾ç½®ä¸€ä¸ªæ˜ŸæœŸçš„ç¬¬ä¸€å¤©ï¼ŒæŒ‰ä¸­å›½çš„ä¹ æƒ¯ä¸€ä¸ªæ˜ŸæœŸçš„ç¬¬ä¸€å¤©æ˜¯æ˜ŸæœŸä¸€
+		int day = calendar.get(Calendar.DAY_OF_WEEK); //è·å¾—å½“å‰æ—¥æœŸæ˜¯ä¸€ä¸ªæ˜ŸæœŸçš„ç¬¬å‡ å¤©
+		calendar.add(Calendar.DATE, calendar.getFirstDayOfWeek()-day); //æ ¹æ®æ—¥å†çš„è§„åˆ™ï¼Œç»™å½“å‰æ—¥æœŸå‡å»æ˜ŸæœŸå‡ ä¸ä¸€ä¸ªæ˜ŸæœŸç¬¬ä¸€å¤©çš„å·®å€¼
 		Date begin = calendar.getTime();
 		calendar.add(Calendar.DATE, 6);
 		Date end = calendar.getTime();
@@ -385,13 +382,13 @@ public final class CalendarUtil {
 	}
 	
 	/**
-	  * parseFormatDate(½«StringÀàĞÍµÄÈÕÆÚ×ª»»³ÉdateÀàĞÍµÄÈÕÆÚ)
+	  * parseFormatDate(å°†Stringç±»å‹çš„æ—¥æœŸè½¬æ¢æˆdateç±»å‹çš„æ—¥æœŸ)
 	  *
 	  * @Title: parseFormatDate
-	  * @Description: ½«StringÀàĞÍµÄÈÕÆÚ×ª»»³ÉdateÀàĞÍµÄÈÕÆÚ
+	  * @Description: å°†Stringç±»å‹çš„æ—¥æœŸè½¬æ¢æˆdateç±»å‹çš„æ—¥æœŸ
 	  * @Date May 3, 2012 1:49:09 PM
 	  * @modifyDate May 3, 2012 1:49:09 PM
-	  * @return Date µÃµ½µÄÈÕÆÚ java.util.Date
+	  * @return Date å¾—åˆ°çš„æ—¥æœŸ java.util.Date
 	 */
 	public static Date parseFormatDate(String strDate) {
 		java.util.Date date = null;
@@ -409,15 +406,15 @@ public final class CalendarUtil {
 
 	}
 	/**
-	  * parseFormatDateBy(Í¨¹ıÏàÓ¦µÄÄêÔÂÈÕ·Ö¸î·ûÀ´½øĞĞÏàÓ¦µÄ¸ñÊ½»¯)
+	  * parseFormatDateBy(é€šè¿‡ç›¸åº”çš„å¹´æœˆæ—¥åˆ†å‰²ç¬¦æ¥è¿›è¡Œç›¸åº”çš„æ ¼å¼åŒ–)
 	  *
 	  * @Title: parseFormatDateBy
-	  * @Description: Í¨¹ıÏàÓ¦µÄÄêÔÂÈÕ·Ö¸î·ûÀ´½øĞĞÏàÓ¦µÄ¸ñÊ½»¯
+	  * @Description: é€šè¿‡ç›¸åº”çš„å¹´æœˆæ—¥åˆ†å‰²ç¬¦æ¥è¿›è¡Œç›¸åº”çš„æ ¼å¼åŒ–
 	  * @Date May 3, 2012 1:50:04 PM
 	  * @modifyDate May 3, 2012 1:50:04 PM
-	  * @param strDate ´«ÈëµÄÈÕÆÚ java.lang.String
-	  * @param division ·Ö¸ô·û java.lang.String
-	  * @return Date µÃµ½µÄÈÕÆÚ java.util.Date
+	  * @param strDate ä¼ å…¥çš„æ—¥æœŸ java.lang.String
+	  * @param division åˆ†éš”ç¬¦ java.lang.String
+	  * @return Date å¾—åˆ°çš„æ—¥æœŸ java.util.Date
 	 */
 	public static java.util.Date parseFormatDateBy(String strDate,
 			String division) {
@@ -431,14 +428,14 @@ public final class CalendarUtil {
 		return date;
 	}
 	/**
-	  * getYear(¸ù¾İÈÕÆÚµÃµ½Äê)
+	  * getYear(æ ¹æ®æ—¥æœŸå¾—åˆ°å¹´)
 	  *
 	  * @Title: getYear
-	  * @Description: ¸ù¾İÈÕÆÚµÃµ½Äê
+	  * @Description: æ ¹æ®æ—¥æœŸå¾—åˆ°å¹´
 	  * @Date May 3, 2012 1:52:03 PM
 	  * @modifyDate May 3, 2012 1:52:03 PM
-	  * @param date ´«ÈëµÄÈÕÆÚ java.util.Date
-	  * @return int µÃµ½µÄÄê int
+	  * @param date ä¼ å…¥çš„æ—¥æœŸ java.util.Date
+	  * @return int å¾—åˆ°çš„å¹´ int
 	 */
 	public static int getYear(java.util.Date date) {
 		java.util.Calendar c = java.util.Calendar.getInstance();
@@ -446,14 +443,14 @@ public final class CalendarUtil {
 		return c.get(java.util.Calendar.YEAR);
 	}
 	/**
-	  * getMonth(¸ù¾İÈÕÆÚµÃµ½ÔÂ·İ)
+	  * getMonth(æ ¹æ®æ—¥æœŸå¾—åˆ°æœˆä»½)
 	  *
 	  * @Title: getMonth
-	  * @Description: ¸ù¾İÈÕÆÚµÃµ½ÔÂ·İ
+	  * @Description: æ ¹æ®æ—¥æœŸå¾—åˆ°æœˆä»½
 	  * @Date May 3, 2012 2:10:15 PM
 	  * @modifyDate May 3, 2012 2:10:15 PM
-	  * @param date ´«ÈëµÄÈÕÆÚ java.util.Date
-	  * @return int µÃµ½µÄÔÂ·İ int
+	  * @param date ä¼ å…¥çš„æ—¥æœŸ java.util.Date
+	  * @return int å¾—åˆ°çš„æœˆä»½ int
 	 */
 	public static int getMonth(java.util.Date date) {
 		java.util.Calendar c = java.util.Calendar.getInstance();
@@ -461,14 +458,14 @@ public final class CalendarUtil {
 		return c.get(java.util.Calendar.MONTH) + 1;
 	}
 	/**
-	  * getDay(¸ù¾İÈÕÆÚµÃµ½Ìì)
+	  * getDay(æ ¹æ®æ—¥æœŸå¾—åˆ°å¤©)
 	  *
 	  * @Title: getDay
-	  * @Description: ¸ù¾İÈÕÆÚµÃµ½Ìì
+	  * @Description: æ ¹æ®æ—¥æœŸå¾—åˆ°å¤©
 	  * @Date May 3, 2012 2:11:03 PM
 	  * @modifyDate May 3, 2012 2:11:03 PM
-	  * @param date ´«ÈëµÄÈÕÆÚ java.util.Date
-	  * @return int µÃµ½µÄÌì int
+	  * @param date ä¼ å…¥çš„æ—¥æœŸ java.util.Date
+	  * @return int å¾—åˆ°çš„å¤© int
 	 */
 	public static int getDay(java.util.Date date) {
 		java.util.Calendar c = java.util.Calendar.getInstance();
@@ -476,14 +473,14 @@ public final class CalendarUtil {
 		return c.get(java.util.Calendar.DAY_OF_MONTH);
 	}
 	/**
-	  * getHour(¸ù¾İÈÕÆÚµÃµ½Ğ¡Ê±Êı)
+	  * getHour(æ ¹æ®æ—¥æœŸå¾—åˆ°å°æ—¶æ•°)
 	  *
 	  * @Title: getHour
-	  * @Description: ¸ù¾İÈÕÆÚµÃµ½Ğ¡Ê±Êı
+	  * @Description: æ ¹æ®æ—¥æœŸå¾—åˆ°å°æ—¶æ•°
 	  * @Date May 3, 2012 2:11:41 PM
 	  * @modifyDate May 3, 2012 2:11:41 PM
-	  * @param date ´«ÈëµÄÈÕÆÚ java.util.Date
-	  * @return int µÃµ½µÄĞ¡Ê±Êı int
+	  * @param date ä¼ å…¥çš„æ—¥æœŸ java.util.Date
+	  * @return int å¾—åˆ°çš„å°æ—¶æ•° int
 	 */
 	public static int getHour(java.util.Date date) {
 		java.util.Calendar c = java.util.Calendar.getInstance();
@@ -491,14 +488,14 @@ public final class CalendarUtil {
 		return c.get(java.util.Calendar.HOUR_OF_DAY);
 	}
 	/**
-	  * getMinute(¸ù¾İÈÕÆÚµÃµ½·ÖÖÓÊı)
+	  * getMinute(æ ¹æ®æ—¥æœŸå¾—åˆ°åˆ†é’Ÿæ•°)
 	  *
 	  * @Title: getMinute
-	  * @Description: ¸ù¾İÈÕÆÚµÃµ½·ÖÖÓÊı
+	  * @Description: æ ¹æ®æ—¥æœŸå¾—åˆ°åˆ†é’Ÿæ•°
 	  * @Date May 3, 2012 2:12:25 PM
 	  * @modifyDate May 3, 2012 2:12:25 PM
-	  * @param date ´«ÈëµÄÈÕÆÚ java.util.Date
-	  * @return int µÃµ½µÄ·ÖÖÓÊı int
+	  * @param date ä¼ å…¥çš„æ—¥æœŸ java.util.Date
+	  * @return int å¾—åˆ°çš„åˆ†é’Ÿæ•° int
 	 */
 	public static int getMinute(java.util.Date date) {
 		java.util.Calendar c = java.util.Calendar.getInstance();
@@ -506,14 +503,14 @@ public final class CalendarUtil {
 		return c.get(java.util.Calendar.MINUTE);
 	}
 	/**
-	  * getSecond(¸ù¾İÈÕÆÚµÃµ½ÃëÊı)
+	  * getSecond(æ ¹æ®æ—¥æœŸå¾—åˆ°ç§’æ•°)
 	  *
 	  * @Title: getSecond
-	  * @Description: ¸ù¾İÈÕÆÚµÃµ½ÃëÊı
+	  * @Description: æ ¹æ®æ—¥æœŸå¾—åˆ°ç§’æ•°
 	  * @Date May 3, 2012 2:13:08 PM
 	  * @modifyDate May 3, 2012 2:13:08 PM
-	  * @param date ´«ÈëµÄÈÕÆÚ java.util.Date
-	  * @return int µÃµ½µÄÃëÊı int
+	  * @param date ä¼ å…¥çš„æ—¥æœŸ java.util.Date
+	  * @return int å¾—åˆ°çš„ç§’æ•° int
 	 */
 	public static int getSecond(java.util.Date date) {
 		java.util.Calendar c = java.util.Calendar.getInstance();
@@ -521,14 +518,14 @@ public final class CalendarUtil {
 		return c.get(java.util.Calendar.SECOND);
 	}
 	/**
-	  * getMillis(¸ù¾İÈÕÆÚµÃµ½ºÁÃëÊı)
+	  * getMillis(æ ¹æ®æ—¥æœŸå¾—åˆ°æ¯«ç§’æ•°)
 	  *
 	  * @Title: getMillis
-	  * @Description: ¸ù¾İÈÕÆÚµÃµ½ºÁÃëÊı
+	  * @Description: æ ¹æ®æ—¥æœŸå¾—åˆ°æ¯«ç§’æ•°
 	  * @Date May 3, 2012 2:14:08 PM
 	  * @modifyDate May 3, 2012 2:14:08 PM
-	  * @param date ´«ÈëµÄÈÕÆÚ java.util.Date
-	  * @return int µÃµ½µÄºÁÃëÊı int
+	  * @param date ä¼ å…¥çš„æ—¥æœŸ java.util.Date
+	  * @return int å¾—åˆ°çš„æ¯«ç§’æ•° int
 	 */
 	public static long getMillis(java.util.Date date) {
 		java.util.Calendar c = java.util.Calendar.getInstance();
@@ -536,15 +533,15 @@ public final class CalendarUtil {
 		return c.getTimeInMillis();
 	}
 	/**
-	  * addDate(ÔÚdateÀàĞÍµÄÊ±¼äÉÏ¼ÓÉÏ¸ø¶¨µÄÌìÊı)
+	  * addDate(åœ¨dateç±»å‹çš„æ—¶é—´ä¸ŠåŠ ä¸Šç»™å®šçš„å¤©æ•°)
 	  *
 	  * @Title: addDate
-	  * @Description: ÔÚdateÀàĞÍµÄÊ±¼äÉÏ¼ÓÉÏ¸ø¶¨µÄÌìÊı
+	  * @Description: åœ¨dateç±»å‹çš„æ—¶é—´ä¸ŠåŠ ä¸Šç»™å®šçš„å¤©æ•°
 	  * @Date May 3, 2012 2:14:54 PM
 	  * @modifyDate May 3, 2012 2:14:54 PM
-	  * @param date  ´«ÈëµÄÈÕÆÚ java.util.Date
-	  * @param day ÌìÊı int
-	  * @return Date µÃµ½µÄÈÕÆÚ java.util.Date
+	  * @param date  ä¼ å…¥çš„æ—¥æœŸ java.util.Date
+	  * @param day å¤©æ•° int
+	  * @return Date å¾—åˆ°çš„æ—¥æœŸ java.util.Date
 	 */
 	public static java.util.Date addDate(java.util.Date date, int day) {
 		java.util.Calendar c = java.util.Calendar.getInstance();
@@ -552,18 +549,18 @@ public final class CalendarUtil {
 		return c.getTime();
 	}
 	/**
-	  * addDate(½«´«ÈëµÄStringÈÕÆÚ¸ù¾İĞèÒªÌí¼ÓµÄÀàĞÍ(type)½øĞĞ¼ÓÈë(minute)£¬²¢°´ÕÕÏàÓ¦µÄ¸ñÊ½·µ»ØString)
-	  * TODO(TypeµÄ²ÎÊıÍ¨¹ıCalendarµÄ¾²Ì¬±äÁ¿µÃµ½£¬Èç£ºCalendar.DAY_OF_MONTH)
+	  * addDate(å°†ä¼ å…¥çš„Stringæ—¥æœŸæ ¹æ®éœ€è¦æ·»åŠ çš„ç±»å‹(type)è¿›è¡ŒåŠ å…¥(minute)ï¼Œå¹¶æŒ‰ç…§ç›¸åº”çš„æ ¼å¼è¿”å›String)
+	  * TODO(Typeçš„å‚æ•°é€šè¿‡Calendarçš„é™æ€å˜é‡å¾—åˆ°ï¼Œå¦‚ï¼šCalendar.DAY_OF_MONTH)
 	  *
 	  * @Title: addDate
 	  * @Description: TODO
 	  * @Date May 3, 2012 2:16:19 PM
 	  * @modifyDate May 3, 2012 2:16:19 PM
-	  * @param dateStr ´«ÈëµÄÈÕÆÚ java.lang.String
-	  * @param type ĞèÒªÌí¼ÓµÄÀàĞÍ int (Í¨¹ıCalendarµÄ¾²Ì¬±äÁ¿µÃµ½£¬Èç£ºCalendar.DAY_OF_MONTH)
-	  * @param minute ¼ÓÈëµÄÊıÖµ int
-	  * @param format ¸ñÊ½
-	  * @return String µÃµ½µÄÈÕÆÚÖµ java.lang.String
+	  * @param dateStr ä¼ å…¥çš„æ—¥æœŸ java.lang.String
+	  * @param type éœ€è¦æ·»åŠ çš„ç±»å‹ int (é€šè¿‡Calendarçš„é™æ€å˜é‡å¾—åˆ°ï¼Œå¦‚ï¼šCalendar.DAY_OF_MONTH)
+	  * @param minute åŠ å…¥çš„æ•°å€¼ int
+	  * @param format æ ¼å¼
+	  * @return String å¾—åˆ°çš„æ—¥æœŸå€¼ java.lang.String
 	 */
 	public static String addDate(String dateStr, int type, int minute,
 			String format) {
@@ -581,31 +578,31 @@ public final class CalendarUtil {
 		return dateFormat.format(nowDate);
 	}
 	/**
-	  * subDate(¼ÆËã2¸öÊ±¼äÏà²îµÄÌìÊı)
+	  * subDate(è®¡ç®—2ä¸ªæ—¶é—´ç›¸å·®çš„å¤©æ•°)
 	  *
 	  * @Title: subDate
-	  * @Description: ¼ÆËã2¸öÊ±¼äÏà²îµÄÌìÊı
+	  * @Description: è®¡ç®—2ä¸ªæ—¶é—´ç›¸å·®çš„å¤©æ•°
 	  * @Date May 3, 2012 2:19:41 PM
 	  * @modifyDate May 3, 2012 2:19:41 PM
-	  * @param date µÚÒ»¸öÈÕÆÚ java.util.Date
-	  * @param date1 µÚ¶ş¸öÈÕÆÚ java.util.Date
-	  * @return int µÃµ½µÚÒ»¸öÈÕÆÚ-µÚ¶ş¸öÈÕÆÚµÄÏà²îÌìÊı int
+	  * @param date ç¬¬ä¸€ä¸ªæ—¥æœŸ java.util.Date
+	  * @param date1 ç¬¬äºŒä¸ªæ—¥æœŸ java.util.Date
+	  * @return int å¾—åˆ°ç¬¬ä¸€ä¸ªæ—¥æœŸ-ç¬¬äºŒä¸ªæ—¥æœŸçš„ç›¸å·®å¤©æ•° int
 	 */
 	public static int subDate(java.util.Date date, java.util.Date date1) {
 		return (int) ((getMillis(date) - getMillis(date1)) / (24 * 3600 * 1000));
 	}
 	/**
-	  * addDate(ÔÚ´«ÈëµÄStringÈÕÆÚÖĞ¼ÓÈëÌìÊı²¢°´ÕÕÏàÓ¦µÄ¸ñÊ½µÃµ½StringÈÕÆÚ)
+	  * addDate(åœ¨ä¼ å…¥çš„Stringæ—¥æœŸä¸­åŠ å…¥å¤©æ•°å¹¶æŒ‰ç…§ç›¸åº”çš„æ ¼å¼å¾—åˆ°Stringæ—¥æœŸ)
 	  *
 	  * @Title: addDate
-	  * @Description: ÔÚ´«ÈëµÄStringÈÕÆÚÖĞ¼ÓÈëÌìÊı²¢°´ÕÕÏàÓ¦µÄ¸ñÊ½µÃµ½StringÈÕÆÚ
+	  * @Description: åœ¨ä¼ å…¥çš„Stringæ—¥æœŸä¸­åŠ å…¥å¤©æ•°å¹¶æŒ‰ç…§ç›¸åº”çš„æ ¼å¼å¾—åˆ°Stringæ—¥æœŸ
 	  * @Date May 3, 2012 2:21:09 PM
 	  * @modifyDate May 3, 2012 2:21:09 PM
-	  * @param date ´«ÈëµÄStringÈÕÆÚ java.lang.String
-	  * @param format ¸ñÊ½ java.lang.String
-	  * @param day ÌìÊı java.lang.String
-	  * @return String µÃµ½µÄStringÈÕÆÚ java.lang.String
-	  * @throws ParseException ×ª»»Òì³£
+	  * @param date ä¼ å…¥çš„Stringæ—¥æœŸ java.lang.String
+	  * @param format æ ¼å¼ java.lang.String
+	  * @param day å¤©æ•° java.lang.String
+	  * @return String å¾—åˆ°çš„Stringæ—¥æœŸ java.lang.String
+	  * @throws ParseException è½¬æ¢å¼‚å¸¸
 	 */
 	public static String addDate(String date, String format, int day) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
@@ -614,22 +611,22 @@ public final class CalendarUtil {
 		return formatDateByFormat(new Date(d1), format);
 	}
 	/*
-	 * ÈÕÆÚ±È½Ïº¯Êı ´«Èëdate1 date2 format return -1 date1<date2 return 0 date1=date2
+	 * æ—¥æœŸæ¯”è¾ƒå‡½æ•° ä¼ å…¥date1 date2 format return -1 date1<date2 return 0 date1=date2
 	 * return 1 date1>date2
 	 */
 	/**
-	  * compareDate(ÈÕÆÚ±È½Ïº¯Êı)
-	  * TODO(×¢Òâ£º½á¹ûÎª£º ´«Èëdate1 date2 format return -1 date1<date2 return 0 date1=date2 1 date1>date2)
+	  * compareDate(æ—¥æœŸæ¯”è¾ƒå‡½æ•°)
+	  * TODO(æ³¨æ„ï¼šç»“æœä¸ºï¼š ä¼ å…¥date1 date2 format return -1 date1<date2 return 0 date1=date2 1 date1>date2)
 	  *
 	  * @Title: compareDate
-	  * @Description: ÈÕÆÚ±È½Ïº¯Êı ´«Èëdate1 date2 format return -1 date1<date2 return 0 date1=date2 1 date1>date2
+	  * @Description: æ—¥æœŸæ¯”è¾ƒå‡½æ•° ä¼ å…¥date1 date2 format return -1 date1<date2 return 0 date1=date2 1 date1>date2
 	  * @Date May 3, 2012 2:23:48 PM
 	  * @modifyDate May 3, 2012 2:23:48 PM
-	  * @param date1 µÚÒ»¸öÈÕÆÚ java.lang.String
-	  * @param date2 µÚ¶ş¸öÈÕÆÚ java.lang.String
-	  * @param format Á½¸öÈÕÆÚ×ª»»µÄ¸ñÊ½ java.lang.String
-	  * @return int µÃµ½µÄ±È½Ï½á¹û 1 date1>date2 0 date1=date2 -1 date1<date2
-	  * @throws Exception Òì³£
+	  * @param date1 ç¬¬ä¸€ä¸ªæ—¥æœŸ java.lang.String
+	  * @param date2 ç¬¬äºŒä¸ªæ—¥æœŸ java.lang.String
+	  * @param format ä¸¤ä¸ªæ—¥æœŸè½¬æ¢çš„æ ¼å¼ java.lang.String
+	  * @return int å¾—åˆ°çš„æ¯”è¾ƒç»“æœ 1 date1>date2 0 date1=date2 -1 date1<date2
+	  * @throws Exception å¼‚å¸¸
 	 */
 	public static int compareDate(String date1, String date2, String format) throws Exception {
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
@@ -645,24 +642,24 @@ public final class CalendarUtil {
 			
 	}
 	/**
-	  * getCurWeek(µ±Ç°ÈÕÆÚµÄĞÇÆÚ)
+	  * getCurWeek(å½“å‰æ—¥æœŸçš„æ˜ŸæœŸ)
 	  *
 	  * @Title: getCurWeek
-	  * @Description: µ±Ç°ÈÕÆÚµÄĞÇÆÚ
+	  * @Description: å½“å‰æ—¥æœŸçš„æ˜ŸæœŸ
 	  * @Date May 3, 2012 2:25:52 PM
 	  * @modifyDate May 3, 2012 2:25:52 PM
-	  * @return String µÃµ½ĞÇÆÚ java.lang.String (Èç:ĞÇÆÚÈÕ)
+	  * @return String å¾—åˆ°æ˜ŸæœŸ java.lang.String (å¦‚:æ˜ŸæœŸæ—¥)
 	 */
 	public static String getCurWeek() {
 		int k = Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 1;
 		Map<Integer, String> map = new HashMap<Integer, String>();
-		map.put(0, "ĞÇÆÚÈÕ");
-		map.put(1, "ĞÇÆÚÒ»");
-		map.put(2, "ĞÇÆÚ¶ş");
-		map.put(3, "ĞÇÆÚÈı");
-		map.put(4, "ĞÇÆÚËÄ");
-		map.put(5, "ĞÇÆÚÎå");
-		map.put(6, "ĞÇÆÚÁù");
+		map.put(0, "æ˜ŸæœŸæ—¥");
+		map.put(1, "æ˜ŸæœŸä¸€");
+		map.put(2, "æ˜ŸæœŸäºŒ");
+		map.put(3, "æ˜ŸæœŸä¸‰");
+		map.put(4, "æ˜ŸæœŸå››");
+		map.put(5, "æ˜ŸæœŸäº”");
+		map.put(6, "æ˜ŸæœŸå…­");
 		
 		for (Entry<Integer, String> entry:map.entrySet()){    
 			if (entry.getKey()==k){
@@ -672,68 +669,68 @@ public final class CalendarUtil {
 		return "";
 	}
 	/**
-	  * subDateByDays(ÈÕÆÚÏà¼õ)
-	  * TODO(·µ»Ø¼õÈ¥ºóµÄÈÕÆÚ£¬¸ñÊ½ÓëÔ­ÈÕÆÚµÄ¸ñÊ½ÏàÍ¬)
+	  * subDateByDays(æ—¥æœŸç›¸å‡)
+	  * TODO(è¿”å›å‡å»åçš„æ—¥æœŸï¼Œæ ¼å¼ä¸åŸæ—¥æœŸçš„æ ¼å¼ç›¸åŒ)
 	  *
 	  * @Title: subDateByDays
-	  * @Description: ÈÕÆÚÏà¼õ
+	  * @Description: æ—¥æœŸç›¸å‡
 	  * @Date May 3, 2012 2:26:57 PM
 	  * @modifyDate May 3, 2012 2:26:57 PM
-	  * @param date Ô­ÈÕÆÚ java.lang.String
-	  * @param days ĞèÒª¼õÈ¥µÄÌìÊı
-	  * @param format ÈÕÆÚµÄ¸ñÊ½
-	  * @return String µÃµ½¼õÈ¥µÄÈÕÆÚ java.lang.String (·µ»Ø¼õÈ¥ºóµÄÈÕÆÚ£¬¸ñÊ½ÓëÔ­ÈÕÆÚµÄ¸ñÊ½ÏàÍ¬)
-	  * @throws Exception Òì³£
+	  * @param date åŸæ—¥æœŸ java.lang.String
+	  * @param days éœ€è¦å‡å»çš„å¤©æ•°
+	  * @param format æ—¥æœŸçš„æ ¼å¼
+	  * @return String å¾—åˆ°å‡å»çš„æ—¥æœŸ java.lang.String (è¿”å›å‡å»åçš„æ—¥æœŸï¼Œæ ¼å¼ä¸åŸæ—¥æœŸçš„æ ¼å¼ç›¸åŒ)
+	  * @throws Exception å¼‚å¸¸
 	 */
 	public static String subDateByDays(String date, int days, String format)
 		throws Exception {
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
-		// ½«Ô­ÈÕÆÚ×ª»»³ÉºÁÃë
+		// å°†åŸæ—¥æœŸè½¬æ¢æˆæ¯«ç§’
 		long curDateTimes = sdf.parse(date).getTime();
-		// ½«ĞèÒª¼õÈ¥µÄÌìÊı×ª»»³ÉºÁÃë
+		// å°†éœ€è¦å‡å»çš„å¤©æ•°è½¬æ¢æˆæ¯«ç§’
 		long daysTimes = Long.parseLong(String.valueOf(days)) * 24 * 3600 * 1000;
-		// ¶ÔºÁÃë½øĞĞÏà¼õ£¬×îºó×ª»»³ÉĞèÒªµÄ¸ñÊ½
+		// å¯¹æ¯«ç§’è¿›è¡Œç›¸å‡ï¼Œæœ€åè½¬æ¢æˆéœ€è¦çš„æ ¼å¼
 		long result = curDateTimes - daysTimes;
 		Date d = new Date();
 		d.setTime(result);
 		return sdf.format(d).toString();
 	}
 	/**
-	  * subAddDateByDays(ÈÕÆÚÏà¼Ó)
+	  * subAddDateByDays(æ—¥æœŸç›¸åŠ )
 	  *
 	  * @Title: subAddDateByDays
-	  * @Description: ÈÕÆÚÏà¼Ó
+	  * @Description: æ—¥æœŸç›¸åŠ 
 	  * @Date Jun 27, 2012 3:19:24 PM
 	  * @modifyDate Jun 27, 2012 3:19:24 PM
-	  * @param date Ô­ÈÕÆÚ
-	  * @param days ĞèÒª¼ÓÉÏµÄÌìÊı
-	  * @param format ÈÕÆÚµÄ¸ñÊ½
-	  * @return ·µ»ØÏà¼ÓºóµÄÈÕÆÚ£¬¸ñÊ½ÓëÔ­ÈÕÆÚµÄ¸ñÊ½ÏàÍ¬
+	  * @param date åŸæ—¥æœŸ
+	  * @param days éœ€è¦åŠ ä¸Šçš„å¤©æ•°
+	  * @param format æ—¥æœŸçš„æ ¼å¼
+	  * @return è¿”å›ç›¸åŠ åçš„æ—¥æœŸï¼Œæ ¼å¼ä¸åŸæ—¥æœŸçš„æ ¼å¼ç›¸åŒ
 	  * @throws Exception
 	 */
   	public static String subAddDateByDays(String date, int days, String format)
   		throws Exception {
   		SimpleDateFormat sdf = new SimpleDateFormat(format);
-  		// ½«Ô­ÈÕÆÚ×ª»»³ÉºÁÃë
+  		// å°†åŸæ—¥æœŸè½¬æ¢æˆæ¯«ç§’
   		long curDateTimes = sdf.parse(date).getTime();
-  		// ½«ĞèÒªÏà¼ÓµÄÌìÊı×ª»»³ÉºÁÃë
+  		// å°†éœ€è¦ç›¸åŠ çš„å¤©æ•°è½¬æ¢æˆæ¯«ç§’
   		long daysTimes = Long.parseLong(String.valueOf(days)) * 24 * 3600 * 1000;
-  		// ¶ÔºÁÃë½øĞĞ¼Ó£¬×îºó×ª»»³ÉĞèÒªµÄ¸ñÊ½
+  		// å¯¹æ¯«ç§’è¿›è¡ŒåŠ ï¼Œæœ€åè½¬æ¢æˆéœ€è¦çš„æ ¼å¼
   		long result = curDateTimes + daysTimes;
   		Date d = new Date();
   		d.setTime(result);
   		return sdf.format(d).toString();
   	}
   	/**
-  	  * subDateGetMonth(Á½¸öÊ±¼äÏà¼õ£¬µÃµ½ÔÂ·İ)
+  	  * subDateGetMonth(ä¸¤ä¸ªæ—¶é—´ç›¸å‡ï¼Œå¾—åˆ°æœˆä»½)
   	  *
   	  * @Title: subDateGetMonth
-  	  * @Description: Á½¸öÊ±¼äÏà¼õ£¬µÃµ½ÔÂ·İ
+  	  * @Description: ä¸¤ä¸ªæ—¶é—´ç›¸å‡ï¼Œå¾—åˆ°æœˆä»½
   	  * @Date Jul 25, 2012 9:54:22 AM
   	  * @modifyDate Jul 25, 2012 9:54:22 AM
-  	  * @param maxDate ´óµÄÊ±¼ä¶ÔÏó java.util.Date
-  	  * @param minDate Ğ¡µÄÊ±¼ä¶ÔÏó java.util.Date
-  	  * @return int µÃµ½µÄÔÂ·İ
+  	  * @param maxDate å¤§çš„æ—¶é—´å¯¹è±¡ java.util.Date
+  	  * @param minDate å°çš„æ—¶é—´å¯¹è±¡ java.util.Date
+  	  * @return int å¾—åˆ°çš„æœˆä»½
   	 */
   	public static int subDateGetMonth(java.util.Date maxDate, java.util.Date minDate) {
   	  
@@ -761,7 +758,7 @@ public final class CalendarUtil {
 		if(!StringUtil.isNotEmpty(format)){
 			format = CalendarUtil.YYYY_MM_DD; 
 		}
-        SimpleDateFormat sdf1 = new SimpleDateFormat(format) ;        // ÊµÀı»¯Ä£°å¶ÔÏó    
+        SimpleDateFormat sdf1 = new SimpleDateFormat(format) ;        // å®ä¾‹åŒ–æ¨¡æ¿å¯¹è±¡    
         
 		try {
 			return sdf1.format(sdf1.parse(date));
@@ -773,13 +770,13 @@ public final class CalendarUtil {
 	public static void main(String[] args) throws Exception {
 //		int k = Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 1;
 //		Map<Integer, String> map = new HashMap<Integer, String>();
-//		map.put(0, "ĞÇÆÚÈÕ");
-//		map.put(1, "ĞÇÆÚÒ»");
-//		map.put(2, "ĞÇÆÚ¶ş");
-//		map.put(3, "ĞÇÆÚÈı");
-//		map.put(4, "ĞÇÆÚËÄ");
-//		map.put(5, "ĞÇÆÚÎå");
-//		map.put(6, "ĞÇÆÚÁù");
+//		map.put(0, "æ˜ŸæœŸæ—¥");
+//		map.put(1, "æ˜ŸæœŸä¸€");
+//		map.put(2, "æ˜ŸæœŸäºŒ");
+//		map.put(3, "æ˜ŸæœŸä¸‰");
+//		map.put(4, "æ˜ŸæœŸå››");
+//		map.put(5, "æ˜ŸæœŸäº”");
+//		map.put(6, "æ˜ŸæœŸå…­");
 //		String str="";
 //		for (Entry<Integer, String> entry:map.entrySet()){    
 //			if (entry.getKey()==k){
@@ -788,4 +785,3 @@ public final class CalendarUtil {
 //		}
 	}
 }
-

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project basedir="." default="package" name="froad-agre-common">
+<project basedir="." default="package" name="zcsh-epay-common">
 <!--
 ====================================================================== 
-project		    :	froad-agre-common
-description	:	公共依赖包
+Project		    :zcsh-epay-common
+Description	    :公共依赖包
+Author          :xxy
+Date            :2018-06-07
 ======================================================================
 -->
 
@@ -11,10 +13,10 @@ description	:	公共依赖包
 	<property name="debuglevel" value="source,lines,vars" />
 	<property name="target" value="1.6" />
 	<property name="source" value="1.6" />
-	<property name="version" value="0.0.1-SNAPSHOT" />
-	<property name="vendor" value="froad" />
-	<property name="author" value="froad" />
-	<property name="project" value="froad-agre-common" />
+	<property name="version" value="0.5.3-SNAPSHOT" />
+	<property name="vendor" value="zcsh" />
+	<property name="author" value="zcsh" />
+	<property name="project" value="zcsh-epay-common" />
 	
     <tstamp>
         <format property="TODAY" pattern="yyyy-MM-dd HH:mm:ss"/>
@@ -45,9 +47,9 @@ description	:	公共依赖包
 	<!-- 执行编译 -->
 	<target name="common-build-project" depends="common-init">
 		<echo message="${ant.project.name}: ${ant.file}" />
-		<javac srcdir="${common.src.home}" destdir="${common.dist.home}/classes" debug="${debuglevel}" encoding="utf-8" includes="**/*.java" source="${source}" target="${target}">
-			<compilerarg line="-Xlint:unchecked " />
-			<compilerarg line="-Xlint:deprecation" />
+		<javac srcdir="${common.src.home}" destdir="${common.dist.home}/classes" debug="${debuglevel}" encoding="utf-8" includes="**/*.java" source="${source}" target="${target}" includeantruntime="on">
+			<compilerarg line="-encoding UTF-8  " />
+			<compilerarg line="-encoding UTF-8 " />
 			<classpath refid="common-classpath" />
 		</javac>
 	</target>

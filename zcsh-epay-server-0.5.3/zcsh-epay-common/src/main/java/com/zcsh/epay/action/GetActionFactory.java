@@ -1,5 +1,5 @@
 /**
- * Copyright www.hoomsun.com ºìÉÏ½ğÈÚĞÅÏ¢·şÎñ£¨ÉÏº££©ÓĞÏŞ¹«Ë¾
+ * Copyright www.hoomsun.com çº¢ä¸Šé‡‘èä¿¡æ¯æœåŠ¡ï¼ˆä¸Šæµ·ï¼‰æœ‰é™å…¬å¸
  */
 package com.zcsh.epay.action;
 
@@ -10,9 +10,9 @@ import java.util.Map;
 import com.zcsh.epay.log.LogCvt;
 
 /**
- * ×÷Õß£ºAdministrator <br>
- * ´´½¨Ê±¼ä£º2018Äê6ÔÂ4ÈÕ <br>
- * ÃèÊö£ºServlet¶¯×÷¹¤³§Àà-´¦ÀíGETÇëÇó
+ * ä½œè€…ï¼šAdministrator <br>
+ * åˆ›å»ºæ—¶é—´ï¼š2018å¹´6æœˆ4æ—¥ <br>
+ * æè¿°ï¼šServletåŠ¨ä½œå·¥å‚ç±»-å¤„ç†GETè¯·æ±‚
  */
 public class GetActionFactory extends ActionFactory {
 
@@ -26,10 +26,9 @@ public class GetActionFactory extends ActionFactory {
 			try {
 				map.put(getActionName(key), Class.forName(value));
 			} catch (ClassNotFoundException e) {
-				LogCvt.error("Àà×°ÔØ±¨´í£º"+e.getMessage(),e);
+				LogCvt.error("ç±»è£…è½½æŠ¥é”™ï¼š"+e.getMessage(),e);
 			}
 		}
 		return map;
 	}
 }
-

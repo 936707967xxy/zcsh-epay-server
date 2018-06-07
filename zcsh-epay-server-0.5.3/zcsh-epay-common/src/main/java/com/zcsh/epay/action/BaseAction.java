@@ -1,6 +1,3 @@
-/**
- * Copyright www.hoomsun.com ºìÉÏ½ğÈÚĞÅÏ¢·şÎñ£¨ÉÏº££©ÓĞÏŞ¹«Ë¾
- */
 package com.zcsh.epay.action;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,15 +11,15 @@ import com.zcsh.epay.util.RequestUtil;
 import com.zcsh.epay.util.ResultCode;
 
 /**
- * ×÷Õß£ºAdministrator <br>
- * ´´½¨Ê±¼ä£º2018Äê6ÔÂ5ÈÕ <br>
- * ÃèÊö£º
+ * ä½œè€…ï¼šAdministrator <br>
+ * åˆ›å»ºæ—¶é—´ï¼š2018å¹´6æœˆ7æ—¥ <br>
+ * æè¿°ï¼š Actionçš„åŸºç¡€æ“ä½œç±»
+ *
  */
 public class BaseAction {
 
 	/**
-     * ¼ìÑéËùÓĞ²ÎÊıµÄ·â×°·½·¨
-     * 
+     * æ£€éªŒæ‰€æœ‰å‚æ•°çš„å°è£…æ–¹æ³•
      * @param obj
      * @param msg
      * @throws BisException
@@ -57,7 +54,7 @@ public class BaseAction {
 				throw new ZcshBusinessException(ResultCode.notAllParameters.getCode(),"authCode,channel" + ResultCode.notAllParameters.getMsg());
 			}
 		}
-		LogCvt.info("ÇëÇóÍ·²ÎÊı"+JSON.toJSONString(authCodeReq));
+		LogCvt.info("è¯·æ±‚å¤´å‚æ•°"+JSON.toJSONString(authCodeReq));
 		return authCodeReq;
     }
 }

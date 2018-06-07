@@ -1,6 +1,3 @@
-/**
- * Copyright www.hoomsun.com ºìÉÏ½ğÈÚĞÅÏ¢·şÎñ£¨ÉÏº££©ÓĞÏŞ¹«Ë¾
- */
 package com.zcsh.epay.util;
 
 import java.lang.reflect.Field;
@@ -10,19 +7,19 @@ import java.lang.reflect.Method;
 import com.zcsh.epay.log.LogCvt;
 
 /**
- * ×÷Õß£ºAdministrator <br>
- * ´´½¨Ê±¼ä£º2018Äê6ÔÂ4ÈÕ <br>
- * ÃèÊö£º
+ * ä½œè€…ï¼šAdministrator <br>
+ * åˆ›å»ºæ—¶é—´ï¼š2018å¹´6æœˆ4æ—¥ <br>
+ * æè¿°ï¼š
  */
 public final class ReflectHelper {
 	
 	private ReflectHelper() {}
 	
 	/**
-	 * »ñÈ¡¶ÔÏóÖ¸¶¨ÊôĞÔĞÅÏ¢
+	 * è·å–å¯¹è±¡æŒ‡å®šå±æ€§ä¿¡æ¯
 	* <p>Function: getField</p>
-	* <p>Description: È¡Ïû°²È«»úÖÆÏŞÖÆ£¬Èç¹ûµ±Ç°Àà²»´æÔÚ£¬Ôò»ñÈ¡¸¸ÀàÊôĞÔĞÅÏ¢£¬Î´ÕÒµ½Ôò·µ»ØNULL</p>
-	* @date 2014-12-16 ÉÏÎç11:27:07
+	* <p>Description: å–æ¶ˆå®‰å…¨æœºåˆ¶é™åˆ¶ï¼Œå¦‚æœå½“å‰ç±»ä¸å­˜åœ¨ï¼Œåˆ™è·å–çˆ¶ç±»å±æ€§ä¿¡æ¯ï¼Œæœªæ‰¾åˆ°åˆ™è¿”å›NULL</p>
+	* @date 2014-12-16 ä¸Šåˆ11:27:07
 	* @version 1.0
 	* @param obj
 	* @param fieldName
@@ -45,10 +42,10 @@ public final class ReflectHelper {
 	}
 
 	/**
-	 * »ñÈ¡Ö¸¶¨¶ÔÏóµÄËùÓĞÊôĞÔ£¬°üº¬¸¸ÀàÊôĞÔ
+	 * è·å–æŒ‡å®šå¯¹è±¡çš„æ‰€æœ‰å±æ€§ï¼ŒåŒ…å«çˆ¶ç±»å±æ€§
 	* <p>Function: getFieldArrayExcludeUID</p>
-	* <p>Description: ²»×¥È¡serialVersionUIDÊôĞÔ</p>
-	* @date 2014-12-16 ÉÏÎç11:27:44
+	* <p>Description: ä¸æŠ“å–serialVersionUIDå±æ€§</p>
+	* @date 2014-12-16 ä¸Šåˆ11:27:44
 	* @version 1.0
 	* @param clazz
 	* @return
@@ -81,10 +78,10 @@ public final class ReflectHelper {
 	}
 	
 	/**
-	 * »ñÈ¡Ö¸¶¨Àà×Ö¶ÎÊôĞÔÖµ
+	 * è·å–æŒ‡å®šç±»å­—æ®µå±æ€§å€¼
 	* <p>Function: getFieldVal</p>
-	* <p>Description: È¡Ïû°²È«·ÃÎÊÏŞÖÆ£¬Èç¹ûµ±Ç°Àà²»´æÔÚ£¬Ôò»ñÈ¡¸¸ÀàÊôĞÔÖµ  ·¢ÉúÒì³£Ôò·µ»ØNULL</p>
-	* @date 2014-12-16 ÉÏÎç11:28:20
+	* <p>Description: å–æ¶ˆå®‰å…¨è®¿é—®é™åˆ¶ï¼Œå¦‚æœå½“å‰ç±»ä¸å­˜åœ¨ï¼Œåˆ™è·å–çˆ¶ç±»å±æ€§å€¼  å‘ç”Ÿå¼‚å¸¸åˆ™è¿”å›NULL</p>
+	* @date 2014-12-16 ä¸Šåˆ11:28:20
 	* @version 1.0
 	* @param obj
 	* @param fieldName
@@ -97,7 +94,7 @@ public final class ReflectHelper {
 		}
 		try {
 			field = getField(obj,fieldName);
-			field.setAccessible(true);//È¡Ïû°²È«»úÖÆÏŞÖÆ
+			field.setAccessible(true);//å–æ¶ˆå®‰å…¨æœºåˆ¶é™åˆ¶
 			return field.get(obj);
 		} catch (SecurityException e) {
 			LogCvt.error(e.getMessage(),e);
@@ -112,10 +109,10 @@ public final class ReflectHelper {
 	}
 	
 	/**
-	 * Îª×Ö¶ÎÊôĞÔÉèÖÃÊôĞÔÖµ
+	 * ä¸ºå­—æ®µå±æ€§è®¾ç½®å±æ€§å€¼
 	* <p>Function: setFieldVal</p>
 	* <p>Description: </p>
-	* @date 2014-12-18 ÉÏÎç9:52:18
+	* @date 2014-12-18 ä¸Šåˆ9:52:18
 	* @version 1.0
 	* @param obj
 	* @param fieldName
@@ -128,7 +125,7 @@ public final class ReflectHelper {
 		}
 		try {
 			field = getField(obj,fieldName);
-			field.setAccessible(true);//È¡Ïû°²È«»úÖÆÏŞÖÆ
+			field.setAccessible(true);//å–æ¶ˆå®‰å…¨æœºåˆ¶é™åˆ¶
 			field.set(obj, value);
 		} catch (SecurityException e) {
 			LogCvt.error(e.getMessage(),e);
@@ -140,10 +137,10 @@ public final class ReflectHelper {
 	}
 	
 	/**
-	 * »ñÈ¡Ö¸¶¨·½·¨
+	 * è·å–æŒ‡å®šæ–¹æ³•
 	* <p>Function: getMethod</p>
 	* <p>Description: </p>
-	* @date 2014-12-18 ÉÏÎç9:55:54
+	* @date 2014-12-18 ä¸Šåˆ9:55:54
 	* @version 1.0
 	* @param obj
 	* @param methodName
@@ -166,10 +163,10 @@ public final class ReflectHelper {
 	}
 	
 	/**
-	 * Ö´ĞĞÖ¸¶¨·½·¨
+	 * æ‰§è¡ŒæŒ‡å®šæ–¹æ³•
 	* <p>Function: invokeMethod</p>
 	* <p>Description: </p>
-	* @date 2014-12-18 ÏÂÎç1:50:06
+	* @date 2014-12-18 ä¸‹åˆ1:50:06
 	* @version 1.0
 	* @param obj
 	* @param method
@@ -199,5 +196,3 @@ public final class ReflectHelper {
 		return supperClass;
 	}
 }
-
-

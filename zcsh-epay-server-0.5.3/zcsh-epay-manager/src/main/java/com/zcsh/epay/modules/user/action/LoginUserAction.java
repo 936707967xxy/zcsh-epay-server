@@ -11,9 +11,9 @@ import com.zcsh.epay.modules.user.vo.req.UserInfoReq;
 import com.zcsh.epay.util.RequestUtil;
 
 /**
- * ×÷Õß£ºAdministrator <br>
- * ´´½¨Ê±¼ä£º2018Äê6ÔÂ5ÈÕ <br>
- * ÃèÊö£º
+ * ä½œè€…ï¼šAdministrator <br>
+ * åˆ›å»ºæ—¶é—´ï¼š2018å¹´6æœˆ5æ—¥ <br>
+ * æè¿°ï¼š
  */
 public class LoginUserAction extends BaseAction implements Action{
 
@@ -21,20 +21,20 @@ public class LoginUserAction extends BaseAction implements Action{
 	
 	public ResBody perform(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
-		LogCvt.info("==============ÓÃ»§ĞÅÏ¢²éÑ¯¿ªÊ¼===============");
+		LogCvt.info("==============ç”¨æˆ·ä¿¡æ¯æŸ¥è¯¢å¼€å§‹===============");
 		long start=System.currentTimeMillis();
 		try {
 			UserInfoReq req = (UserInfoReq) RequestUtil.copyParam(UserInfoReq.class, request);
-			LogCvt.info("ÇëÇó²ÎÊı£º"+JSON.toJSONString(req));
+			LogCvt.info("è¯·æ±‚å‚æ•°ï¼š"+JSON.toJSONString(req));
 			return service.queryUserInfo(req);
 		} catch (Exception e) {
 			// TODO: handle exception
-			LogCvt.error("²éÑ¯Òì³££º"+e.getMessage(),e);
-			return new ResBody(ResBody.ERROR_CODE, "²éÑ¯Òì³£");
+			LogCvt.error("æŸ¥è¯¢å¼‚å¸¸ï¼š"+e.getMessage(),e);
+			return new ResBody(ResBody.ERROR_CODE, "æŸ¥è¯¢å¼‚å¸¸");
 		}finally{
 			long end=System.currentTimeMillis();
-			LogCvt.info("ºÄÊ±£º"+(end-start)+"ms");
-			LogCvt.info("==============ÓÃ»§ĞÅÏ¢²éÑ¯½áÊø===============");
+			LogCvt.info("è€—æ—¶ï¼š"+(end-start)+"ms");
+			LogCvt.info("==============ç”¨æˆ·ä¿¡æ¯æŸ¥è¯¢ç»“æŸ===============");
 		}
 	}
 

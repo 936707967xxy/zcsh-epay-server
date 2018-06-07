@@ -1,24 +1,19 @@
-/**
- * Copyright www.hoomsun.com ºìÉÏ½ğÈÚĞÅÏ¢·şÎñ£¨ÉÏº££©ÓĞÏŞ¹«Ë¾
- */
 package com.zcsh.epay.util;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletResponse;
-
 import com.alibaba.fastjson.JSON;
 import com.zcsh.epay.log.LogCvt;
 
 /**
- * ×÷Õß£ºAdministrator <br>
- * ´´½¨Ê±¼ä£º2018Äê6ÔÂ4ÈÕ <br>
- * ÃèÊö£º
+ * ä½œè€…ï¼šAdministrator <br>
+ * åˆ›å»ºæ—¶é—´ï¼š2018å¹´6æœˆ4æ—¥ <br>
+ * æè¿°ï¼š
  */
 /**
- * HttpServletResponseÏìÓ¦¸¨ÖúÀà
+ * HttpServletResponseå“åº”è¾…åŠ©ç±»
  * 
  * @author zhupengcheng@f-road.com.cn
  * @date 2016-11-02
@@ -27,7 +22,7 @@ import com.zcsh.epay.log.LogCvt;
 public class ResponseUtil {
 	
 	/**
-	 * ·µ»ØJSON¸ñÊ½ÏìÓ¦
+	 * è¿”å›JSONæ ¼å¼å“åº”
 	 * 
 	 * @param response
 	 * @param model
@@ -48,15 +43,15 @@ public class ResponseUtil {
 		    xml = xml.replaceAll("\n","").replaceAll("\r","");
 		    responseMsg = respXml.replace("<bizBody></bizBody>", "<bizBody>"+xml+"</bizBody>");
 		    
-			//×ßxml
-			LogCvt.info("ÏìÓ¦xml½á¹ûÎª£º" + responseMsg);
+			//èµ°xml
+			LogCvt.info("å“åº”xmlç»“æœä¸ºï¼š" + responseMsg);
 			
 		}else{
-			//×ßjson
+			//èµ°json
 			respMap.remove("sopRespXml");
 			response.setContentType("application/json; charset=UTF-8");
 			responseMsg = JSON.toJSONString(respMap);
-			LogCvt.info("ÏìÓ¦json½á¹ûÎª£º" + responseMsg);
+			LogCvt.info("å“åº”jsonç»“æœä¸ºï¼š" + responseMsg);
 		     
 		}
 		
@@ -69,7 +64,7 @@ public class ResponseUtil {
 	        out = response.getWriter();  
 	        out.append(responseMsg);  
 	    } catch (IOException e) {  
-	        LogCvt.error("ÏìÓ¦Ê§°Ü", e);
+	        LogCvt.error("å“åº”å¤±è´¥", e);
 	    } finally {  
 	        if (out != null) {  
 	            out.close();  
@@ -78,7 +73,7 @@ public class ResponseUtil {
 	}
 
 	/**
-	 * ·µ»ØJSON¸ñÊ½ÏìÓ¦
+	 * è¿”å›JSONæ ¼å¼å“åº”
 	 * 
 	 * @param response
 	 * @param model
@@ -99,16 +94,16 @@ public class ResponseUtil {
 		    xml = xml.replaceAll("\n","").replaceAll("\r","");
 		    responseMsg = respXml.replace("<bizBody></bizBody>", "<bizBody>"+xml+"</bizBody>");
 		    
-			//×ßxml
-			LogCvt.info("ÏìÓ¦xml½á¹ûÎª£º" + responseMsg);
+			//èµ°xml
+			LogCvt.info("å“åº”xmlç»“æœä¸ºï¼š" + responseMsg);
 			
 		}else{
-			//×ßjson
+			//èµ°json
 			respMap.remove("sopRespXml");
 			response.setContentType("application/json; charset=UTF-8");
 			responseMsg = JSON.toJSONString(respMap);
 			if(!actionName.contains("fileDownload")){
-				LogCvt.info("ÏìÓ¦json½á¹ûÎª£º" + responseMsg);
+				LogCvt.info("å“åº”jsonç»“æœä¸ºï¼š" + responseMsg);
 			}
 		     
 		}
@@ -122,7 +117,7 @@ public class ResponseUtil {
 	        out = response.getWriter();  
 	        out.append(responseMsg);  
 	    } catch (IOException e) {  
-	        LogCvt.error("ÏìÓ¦Ê§°Ü", e);
+	        LogCvt.error("å“åº”å¤±è´¥", e);
 	    } finally {  
 	        if (out != null) {  
 	            out.close();  
@@ -130,4 +125,3 @@ public class ResponseUtil {
 	    }  
 	}
 }
-

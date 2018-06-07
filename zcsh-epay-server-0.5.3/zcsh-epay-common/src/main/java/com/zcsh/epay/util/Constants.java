@@ -1,22 +1,19 @@
-/**
- * Copyright www.hoomsun.com ºìÉÏ½ğÈÚĞÅÏ¢·şÎñ£¨ÉÏº££©ÓĞÏŞ¹«Ë¾
- */
 package com.zcsh.epay.util;
 
 /**
- * ×÷Õß£ºAdministrator <br>
- * ´´½¨Ê±¼ä£º2018Äê6ÔÂ4ÈÕ <br>
- * ÃèÊö£º
+ * ä½œè€…ï¼šAdministrator <br>
+ * åˆ›å»ºæ—¶é—´ï¼š2018å¹´6æœˆ4æ—¥ <br>
+ * æè¿°ï¼š
  */
 public class Constants {
-	public static final String NEWLINE = System.getProperty("line.separator"); // ²Ù×÷ÏµÍ³µÄ»Ø³µ×Ö·û´®
+	public static final String NEWLINE = System.getProperty("line.separator"); // æ“ä½œç³»ç»Ÿçš„å›è½¦å­—ç¬¦ä¸²
 	public static final String CONFIG_URI = "./config/";
 	public static final String CONFIG_PATH_URI = "config";
-	public static final String DOWNLOAD_FILE_FIX = ".csv";//µ¼³öºó×º
-	public static final String COMPRESS_FILE_FIX = ".gz";//Ñ¹Ëõºó×º
+	public static final String DOWNLOAD_FILE_FIX = ".csv";//å¯¼å‡ºåç¼€
+	public static final String COMPRESS_FILE_FIX = ".gz";//å‹ç¼©åç¼€
 	
 	/**
-	 * ÏµÍ³±äÁ¿
+	 * ç³»ç»Ÿå˜é‡
 	 */
 	public static final String WORK_DIR 		= "WORK_DIR";	
 	public static final String WORK_PATH 		= "WORK_PATH";

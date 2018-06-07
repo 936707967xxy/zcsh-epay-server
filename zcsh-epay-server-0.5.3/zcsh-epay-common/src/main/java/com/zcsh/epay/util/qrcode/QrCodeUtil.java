@@ -1,6 +1,3 @@
-/**
- * Copyright www.hoomsun.com ºìÉÏ½ğÈÚĞÅÏ¢·şÎñ£¨ÉÏº££©ÓĞÏŞ¹«Ë¾
- */
 package com.zcsh.epay.util.qrcode;
 import java.awt.Color;
 import java.awt.Font;
@@ -10,11 +7,8 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-
 import javax.imageio.ImageIO;
-
 import org.apache.commons.lang.StringUtils;
-
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Binarizer;
 import com.google.zxing.BinaryBitmap;
@@ -29,30 +23,30 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 /**
- * ×÷Õß£ºAdministrator <br>
- * ´´½¨Ê±¼ä£º2018Äê6ÔÂ6ÈÕ <br>
- * ÃèÊö£º »­ÖÆ¶¨logoºÍÖÆ¶¨ÃèÊöµÄ¶şÎ¬Âë
+ * ä½œè€…ï¼šAdministrator <br>
+ * åˆ›å»ºæ—¶é—´ï¼š2018å¹´6æœˆ6æ—¥ <br>
+ * æè¿°ï¼š ç”»åˆ¶å®šlogoå’Œåˆ¶å®šæè¿°çš„äºŒç»´ç 
  */
 public class QrCodeUtil {
-    private static final int QRCOLOR = 0xFF000000; // Ä¬ÈÏÊÇºÚÉ«
-    private static final int BGWHITE = 0xFFFFFFFF; // ±³¾°ÑÕÉ«
-    private static final int WIDTH = 400; // ¶şÎ¬Âë¿í
-    private static final int HEIGHT = 400; // ¶şÎ¬Âë¸ß
+    private static final int QRCOLOR = 0xFF000000; // é»˜è®¤æ˜¯é»‘è‰²
+    private static final int BGWHITE = 0xFFFFFFFF; // èƒŒæ™¯é¢œè‰²
+    private static final int WIDTH = 400; // äºŒç»´ç å®½
+    private static final int HEIGHT = 400; // äºŒç»´ç é«˜
 
-    // ÓÃÓÚÉèÖÃQR¶şÎ¬Âë²ÎÊı
+    // ç”¨äºè®¾ç½®QRäºŒç»´ç å‚æ•°
     private static Map<EncodeHintType, Object> hints = new HashMap<EncodeHintType, Object>() {
     private static final long serialVersionUID = 1L;
     {
-            put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);// ÉèÖÃQR¶şÎ¬ÂëµÄ¾À´í¼¶±ğ£¨HÎª×î¸ß¼¶±ğ£©¾ßÌå¼¶±ğĞÅÏ¢
-            put(EncodeHintType.CHARACTER_SET, "utf-8");// ÉèÖÃ±àÂë·½Ê½
+            put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);// è®¾ç½®QRäºŒç»´ç çš„çº é”™çº§åˆ«ï¼ˆHä¸ºæœ€é«˜çº§åˆ«ï¼‰å…·ä½“çº§åˆ«ä¿¡æ¯
+            put(EncodeHintType.CHARACTER_SET, "utf-8");// è®¾ç½®ç¼–ç æ–¹å¼
             put(EncodeHintType.MARGIN, 0);
         }
     };
 
     /**
-     * ×÷Õß£ºAdministrator <br>
-     * ´´½¨Ê±¼ä£º2018Äê6ÔÂ6ÈÕ <br>
-     * ÃèÊö£º Éú³É´ølogoµÄ¶şÎ¬ÂëÍ¼Æ¬
+     * ä½œè€…ï¼šAdministrator <br>
+     * åˆ›å»ºæ—¶é—´ï¼š2018å¹´6æœˆ6æ—¥ <br>
+     * æè¿°ï¼š ç”Ÿæˆå¸¦logoçš„äºŒç»´ç å›¾ç‰‡
      * @param logoFile
      * @param codeFile
      * @param qrUrl
@@ -61,11 +55,11 @@ public class QrCodeUtil {
     public static void createLogoQRCode(File logoFile, File codeFile, String qrUrl, String note) {
         try {
             MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-            // ²ÎÊıË³Ğò·Ö±ğÎª£º±àÂëÄÚÈİ£¬±àÂëÀàĞÍ£¬Éú³ÉÍ¼Æ¬¿í¶È£¬Éú³ÉÍ¼Æ¬¸ß¶È£¬ÉèÖÃ²ÎÊı
+            // å‚æ•°é¡ºåºåˆ†åˆ«ä¸ºï¼šç¼–ç å†…å®¹ï¼Œç¼–ç ç±»å‹ï¼Œç”Ÿæˆå›¾ç‰‡å®½åº¦ï¼Œç”Ÿæˆå›¾ç‰‡é«˜åº¦ï¼Œè®¾ç½®å‚æ•°
             BitMatrix bm = multiFormatWriter.encode(qrUrl, BarcodeFormat.QR_CODE, WIDTH, HEIGHT, hints);
             BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 
-            // ¿ªÊ¼ÀûÓÃ¶şÎ¬ÂëÊı¾İ´´½¨BitmapÍ¼Æ¬£¬·Ö±ğÉèÎªºÚ£¨0xFFFFFFFF£©°×£¨0xFF000000£©Á½É«
+            // å¼€å§‹åˆ©ç”¨äºŒç»´ç æ•°æ®åˆ›å»ºBitmapå›¾ç‰‡ï¼Œåˆ†åˆ«è®¾ä¸ºé»‘ï¼ˆ0xFFFFFFFFï¼‰ç™½ï¼ˆ0xFF000000ï¼‰ä¸¤è‰²
             for (int x = 0; x < WIDTH; x++) {
                 for (int y = 0; y < HEIGHT; y++) {
                     image.setRGB(x, y, bm.get(x, y) ? QRCOLOR : BGWHITE);
@@ -74,29 +68,29 @@ public class QrCodeUtil {
             int width = image.getWidth();
             int height = image.getHeight();
             if (Objects.requireNonNull(logoFile)!=null && logoFile.exists()) {
-                // ¹¹½¨»æÍ¼¶ÔÏó
+                // æ„å»ºç»˜å›¾å¯¹è±¡
                 Graphics2D g = image.createGraphics();
-                // ¶ÁÈ¡LogoÍ¼Æ¬
+                // è¯»å–Logoå›¾ç‰‡
                 BufferedImage logo = ImageIO.read(logoFile);
-                // ¿ªÊ¼»æÖÆlogoÍ¼Æ¬
+                // å¼€å§‹ç»˜åˆ¶logoå›¾ç‰‡
                 g.drawImage(logo, width * 2 / 5, height * 2 / 5, width * 2 / 10, height * 2 / 10, null);
                 g.dispose();
                 logo.flush();
             }
-            // ×Ô¶¨ÒåÎÄ±¾ÃèÊö
+            // è‡ªå®šä¹‰æ–‡æœ¬æè¿°
             if (StringUtils.isNotEmpty(note)) {
-                // ĞÂµÄÍ¼Æ¬£¬°Ñ´ølogoµÄ¶şÎ¬ÂëÏÂÃæ¼ÓÉÏÎÄ×Ö
+                // æ–°çš„å›¾ç‰‡ï¼ŒæŠŠå¸¦logoçš„äºŒç»´ç ä¸‹é¢åŠ ä¸Šæ–‡å­—
                 BufferedImage outImage = new BufferedImage(400, 445, BufferedImage.TYPE_4BYTE_ABGR);
                 Graphics2D outg = outImage.createGraphics();
-                // »­¶şÎ¬Âëµ½ĞÂµÄÃæ°å
+                // ç”»äºŒç»´ç åˆ°æ–°çš„é¢æ¿
                 outg.drawImage(image, 0, 0, image.getWidth(), image.getHeight(), null);
-                // »­ÎÄ×Öµ½ĞÂµÄÃæ°å
+                // ç”»æ–‡å­—åˆ°æ–°çš„é¢æ¿
                 outg.setColor(Color.BLACK);
-                outg.setFont(new Font("ËÎÌå", Font.ROMAN_BASELINE, 12)); // ×ÖÌå¡¢×ÖĞÍ¡¢×ÖºÅ
+                outg.setFont(new Font("å®‹ä½“", Font.ROMAN_BASELINE, 12)); // å­—ä½“ã€å­—å‹ã€å­—å·
                 int strWidth = outg.getFontMetrics().stringWidth(note);
                 if (strWidth > 399) {
-                    // //³¤¶È¹ı³¤¾Í½ØÈ¡Ç°Ãæ²¿·Ö
-                    // ³¤¶È¹ı³¤¾Í»»ĞĞ
+                    // //é•¿åº¦è¿‡é•¿å°±æˆªå–å‰é¢éƒ¨åˆ†
+                    // é•¿åº¦è¿‡é•¿å°±æ¢è¡Œ
                     String note1 = note.substring(0, note.length() / 2);
                     String note2 = note.substring(note.length() / 2, note.length());
                     int strWidth1 = outg.getFontMetrics().stringWidth(note1);
@@ -106,13 +100,13 @@ public class QrCodeUtil {
                     Graphics2D outg2 = outImage2.createGraphics();
                     outg2.drawImage(outImage, 0, 0, outImage.getWidth(), outImage.getHeight(), null);
                     outg2.setColor(Color.BLACK);
-                    outg2.setFont(new Font("ËÎÌå", Font.BOLD, 30)); // ×ÖÌå¡¢×ÖĞÍ¡¢×ÖºÅ
+                    outg2.setFont(new Font("å®‹ä½“", Font.BOLD, 30)); // å­—ä½“ã€å­—å‹ã€å­—å·
                     outg2.drawString(note2, 200 - strWidth2 / 2,outImage.getHeight() + (outImage2.getHeight() - outImage.getHeight()) / 2 + 5);
                     outg2.dispose();
                     outImage2.flush();
                     outImage = outImage2;
                 } else {
-                    outg.drawString(note, 200 - strWidth / 2, height + (outImage.getHeight() - height) / 2 + 12); // »­ÎÄ×Ö
+                    outg.drawString(note, 200 - strWidth / 2, height + (outImage.getHeight() - height) / 2 + 12); // ç”»æ–‡å­—
                 }
                 outg.dispose();
                 outImage.flush();
@@ -126,9 +120,9 @@ public class QrCodeUtil {
     }
 
     /**
-     * ×÷Õß£ºAdministrator <br>
-     * ´´½¨Ê±¼ä£º2018Äê6ÔÂ6ÈÕ <br>
-     * ÃèÊö£º 
+     * ä½œè€…ï¼šAdministrator <br>
+     * åˆ›å»ºæ—¶é—´ï¼š2018å¹´6æœˆ6æ—¥ <br>
+     * æè¿°ï¼š 
      * @param filePath
      * @return
      */
@@ -145,10 +139,10 @@ public class QrCodeUtil {
             MultiFormatReader formatReader = new MultiFormatReader();
             Result result = formatReader.decode(binaryBitmap, hints);
 
-            System.out.println("result Îª£º" + result.toString());
-            System.out.println("resultFormat Îª£º" + result.getBarcodeFormat());
-            System.out.println("resultText Îª£º" + result.getText());
-            //ÉèÖÃ·µ»ØÖµ
+            System.out.println("result ä¸ºï¼š" + result.toString());
+            System.out.println("resultFormat ä¸ºï¼š" + result.getBarcodeFormat());
+            System.out.println("resultText ä¸ºï¼š" + result.getText());
+            //è®¾ç½®è¿”å›å€¼
             content = result.getText();
         } catch (Exception e) {
             e.printStackTrace();

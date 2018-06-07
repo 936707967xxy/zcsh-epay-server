@@ -1,25 +1,21 @@
-/**
- * Copyright www.hoomsun.com ºìÉÏ½ğÈÚĞÅÏ¢·şÎñ£¨ÉÏº££©ÓĞÏŞ¹«Ë¾
- */
 package com.zcsh.epay.message;
 
 import java.util.List;
-
 import com.alibaba.fastjson.JSON;
 import com.zcsh.epay.exceptions.ZcshBusinessException;
 import com.zcsh.epay.util.Paging;
 import com.zcsh.epay.util.ResultCode;
 
 /**
- * ×÷Õß£ºAdministrator <br>
- * ´´½¨Ê±¼ä£º2018Äê6ÔÂ4ÈÕ <br>
- * ÃèÊö£º
+ * ä½œè€…ï¼šAdministrator <br>
+ * åˆ›å»ºæ—¶é—´ï¼š2018å¹´6æœˆ4æ—¥ <br>
+ * æè¿°ï¼š
  */
 public class ResBody {
-	final public static String	SUCCESS_CODE	= "0000";//³É¹¦
-	final public static String	ERROR_CODE		= "9999";//Ê§°Ü
+	final public static String	SUCCESS_CODE	= "0000";//æˆåŠŸ
+	final public static String	ERROR_CODE		= "9999";//å¤±è´¥
 	String						code			= SUCCESS_CODE;
-	String						message			= "³É¹¦";
+	String						message			= "æˆåŠŸ";
 	Paging						page;
 	Object						data;
 	String                      sopRespXml      ="";
@@ -59,10 +55,10 @@ public class ResBody {
     
     /**
      *     
-     * ´´½¨Ò»¸öĞÂµÄÊµÀı RespBody.
+     * åˆ›å»ºä¸€ä¸ªæ–°çš„å®ä¾‹ RespBody.
      *
-     * @param status Ã¶¾Ù¶ÔÏó
-     * @param data Êı¾İ¶ÔÏó
+     * @param status æšä¸¾å¯¹è±¡
+     * @param data æ•°æ®å¯¹è±¡
      */
     public ResBody(ResultCode resultCode, Object data) {
     	this.code = resultCode.getCode();
@@ -72,11 +68,11 @@ public class ResBody {
     
     /**
      * 
-     * ´´½¨Ò»¸öĞÂµÄÊµÀı RespBody.
+     * åˆ›å»ºä¸€ä¸ªæ–°çš„å®ä¾‹ RespBody.
      *
-     * @param status Ã¶¾Ù¶ÔÏó
-     * @param page ·ÖÒ³¶ÔÏó
-     * @param data  Êı¾İ¶ÔÏó
+     * @param status æšä¸¾å¯¹è±¡
+     * @param page åˆ†é¡µå¯¹è±¡
+     * @param data  æ•°æ®å¯¹è±¡
      */
     public ResBody(Paging page,Object data) {
     	this.code = ResultCode.success.getCode();
@@ -87,12 +83,12 @@ public class ResBody {
     
     
     /**
-     * ´íÎó·µ»Ø
+     * é”™è¯¯è¿”å›
      * @Title: error
-     * @Description: TODO(ÕâÀïÓÃÒ»¾ä»°ÃèÊöÕâ¸ö·½·¨µÄ×÷ÓÃ)
+     * @Description: TODO(è¿™é‡Œç”¨ä¸€å¥è¯æè¿°è¿™ä¸ªæ–¹æ³•çš„ä½œç”¨)
      * @param @param e
-     * @param @return    ²ÎÊı
-     * @return RespBody    ·µ»ØÀàĞÍ
+     * @param @return    å‚æ•°
+     * @return RespBody    è¿”å›ç±»å‹
      * @throws
      */
     public static ResBody error(ResultCode resultCode) {
@@ -101,12 +97,12 @@ public class ResBody {
     
     
     /**
-     * ´íÎó·µ»Ø
+     * é”™è¯¯è¿”å›
      * @Title: result
-     * @Description: TODO(¾²Ì¬¹¹Ôì·â×°)
-     * @param @param e  Òì³£¶ÔÏó
-     * @param @return    ²ÎÊı
-     * @return RespBody    ·µ»ØÀàĞÍ
+     * @Description: TODO(é™æ€æ„é€ å°è£…)
+     * @param @param e  å¼‚å¸¸å¯¹è±¡
+     * @param @return    å‚æ•°
+     * @return RespBody    è¿”å›ç±»å‹
      * @throws
      */
     public static ResBody error(ZcshBusinessException e) {
@@ -114,12 +110,12 @@ public class ResBody {
     }
     
     /**
-     * ³É¹¦·µ»Ø
+     * æˆåŠŸè¿”å›
      * @Title: result
-     * @Description: TODO(¾²Ì¬·â×°¹¹Ôì)
-     * @param @param data Êı¾İ¶ÔÏó
-     * @param @return    ²ÎÊı
-     * @return RespBody    ·µ»ØÀàĞÍ
+     * @Description: TODO(é™æ€å°è£…æ„é€ )
+     * @param @param data æ•°æ®å¯¹è±¡
+     * @param @return    å‚æ•°
+     * @return RespBody    è¿”å›ç±»å‹
      * @throws
      */
     public static ResBody result(Object data) {
@@ -137,13 +133,13 @@ public class ResBody {
 	}
 
 	/**
-     * ³É¹¦·µ»Ø
+     * æˆåŠŸè¿”å›
      * @Title: result
-     * @Description: TODO(¾²Ì¬·â×°¹¹Ôì)
-     * @param @param page    ·ÖÒ³¶ÔÏó
-     * @param @param content  Êı¾İ¶ÔÏó
-     * @param @return    ²ÎÊı
-     * @return RespBody    ·µ»ØÀàĞÍ
+     * @Description: TODO(é™æ€å°è£…æ„é€ )
+     * @param @param page    åˆ†é¡µå¯¹è±¡
+     * @param @param content  æ•°æ®å¯¹è±¡
+     * @param @return    å‚æ•°
+     * @return RespBody    è¿”å›ç±»å‹
      * @throws
      */
     public static ResBody result(Paging page, Object data) {
@@ -188,4 +184,3 @@ public class ResBody {
 		return JSON.toJSONString(this);
 	}
 }
-

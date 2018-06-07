@@ -1,6 +1,3 @@
-/**
- * Copyright www.hoomsun.com ºìÉÏ½ğÈÚĞÅÏ¢·şÎñ£¨ÉÏº££©ÓĞÏŞ¹«Ë¾
- */
 package com.zcsh.epay.util;
 
 import java.io.BufferedReader;
@@ -13,6 +10,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,9 +21,9 @@ import com.zcsh.epay.exceptions.ZcshBusinessException;
 import com.zcsh.epay.log.LogCvt;
 
 /**
- * ×÷Õß£ºAdministrator <br>
- * ´´½¨Ê±¼ä£º2018Äê6ÔÂ4ÈÕ <br>
- * ÃèÊö£º
+ * ä½œè€…ï¼šAdministrator <br>
+ * åˆ›å»ºæ—¶é—´ï¼š2018å¹´6æœˆ4æ—¥ <br>
+ * æè¿°ï¼š
  */
 public final class StringUtil {
 
@@ -48,7 +46,7 @@ public final class StringUtil {
 	public static final String AT = "@";
 
 	/**
-	 * ĞĞ·Ö¸ô·û
+	 * è¡Œåˆ†éš”ç¬¦
 	 */
 	public static final String LINE_SEPARATOR = System.getProperty("line.separator");
 
@@ -60,10 +58,10 @@ public final class StringUtil {
 	}
 
 	/**
-	 * ¼ì²éÊÇ·ñÎªÊÖ»úºÅÂë(13¿ªÍ·µÄ11Î»Êı×Ö×Ö´®)
+	 * æ£€æŸ¥æ˜¯å¦ä¸ºæ‰‹æœºå·ç (13å¼€å¤´çš„11ä½æ•°å­—å­—ä¸²)
 	 * 
 	 * @param sMobile
-	 *            ±»¼ì²éµÄ×Ö´®
+	 *            è¢«æ£€æŸ¥çš„å­—ä¸²
 	 * @return
 	 */
 	public static boolean isMobileNumber(String sMobile) {
@@ -77,10 +75,10 @@ public final class StringUtil {
 	}
 
 	/**
-	 * ¼ì²éÊÇ·ñÎªÒÆ¶¯ÊÖ»úºÅÂë(13¿ªÍ·µÄ11Î»Êı×Ö×Ö´®)
+	 * æ£€æŸ¥æ˜¯å¦ä¸ºç§»åŠ¨æ‰‹æœºå·ç (13å¼€å¤´çš„11ä½æ•°å­—å­—ä¸²)
 	 * 
 	 * @param sMobile
-	 *            ±»¼ì²éµÄ×Ö´®
+	 *            è¢«æ£€æŸ¥çš„å­—ä¸²
 	 * @return
 	 */
 	public static boolean isGmccMobile(String sMobile) {
@@ -95,10 +93,10 @@ public final class StringUtil {
 	}
 
 	/**
-	 * ¼ì²éÊÇ·ñÎªÁªÍ¨ÊÖ»úºÅÂë(13¿ªÍ·µÄ11Î»Êı×Ö×Ö´®)
+	 * æ£€æŸ¥æ˜¯å¦ä¸ºè”é€šæ‰‹æœºå·ç (13å¼€å¤´çš„11ä½æ•°å­—å­—ä¸²)
 	 * 
 	 * @param sMobile
-	 *            ±»¼ì²éµÄ×Ö´®
+	 *            è¢«æ£€æŸ¥çš„å­—ä¸²
 	 * @return
 	 */
 	public static boolean isUnicomMobile(String sMobile) {
@@ -110,9 +108,9 @@ public final class StringUtil {
 	}
 
 	/**
-	 * ¼ì²éÊÇ·ñÎªÊı×Ö×Ö·û´®
+	 * æ£€æŸ¥æ˜¯å¦ä¸ºæ•°å­—å­—ç¬¦ä¸²
 	 * 
-	 * @param ±»¼ì²éµÄ×Ö´®
+	 * @param è¢«æ£€æŸ¥çš„å­—ä¸²
 	 * @return
 	 */
 	public static boolean isNumber(String str) {
@@ -123,7 +121,7 @@ public final class StringUtil {
 	}
 
 	/**
-	 * ×Ö·û·Ö²ğ·½·¨£¬ÀàËÆString.split()
+	 * å­—ç¬¦åˆ†æ‹†æ–¹æ³•ï¼Œç±»ä¼¼String.split()
 	 * 
 	 * @param str
 	 * @param div
@@ -153,18 +151,18 @@ public final class StringUtil {
 	}
 
 	/**
-	 * Ê¹ÓÃÕıÔò±í´ïÊ½µÄ×Ö·û´®Ìæ»»
+	 * ä½¿ç”¨æ­£åˆ™è¡¨è¾¾å¼çš„å­—ç¬¦ä¸²æ›¿æ¢
 	 * 
 	 * @param src
 	 * @param patternStr
-	 *            º¬ÕıÔòÊ½µÄ±»Ìæ»»×Ö·û´®
+	 *            å«æ­£åˆ™å¼çš„è¢«æ›¿æ¢å­—ç¬¦ä¸²
 	 * @param replacement
-	 *            Ìæ»»µÄ×Ö´®
+	 *            æ›¿æ¢çš„å­—ä¸²
 	 * @return
 	 */
 	public static String regReplace(String src, String patternStr,
 			String replacement) {
-		// System.out.println("Ìæ»»£º[" + src + "],[" + patternStr + "],[" +
+		// System.out.println("æ›¿æ¢ï¼š[" + src + "],[" + patternStr + "],[" +
 		// replacement + "]");
 		if (src == null || patternStr == null || replacement == null) {
 			return src;
@@ -175,13 +173,13 @@ public final class StringUtil {
 	}
 
 	/**
-	 * ×Ö·û´®Ìæ»»£¬²»ÓÃÕıÔòÊ½¡£
+	 * å­—ç¬¦ä¸²æ›¿æ¢ï¼Œä¸ç”¨æ­£åˆ™å¼ã€‚
 	 * 
 	 * @param src
 	 * @param seachWord
-	 *            ±»Ìæ»»×Ö·û´®
+	 *            è¢«æ›¿æ¢å­—ç¬¦ä¸²
 	 * @param replacement
-	 *            Ìæ»»µÄ×Ö´®
+	 *            æ›¿æ¢çš„å­—ä¸²
 	 * @return
 	 */
 	public static String strReplace(String src, String seachWord,
@@ -204,7 +202,7 @@ public final class StringUtil {
 	}
 
 	/**
-	 * Ê¹ÓÃÕıÔò±í´ïÊ½µÄ×Ö·û´®Ìæ»».Ìæ»»{0},{1},...
+	 * ä½¿ç”¨æ­£åˆ™è¡¨è¾¾å¼çš„å­—ç¬¦ä¸²æ›¿æ¢.æ›¿æ¢{0},{1},...
 	 * 
 	 * @param src
 	 *            String
@@ -230,7 +228,7 @@ public final class StringUtil {
 	}
 
 	/**
-	 * ×Ö·û´®Ìæ»»£¬²»ÓÃÕıÔòÊ½¡£
+	 * å­—ç¬¦ä¸²æ›¿æ¢ï¼Œä¸ç”¨æ­£åˆ™å¼ã€‚
 	 * 
 	 * @param src
 	 * @param replacement
@@ -254,12 +252,12 @@ public final class StringUtil {
 	}
 
 	/**
-	 * È¡Ö¸¶¨³¤¶ÈµÄ×Ö·û´®,Î»Êı²»×ãÔòÇ°Ãæ²¹0£¬ÈçÎ»Êı¹ı³¤£¬ÔòÖ»È¡ºólenÎ»
+	 * å–æŒ‡å®šé•¿åº¦çš„å­—ç¬¦ä¸²,ä½æ•°ä¸è¶³åˆ™å‰é¢è¡¥0ï¼Œå¦‚ä½æ•°è¿‡é•¿ï¼Œåˆ™åªå–ålenä½
 	 * 
 	 * @param iStr
-	 *            ³õÊ¼Êı×Ö
+	 *            åˆå§‹æ•°å­—
 	 * @param len
-	 *            ³¤¶È
+	 *            é•¿åº¦
 	 * @return
 	 */
 	public static String fillZeroStr(int iStr, int len) {
@@ -281,21 +279,21 @@ public final class StringUtil {
 	}
 
 	/**
-	 * ½Øµô×Ö·û´®ÖĞµÄ¿Õ¸ñ
+	 * æˆªæ‰å­—ç¬¦ä¸²ä¸­çš„ç©ºæ ¼
 	 */
 	public static String cutSpace(String src) {
 		if (src == null || src.length() == 0) {
 			return src;
 		}
-		// Ó¢ÎÄ¿Õ¸ñ
+		// è‹±æ–‡ç©ºæ ¼
 		String temp = regReplace(src, " ", "");
-		// ÖĞÎÄ¿Õ¸ñ
-		temp = regReplace(temp, "¡¡", "");
+		// ä¸­æ–‡ç©ºæ ¼
+		temp = regReplace(temp, "ã€€", "");
 		return temp;
 	}
 
 	/**
-	 * ½ØÈ¡¿Õ¸ñ
+	 * æˆªå–ç©ºæ ¼
 	 */
 	public static String trimAll(String src) {
 		if (src == null || "".equals(src)) {
@@ -310,11 +308,11 @@ public final class StringUtil {
 	
 
 	/**
-	 * Ìá¹©¾«È·µÄĞ¡ÊıÎ»ËÄÉáÎåÈë´¦Àí¡£
+	 * æä¾›ç²¾ç¡®çš„å°æ•°ä½å››èˆäº”å…¥å¤„ç†ã€‚
 	 * 
 	 * @param v
-	 *            ĞèÒªËÄÉáÎåÈëµÄÊı×Ö scale Ğ¡Êıµãºó±£Áô¼¸Î».£¨ÏÖÔÚÄ¬ÈÏÈ¡2Î»Ğ¡Êı£©
-	 * @return ËÄÉáÎåÈëºóµÄ½á¹û
+	 *            éœ€è¦å››èˆäº”å…¥çš„æ•°å­— scale å°æ•°ç‚¹åä¿ç•™å‡ ä½.ï¼ˆç°åœ¨é»˜è®¤å–2ä½å°æ•°ï¼‰
+	 * @return å››èˆäº”å…¥åçš„ç»“æœ
 	 */
 	public static double round(double v) {
 		java.math.BigDecimal b = new java.math.BigDecimal(Double.toString(v));
@@ -330,7 +328,7 @@ public final class StringUtil {
 	}
 
 	/**
-	 * ×ª»»
+	 * è½¬æ¢
 	 * 
 	 * @param str
 	 *            String
@@ -430,7 +428,7 @@ public final class StringUtil {
 	}
 
 	/**
-	 * ½«ÊıÖµÖµ£¬×ª»»³ÉÊı¾İ¿âIn²éÑ¯ĞèÒªµÄ½á¹¹·½Ê½
+	 * å°†æ•°å€¼å€¼ï¼Œè½¬æ¢æˆæ•°æ®åº“InæŸ¥è¯¢éœ€è¦çš„ç»“æ„æ–¹å¼
 	 * 
 	 * @Title: toArraySqlIn
 	 * @Description: TODO
@@ -454,7 +452,7 @@ public final class StringUtil {
 	}
 
 	/**
-	 * ºº×Ö×ª»»³ÉUnicode±àÂë
+	 * æ±‰å­—è½¬æ¢æˆUnicodeç¼–ç 
 	 * 
 	 * @Title: encodeUnicode
 	 * @Description: TODO
@@ -476,14 +474,14 @@ public final class StringUtil {
 			}
 			UnicodeBlock ub = UnicodeBlock.of(ch);
 			if (ub == UnicodeBlock.BASIC_LATIN) {
-				// Ó¢ÎÄ¼°Êı×ÖµÈ
+				// è‹±æ–‡åŠæ•°å­—ç­‰
 				sb.append(myBuffer[i]);
 			} else if (ub == UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS) {
-				// È«½Ç°ë½Ç×Ö·û
+				// å…¨è§’åŠè§’å­—ç¬¦
 				int j = (int) myBuffer[i] - 65248;
 				sb.append((char) j);
 			} else {
-				// ºº×Ö
+				// æ±‰å­—
 				short s = (short) myBuffer[i];
 				String hexS = Integer.toHexString(s);
 				String unicode = "\\u" + hexS;
@@ -494,7 +492,7 @@ public final class StringUtil {
 	}
 
 	/**
-	 * unicode ×ª»»³É ÖĞÎÄ(ÖØ¹¹Ç°)
+	 * unicode è½¬æ¢æˆ ä¸­æ–‡(é‡æ„å‰)
 	 * 
 	 * @Title: decodeUnicode
 	 * @Description: TODO
@@ -574,7 +572,7 @@ public final class StringUtil {
 	}*/
 	
 	/**
-	 * unicode ×ª»»³É ÖĞÎÄ(ÖØ¹¹ºó)
+	 * unicode è½¬æ¢æˆ ä¸­æ–‡(é‡æ„å)
 	 * @Title: decodeUnicode
 	 * @Description: TODO
 	 * @author: share 2013-12-7
@@ -666,19 +664,19 @@ public final class StringUtil {
 	}
 	/**
 	 * @throws FroadBusinessException 
-	 * »ñÈ¡ÊÖ»úÀàĞÍ
+	 * è·å–æ‰‹æœºç±»å‹
 	 * 
 	 * @Title: getMbType
-	 * @Description: »ñÈ¡ÊÖ»úÀàĞÍ
-	 * @author: froad-huangyihao 2014Äê8ÔÂ29ÈÕ
-	 * @modify: froad-huangyihao 2014Äê8ÔÂ29ÈÕ
+	 * @Description: è·å–æ‰‹æœºç±»å‹
+	 * @author: froad-huangyihao 2014å¹´8æœˆ29æ—¥
+	 * @modify: froad-huangyihao 2014å¹´8æœˆ29æ—¥
 	 * @param @return
 	 * @return String
 	 * @throws
 	 */
 	public static String getMbType(String mobile) throws ZcshBusinessException {
 		if (!StringUtil.isMobileNumber(mobile)) {
-			throw new ZcshBusinessException("·ÇÊÖ»úºÅÂë");
+			throw new ZcshBusinessException("éæ‰‹æœºå·ç ");
 		} else {
 			if (StringUtil.isGmccMobile(mobile)) {
 				return "1";
@@ -710,12 +708,12 @@ public final class StringUtil {
 
 	/**
 	 * @throws FroadBusinessException 
-	 * Òş²Ø²¿·Ö¿¨ºÅĞÅÏ¢
+	 * éšè—éƒ¨åˆ†å¡å·ä¿¡æ¯
 	 * 
 	 * @Title: hiheAcctNo
 	 * @Description: TODO
-	 * @author: froad-zpy 2014Äê9ÔÂ1ÈÕ
-	 * @modify: froad-zpy 2014Äê9ÔÂ1ÈÕ
+	 * @author: froad-zpy 2014å¹´9æœˆ1æ—¥
+	 * @modify: froad-zpy 2014å¹´9æœˆ1æ—¥
 	 * @param @return
 	 * @return String
 	 * @throws
@@ -725,7 +723,7 @@ public final class StringUtil {
 			return acctNo.substring(0, 4) + "*********" + acctNo.substring(acctNo.length() - 4);
 		} catch (Exception e) {
 			LogCvt.error(e.getMessage(), e);
-			throw new ZcshBusinessException("ÓÃ»§ÕÊºÅÓĞÎó£¡");
+			throw new ZcshBusinessException("ç”¨æˆ·å¸å·æœ‰è¯¯ï¼");
 		}
 	}
 
@@ -818,9 +816,9 @@ public final class StringUtil {
 	}
 	
 	/**
-	 * @Description: ÅĞ¶Ï×Ö·û´®ÀïÃæµÄ×Ö·ûÊÇ·ñÈ«²¿ÏàÍ¬
+	 * @Description: åˆ¤æ–­å­—ç¬¦ä¸²é‡Œé¢çš„å­—ç¬¦æ˜¯å¦å…¨éƒ¨ç›¸åŒ
 	 * @author chenjun
-	 * @time   2016Äê3ÔÂ23ÈÕ ÉÏÎç12:36:43
+	 * @time   2016å¹´3æœˆ23æ—¥ ä¸Šåˆ12:36:43
 	 * @param str
 	 * @return
 	 */
@@ -835,25 +833,15 @@ public final class StringUtil {
 	
 	
 	/**
-
-     * <p>ÅĞ¶Ï×Ö·û´®ÊÇ·ñÊÇ""," ",null,×¢ÒâºÍisEmptyµÄÇø±ğ</p>
-
-     * ·½·¨Õª×Ôcommons.lang
-
+     * <p>åˆ¤æ–­å­—ç¬¦ä¸²æ˜¯å¦æ˜¯""," ",null,æ³¨æ„å’ŒisEmptyçš„åŒºåˆ«</p>
+     * æ–¹æ³•æ‘˜è‡ªcommons.lang
      * <pre>
-
      * StringUtils.isBlank(null)      = true
-
      * StringUtils.isBlank("")        = true
-
      * StringUtils.isBlank(" ")       = true
-
      * StringUtils.isBlank("bob")     = false
-
      * StringUtils.isBlank("  bob  ") = false
-
      * </pre>
-
      */
 
     public static boolean isBlank(String str) {
@@ -881,9 +869,9 @@ public final class StringUtil {
     }
     
     /**
-     * @Description: ¼ì²éÓÃ»§Ãû¸ñÊ½
+     * @Description: æ£€æŸ¥ç”¨æˆ·åæ ¼å¼
      * @author chenjun
-     * @time   2016Äê4ÔÂ6ÈÕ ÏÂÎç9:39:09
+     * @time   2016å¹´4æœˆ6æ—¥ ä¸‹åˆ9:39:09
      * @param loginName
      * @return
      * @throws FroadBusinessException 
@@ -891,17 +879,31 @@ public final class StringUtil {
     public static void checkLoginName(String loginName) throws ZcshBusinessException {
     	int nameLen = loginName.length();
 		if (nameLen<4 || nameLen>20) {
-			throw new ZcshBusinessException("ÓÃ»§Ãû³¤¶ÈĞè4-20Î»");
+			throw new ZcshBusinessException("ç”¨æˆ·åé•¿åº¦éœ€4-20ä½");
 		}
 		String regex="[a-zA-Z0-9]*";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher match=pattern.matcher(loginName);
 		boolean falg=match.matches();
 		if (!falg) {
-			throw new ZcshBusinessException("ÓÃ»§ÃûÖ»ÄÜÊäÈëÓ¢ÎÄ»òÊı×Ö,»òÓ¢ÎÄÓëÊı×ÖµÄ×éºÏ");
+			throw new ZcshBusinessException("ç”¨æˆ·ååªèƒ½è¾“å…¥è‹±æ–‡æˆ–æ•°å­—,æˆ–è‹±æ–‡ä¸æ•°å­—çš„ç»„åˆ");
 		}
     }
-    
+    /**
+     * StringUtilså·¥å…·ç±»æ–¹æ³•
+     * è·å–ä¸€å®šé•¿åº¦çš„éšæœºå­—ç¬¦ä¸²ï¼ŒèŒƒå›´0-9ï¼Œa-z
+     * @param lengthï¼šæŒ‡å®šå­—ç¬¦ä¸²é•¿åº¦
+     * @return ä¸€å®šé•¿åº¦çš„éšæœºå­—ç¬¦ä¸²
+     */
+    public static String getRandomStringByLength(int length) {
+        String base = "abcdefghijklmnopqrstuvwxyz0123456789";
+        Random random = new Random();
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < length; i++) {
+            int number = random.nextInt(base.length());
+            sb.append(base.charAt(number));
+        }
+        return sb.toString();
+    }
 
 }
-

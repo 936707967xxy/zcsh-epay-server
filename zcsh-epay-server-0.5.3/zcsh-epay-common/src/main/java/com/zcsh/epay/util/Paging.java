@@ -1,22 +1,19 @@
-/**
- * Copyright www.hoomsun.com ºìÉÏ½ğÈÚĞÅÏ¢·şÎñ£¨ÉÏº££©ÓĞÏŞ¹«Ë¾
- */
 package com.zcsh.epay.util;
 
 import org.apache.ibatis.session.RowBounds;
 
 /**
- * ×÷Õß£ºAdministrator <br>
- * ´´½¨Ê±¼ä£º2018Äê6ÔÂ4ÈÕ <br>
- * ÃèÊö£º
+ * ä½œè€…ï¼šAdministrator <br>
+ * åˆ›å»ºæ—¶é—´ï¼š2018å¹´6æœˆ4æ—¥ <br>
+ * æè¿°ï¼š
  */
 public class Paging extends RowBounds {
-	 // -- ·ÖÒ³²ÎÊı --//
-	 protected int pageNumber = 1;// µ±Ç°Ò³Âë
-	 protected int pageSize = 10;// Ã¿Ò³¼ÇÂ¼Êı
-	 protected long totalCount = 0;// ×Ü¼ÇÂ¼Êı
-	 protected int pageCount = 0;// ×ÜÒ³Êı
-	 protected boolean hasNext = false;//ÊÇ·ñÓĞÏÂÒ»Ò³
+	 // -- åˆ†é¡µå‚æ•° --//
+	 protected int pageNumber = 1;// å½“å‰é¡µç 
+	 protected int pageSize = 10;// æ¯é¡µè®°å½•æ•°
+	 protected long totalCount = 0;// æ€»è®°å½•æ•°
+	 protected int pageCount = 0;// æ€»é¡µæ•°
+	 protected boolean hasNext = false;//æ˜¯å¦æœ‰ä¸‹ä¸€é¡µ
 
 	 public Paging() {
 	  setParame();
@@ -72,4 +69,3 @@ public class Paging extends RowBounds {
 	 }
 
 	}
-

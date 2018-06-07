@@ -1,6 +1,3 @@
-/**
- * Copyright www.hoomsun.com ºìÉÏ½ğÈÚĞÅÏ¢·şÎñ£¨ÉÏº££©ÓĞÏŞ¹«Ë¾
- */
 package com.zcsh.epay.action;
 
 import java.io.BufferedReader;
@@ -24,9 +21,9 @@ import com.zcsh.epay.util.ResponseUtil;
 import com.zcsh.epay.util.ResultCode;
 
 /**
- * ×÷Õß£ºAdministrator <br>
- * ´´½¨Ê±¼ä£º2018Äê6ÔÂ4ÈÕ <br>
- * ÃèÊö£º
+ * ä½œè€…ï¼šAdministrator <br>
+ * åˆ›å»ºæ—¶é—´ï¼š2018å¹´6æœˆ4æ—¥ <br>
+ * æè¿°ï¼š
  */
 public class AgreServlet extends HttpServlet {
 	public static final String FILE_NAME = "actionConfig.properties";
@@ -43,7 +40,7 @@ public class AgreServlet extends HttpServlet {
 				bf = new BufferedReader(isr);
 				ActionFactory.prop.load(bf);
 			} catch (Exception e) {
-				LogCvt.debug("³õÊ¼»¯Òì³£" + e.getMessage(), e);
+				LogCvt.debug("åˆå§‹åŒ–å¼‚å¸¸" + e.getMessage(), e);
 			} finally{
 				try{
 					if(isr!=null) isr.close();
@@ -76,7 +73,7 @@ public class AgreServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		setThreadName(request);
-		LogCvt.info("[Servlet]-GETÇëÇó["+request.getRequestURI()+"]......");
+		LogCvt.info("[Servlet]-GETè¯·æ±‚["+request.getRequestURI()+"]......");
 		long startTime = System.currentTimeMillis();
 		String actionName = getActionName(request);
 		try {
@@ -86,24 +83,24 @@ public class AgreServlet extends HttpServlet {
 				ResponseUtil.returnJSONResponse(response, perform, actionName);
 			}
 		} catch (InstantiationException e) {
-			LogCvt.error("ÊµÀı»¯ActionÀà´íÎó. [" + actionName + "]", e);
+			LogCvt.error("å®ä¾‹åŒ–Actionç±»é”™è¯¯. [" + actionName + "]", e);
 		} catch (IllegalAccessException e) {
-			LogCvt.error("ÊµÀı»¯ActionÀà´íÎó. [" + actionName + "]", e);
+			LogCvt.error("å®ä¾‹åŒ–Actionç±»é”™è¯¯. [" + actionName + "]", e);
 		} catch (Exception e) {
-			LogCvt.error("ActionÒµÎñÖ´ĞĞ´íÎó", e);
+			LogCvt.error("Actionä¸šåŠ¡æ‰§è¡Œé”™è¯¯", e);
 			Map<String, Object> resultMap = new HashMap<String, Object>();
 			resultMap.put("code", ResultCode.badRequest.getCode());
 			resultMap.put("message", ResultCode.badRequest.getMsg());
 			ResponseUtil.returnJSONResponse(response, resultMap);
 		}
 
-		LogCvt.info("[Servlet]-GETÇëÇóÍê³É["+request.getRequestURI()+"],[ºÄÊ±£º"+(System.currentTimeMillis()-startTime)+"ms]......");
+		LogCvt.info("[Servlet]-GETè¯·æ±‚å®Œæˆ["+request.getRequestURI()+"],[è€—æ—¶ï¼š"+(System.currentTimeMillis()-startTime)+"ms]......");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
 			IOException {
 		setThreadName(request);
-		LogCvt.info("[Servlet]-POSTÇëÇó["+request.getRequestURI()+"]......");
+		LogCvt.info("[Servlet]-POSTè¯·æ±‚["+request.getRequestURI()+"]......");
 		long startTime = System.currentTimeMillis();
 		String actionName = getActionName(request);
 		try {
@@ -113,17 +110,17 @@ public class AgreServlet extends HttpServlet {
 				ResponseUtil.returnJSONResponse(response, perform, actionName);
 			}
 		} catch (InstantiationException e) {
-			LogCvt.error("ÊµÀı»¯ActionÀà´íÎó. [" + actionName + "]", e);
+			LogCvt.error("å®ä¾‹åŒ–Actionç±»é”™è¯¯. [" + actionName + "]", e);
 		} catch (IllegalAccessException e) {
-			LogCvt.error("ÊµÀı»¯ActionÀà´íÎó. [" + actionName + "]", e);
+			LogCvt.error("å®ä¾‹åŒ–Actionç±»é”™è¯¯. [" + actionName + "]", e);
 		} catch (Exception e) {
-			LogCvt.error("ActionÒµÎñÖ´ĞĞ´íÎó", e);
+			LogCvt.error("Actionä¸šåŠ¡æ‰§è¡Œé”™è¯¯", e);
 			Map<String, Object> resultMap = new HashMap<String, Object>();
 			resultMap.put("code", ResultCode.badRequest.getCode());
 			resultMap.put("message", ResultCode.badRequest.getMsg());
 			ResponseUtil.returnJSONResponse(response, resultMap);
 		}
-		LogCvt.info("[Servlet]-POSTÇëÇóÍê³É["+request.getRequestURI()+"],[ºÄÊ±£º"+(System.currentTimeMillis()-startTime)+"ms]......");
+		LogCvt.info("[Servlet]-POSTè¯·æ±‚å®Œæˆ["+request.getRequestURI()+"],[è€—æ—¶ï¼š"+(System.currentTimeMillis()-startTime)+"ms]......");
 	}
 	
 	public static int random(int begin, int end){
@@ -138,4 +135,3 @@ public class AgreServlet extends HttpServlet {
 		Thread.currentThread().setName(String.valueOf(sb));
 	}
 }
-

@@ -14,47 +14,47 @@ import com.zcsh.epay.log.LogCvt;
 public class DateUtil {
 
     /**
-     * <p>±ê×¼µÄÈÕÆÚ¸ñÊ½yyyyMMdd</p>
+     * <p>æ ‡å‡†çš„æ—¥æœŸæ ¼å¼yyyyMMdd</p>
      */
     public static final String standardFormat = "yyyyMMdd";
 
     /**
-     * <p>8Î»ÈÕÆÚ¸ñÊ½yy-MM-dd</p>
+     * <p>8ä½æ—¥æœŸæ ¼å¼yy-MM-dd</p>
      */
     public static final String byte8Format = "yy-MM-dd";
 
     /**
-     * <p>8Î»ÈÕÆÚ¸ñÊ½yy/MM/dd</p>
+     * <p>8ä½æ—¥æœŸæ ¼å¼yy/MM/dd</p>
      */
     public static final String anotherByte8Format = "yy/MM/dd";
 
     /**
-     * <p>6Î»ÈÕÆÚ¸ñÊ½yyMMdd</p>
+     * <p>6ä½æ—¥æœŸæ ¼å¼yyMMdd</p>
      */
     public static final String byte6Format = "yyMMdd";
 
     /**
-     * <p>10Î»ÈÕÆÚ¸ñÊ½yyyy-MM-dd</p>
+     * <p>10ä½æ—¥æœŸæ ¼å¼yyyy-MM-dd</p>
      */
     public static final String byte10Format = "yyyy-MM-dd";
 
     /**
-     * <p>17Î»Ê±¼ä¸ñÊ½yyyyMMdd HH:mm:ss</p>
+     * <p>17ä½æ—¶é—´æ ¼å¼yyyyMMdd HH:mm:ss</p>
      */
     public static final String byte17Format = "yyyyMMdd HH:mm:ss";
 
     /**
-     * <p>20Î»Ê±¼ä¸ñÊ½yyyy-MM-dd HH:mm:ss</p>
+     * <p>20ä½æ—¶é—´æ ¼å¼yyyy-MM-dd HH:mm:ss</p>
      */
     public static final String anotherByte20Format = "yyyy-MM-dd HH:mm:ss";
 
     /**
-     * <p>20Î»Ê±¼ä¸ñÊ½yyyy-MM-dd HH:mm:ss</p>
+     * <p>20ä½æ—¶é—´æ ¼å¼yyyy-MM-dd HH:mm:ss</p>
      */
     public static final String anotherByte14Format = "yyyyMMddHHmmss";
     
     /**
-     * <p>10Î»ÈÕÆÚ¸ñÊ½yyyy/MM/dd</p>
+     * <p>10ä½æ—¥æœŸæ ¼å¼yyyy/MM/dd</p>
      */
     public static final String anotherByte10Format = "yyyy/MM/dd";
 
@@ -75,14 +75,14 @@ public class DateUtil {
         if (length == 6) {
             return getDateFromString(strDate, "yyMMdd");
         } else if (length == 8) {
-            //¶ÔÓÚyy/MM/ddºÍyy-MM-dd¸ñÊ½
+            //å¯¹äºyy/MM/ddå’Œyy-MM-ddæ ¼å¼
             if ("/".equals(strDate.substring(2, 3)) && "/".equals(strDate.substring(5, 6))) {
                 //strDate = strDate.replace('/','-');
                 return getDateFromString(strDate, "yy/MM/dd");
             } else if ("-".equals(strDate.substring(2, 3)) && "-".equals(strDate.substring(5, 6))) {
                 return getDateFromString(strDate, "yy-MM-dd");
             } else {
-                //yyMMddÀàĞÍµÄ
+                //yyMMddç±»å‹çš„
                 return getDateFromString(strDate, "yyyyMMdd");
             }
 
@@ -98,8 +98,8 @@ public class DateUtil {
 
     /**
      * <p>get Date from a formated string</p>
-     * ±¾·½·¨ÊµÏÖÔÚÈÕÆÚ¸ñÊ½ºÍÈÕÆÚÀàĞÍÏàÒ»ÖÂµÄÇé¿öÏÂ£¬·µ»Ø¸ÃÈÕÆÚÀàĞÍµÄdate
-     * Èç¹ûÓĞÒì³££¬ÔòÎªÀàĞÍ²»Æ¥ÅäÒì³£
+     * æœ¬æ–¹æ³•å®ç°åœ¨æ—¥æœŸæ ¼å¼å’Œæ—¥æœŸç±»å‹ç›¸ä¸€è‡´çš„æƒ…å†µä¸‹ï¼Œè¿”å›è¯¥æ—¥æœŸç±»å‹çš„date
+     * å¦‚æœæœ‰å¼‚å¸¸ï¼Œåˆ™ä¸ºç±»å‹ä¸åŒ¹é…å¼‚å¸¸
      * <pre>
      * getDateFromString("031009", "yyMMdd")
      * getDateFromString("20031009", "yyyyMMdd")
@@ -119,18 +119,18 @@ public class DateUtil {
 
         if (length == 6) {
             if ("yyMMdd".equals(format)) {
-                //Èç¹ûstrDateÊÇ060417£¬formatÊÇyyMMdd
+                //å¦‚æœstrDateæ˜¯060417ï¼Œformatæ˜¯yyMMdd
                 isByte6FormatVolidate = true;
             }
         } else if (length == 8) {
             if ("/".equals(strDate.substring(2, 3)) && "/".equals(strDate.substring(5, 6))) {
-                //µ±formatÎªyy/MM/ddÇé¿öÊ±
+                //å½“formatä¸ºyy/MM/ddæƒ…å†µæ—¶
                 if ("yy/MM/dd".equals(format)) {
                     isByte8FormatVolidate = true;
                 }
 
             } else if ("-".equals(strDate.substring(2, 3)) && "-".equals(strDate.substring(5, 6))) {
-                //µ±formatÎªyy-MM-ddÇé¿öÊ±
+                //å½“formatä¸ºyy-MM-ddæƒ…å†µæ—¶
                 if ("yy-MM-dd".equals(format)) {
                     isByte8FormatVolidate = true;
                 }
@@ -139,12 +139,12 @@ public class DateUtil {
             }
         } else if (length == 10) {
             if ("/".equals(strDate.substring(4, 5)) && "/".equals(strDate.substring(7, 8))) {
-                //µ±formatÎªyyyy/MM/ddÇé¿öÊ±
+                //å½“formatä¸ºyyyy/MM/ddæƒ…å†µæ—¶
                 if ("yyyy/MM/dd".equals(format)) {
                     isByte10FormatVolidate = true;
                 }
             } else if ("-".equals(strDate.substring(4, 5)) && "-".equals(strDate.substring(7, 8))) {
-                //µ±formatÎªyyyy-MM-ddÇé¿öÊ±
+                //å½“formatä¸ºyyyy-MM-ddæƒ…å†µæ—¶
                 if ("yyyy-MM-dd".equals(format)) {
                     isByte10FormatVolidate = true;
                 }
@@ -164,17 +164,17 @@ public class DateUtil {
                 return formatter.parse(strDate, pos);
             } catch (Exception e) {
 
-            	LogCvt.error("¸ù¾İÊäÈëÈÕÆÚ[" + strDate + "]ÒÔ¼°¸ñÊ½ [" + format + "] ·µ»ØÈÕÆÚÀàĞÍ´íÎó", e);
+            	LogCvt.error("æ ¹æ®è¾“å…¥æ—¥æœŸ[" + strDate + "]ä»¥åŠæ ¼å¼ [" + format + "] è¿”å›æ—¥æœŸç±»å‹é”™è¯¯", e);
 
-                throw new Exception("·µ»ØÈÕÆÚÀàĞÍ´íÎó", e);
+                throw new Exception("è¿”å›æ—¥æœŸç±»å‹é”™è¯¯", e);
             }
         } else {
-            throw new Exception("ÈÕÆÚÀàĞÍÓë¸ñÊ½²»Æ¥Åä");
+            throw new Exception("æ—¥æœŸç±»å‹ä¸æ ¼å¼ä¸åŒ¹é…");
         }
 
     }
  	/**
-	 * ¸ñÊ½»¯ÈÕÆÚ
+	 * æ ¼å¼åŒ–æ—¥æœŸ
 	 *
 	 * @param date
 	 *
@@ -190,7 +190,7 @@ public class DateUtil {
 	}
     /**
      * <p>date String from format 1 to format 2</p>
-     * ±¾·½·¨ÊµÏÖ´Ó±ê×¼ÈÕÆÚ¸ñÊ½yyyyMMdd×ª»»ÎªformatÀàĞÍµÄ¸ñÊ½
+     * æœ¬æ–¹æ³•å®ç°ä»æ ‡å‡†æ—¥æœŸæ ¼å¼yyyyMMddè½¬æ¢ä¸ºformatç±»å‹çš„æ ¼å¼
      * <pre>
      * getFormat2FromStd("20030908", "yyyy-MM-dd") = "2003-09-08"
      * </pre>
@@ -206,7 +206,7 @@ public class DateUtil {
 
     /**
      * <p>date String from format 1 to format 2</p>
-     * ±¾·½·¨ÊµÏÖ´ÓÒ»¸öÈÕÆÚ¸ñÊ½dateºÍÆä¶ÔÓ¦µÄÈÕÆÚÀàĞÍformat1£¬×ª»»ÎªÁíÒ»ÖÖÈÕÆÚÀàĞÍformat2µÄÈÕÆÚ±íÊ¾
+     * æœ¬æ–¹æ³•å®ç°ä»ä¸€ä¸ªæ—¥æœŸæ ¼å¼dateå’Œå…¶å¯¹åº”çš„æ—¥æœŸç±»å‹format1ï¼Œè½¬æ¢ä¸ºå¦ä¸€ç§æ—¥æœŸç±»å‹format2çš„æ—¥æœŸè¡¨ç¤º
      * <pre>
      * getFormat2FromFormat1("03-09-08", "yy-MM-dd", "yyyyMMdd") = "20030908"
      * </pre>
@@ -217,14 +217,14 @@ public class DateUtil {
      */
     public static String getNewFormatFromOldFormat(String date, String format1, String format2) throws Exception {
         return getStringFromDate(getDateFromString(date, format1), format2);
-        //×¢Òâ£º´Ë´¦¶ÔÓÚformat2µÄ¸ñÊ½ÎŞ·¨½øĞĞĞ£Ñé
+        //æ³¨æ„ï¼šæ­¤å¤„å¯¹äºformat2çš„æ ¼å¼æ— æ³•è¿›è¡Œæ ¡éªŒ
 
     }
 
 
     /**
-     * ±¾·½·¨ÊµÏÖÔÚÈÕÆÚ¸ñÊ½ºÍÈÕÆÚÀàĞÍÏàÒ»ÖÂµÄÇé¿öÏÂ£¬·µ»Ø¸ÃÈÕÆÚÀàĞÍµÄdate
-     * Èç¹ûÓĞÒì³££¬ÔòÎª±ê×¼ÈÕÆÚ¸ñÊ½yyyyMMdd×ª»»ÎªÆäËû¸ñÊ½(yyMMdd,yy-MM-dd,yy/MM/dd,yyyy-MM-dd,yyyy/MM/dd)Òì³£
+     * æœ¬æ–¹æ³•å®ç°åœ¨æ—¥æœŸæ ¼å¼å’Œæ—¥æœŸç±»å‹ç›¸ä¸€è‡´çš„æƒ…å†µä¸‹ï¼Œè¿”å›è¯¥æ—¥æœŸç±»å‹çš„date
+     * å¦‚æœæœ‰å¼‚å¸¸ï¼Œåˆ™ä¸ºæ ‡å‡†æ—¥æœŸæ ¼å¼yyyyMMddè½¬æ¢ä¸ºå…¶ä»–æ ¼å¼(yyMMdd,yy-MM-dd,yy/MM/dd,yyyy-MM-dd,yyyy/MM/dd)å¼‚å¸¸
      *
      * @param strDate
      * @param format
@@ -246,12 +246,12 @@ public class DateUtil {
                 return formatter.parse(strDate, pos);
             } catch (Exception e) {
 
-            	LogCvt.error("¸ù¾İÊäÈëÈÕÆÚ[" + strDate + "]ÒÔ¼°¸ñÊ½ [" + format + "] ·µ»ØÈÕÆÚÀàĞÍ´íÎó", e);
+            	LogCvt.error("æ ¹æ®è¾“å…¥æ—¥æœŸ[" + strDate + "]ä»¥åŠæ ¼å¼ [" + format + "] è¿”å›æ—¥æœŸç±»å‹é”™è¯¯", e);
 
-                throw new Exception("·µ»ØÈÕÆÚÀàĞÍ´íÎó", e);
+                throw new Exception("è¿”å›æ—¥æœŸç±»å‹é”™è¯¯", e);
             }
         } else {
-            throw new Exception("ÈÕÆÚÀàĞÍ²»ÊÇ±ê×¼¸ñÊ½yyyyMMdd");
+            throw new Exception("æ—¥æœŸç±»å‹ä¸æ˜¯æ ‡å‡†æ ¼å¼yyyyMMdd");
         }
 
     }
@@ -282,7 +282,7 @@ public class DateUtil {
      * getDateFromString(new Date(System.currentTimeMillis()), "yyMMdd HH:mm:ss") = "030910 12:23:30"
      * </pre>
      * <p/>
-     * ×¢Òâ£ºÓÉÓÚformat¸ñÊ½ÓĞ¶àÖÖ(ÈÕÆÚÀàĞÍ¡¢ÈÕÆÚÀàĞÍ + Ê±¼äÀàĞÍ¡¢Ê±¼äÀàĞÍ»òÕß¿ÉÄÜÓĞÆäËû×Ö·û´®)£¬Òò´Ë±¾·½·¨¶ÔformatµÄ¸ñÊ½²¢Ã»ÓĞ×÷³öĞ£Ñé
+     * æ³¨æ„ï¼šç”±äºformatæ ¼å¼æœ‰å¤šç§(æ—¥æœŸç±»å‹ã€æ—¥æœŸç±»å‹ + æ—¶é—´ç±»å‹ã€æ—¶é—´ç±»å‹æˆ–è€…å¯èƒ½æœ‰å…¶ä»–å­—ç¬¦ä¸²)ï¼Œå› æ­¤æœ¬æ–¹æ³•å¯¹formatçš„æ ¼å¼å¹¶æ²¡æœ‰ä½œå‡ºæ ¡éªŒ
      *
      * @param dt     the data to be convert
      * @param format the format to be returned
@@ -294,9 +294,9 @@ public class DateUtil {
             return formatter.format(dt);
         } catch (Exception e) {
 
-        	LogCvt.error("¸ù¾İÊäÈëÈÕÆÚ[" + dt + "]ÒÔ¼°¸ñÊ½ [" + format + "] ·µ»ØÈÕÆÚÀàĞÍ´íÎó", e);
+        	LogCvt.error("æ ¹æ®è¾“å…¥æ—¥æœŸ[" + dt + "]ä»¥åŠæ ¼å¼ [" + format + "] è¿”å›æ—¥æœŸç±»å‹é”™è¯¯", e);
 
-            throw new Exception("·µ»ØÈÕÆÚÀàĞÍ´íÎó", e);
+            throw new Exception("è¿”å›æ—¥æœŸç±»å‹é”™è¯¯", e);
         }
 
     }
@@ -304,7 +304,7 @@ public class DateUtil {
 
     /**
      * <p>get the interval days between two date</p>
-     * ±¾·½·¨ÊµÏÖ»ñÈ¡Á½¸ö²»Í¬µÄdateÀàĞÍÈÕÆÚÖ®¼äµÄ¼ä¸ô
+     * æœ¬æ–¹æ³•å®ç°è·å–ä¸¤ä¸ªä¸åŒçš„dateç±»å‹æ—¥æœŸä¹‹é—´çš„é—´éš”
      * <pre>
      * diffDate(dt1, dt2) = 2 // suppose dt1="030902" & dt2="030831"
      * </pre>
@@ -323,14 +323,14 @@ public class DateUtil {
             return (int) ((date2 - date1) / (24 * 3600 * 1000.0) + 0.5);
         } catch (Exception e) {
 
-        	LogCvt.error("¸ù¾İÊäÈëÈÕÆÚ [" + dt1 + "]ÒÔ¼°ÈÕÆÚ [" + dt2 + "] ·µ»ØÈÕÆÚ¼ä¸ô´íÎó");
-            throw new Exception("·µ»ØÈÕÆÚ¼ä¸ô´íÎó,[ " + "¿ÉÄÜÊÇÁ½ÖÖÈÕÆÚ¸ñÊ½²»Æ¥Åä ]", e);
+        	LogCvt.error("æ ¹æ®è¾“å…¥æ—¥æœŸ [" + dt1 + "]ä»¥åŠæ—¥æœŸ [" + dt2 + "] è¿”å›æ—¥æœŸé—´éš”é”™è¯¯");
+            throw new Exception("è¿”å›æ—¥æœŸé—´éš”é”™è¯¯,[ " + "å¯èƒ½æ˜¯ä¸¤ç§æ—¥æœŸæ ¼å¼ä¸åŒ¹é… ]", e);
         }
     }
 
     /**
      * <p>get the interval days between two date described by formater "yy-MM-dd"</p>
-     * ±¾·½·¨ÊµÏÖ»ñÈ¡Á½¸ö²»Í¬µÄStringÀàĞÍµÄÈÕÆÚ¼ä¸ô£¬Ö»ÄÜÊµÏÖ¶Ô±ê×¼ÈÕÆÚ¸ñÊ½yyyyMMddµÄ¼ä¸ô»ñÈ¡
+     * æœ¬æ–¹æ³•å®ç°è·å–ä¸¤ä¸ªä¸åŒçš„Stringç±»å‹çš„æ—¥æœŸé—´éš”ï¼Œåªèƒ½å®ç°å¯¹æ ‡å‡†æ—¥æœŸæ ¼å¼yyyyMMddçš„é—´éš”è·å–
      * <pre>
      * diffDate("20030902", "20030904") = 2
      * </pre>
@@ -347,7 +347,7 @@ public class DateUtil {
 
     /**
      * <p>get the interval days between two date described by desired formater</p>
-     * ±¾·½·¨ÊµÏÖ»ñÈ¡Á½¸öÈÕÆÚÖ®¼äµÄ¼ä¸ô£¬ÈÕÆÚ¸ñÊ½°´ÕÕformatµÄÀàĞÍ¶ø¶¨
+     * æœ¬æ–¹æ³•å®ç°è·å–ä¸¤ä¸ªæ—¥æœŸä¹‹é—´çš„é—´éš”ï¼Œæ—¥æœŸæ ¼å¼æŒ‰ç…§formatçš„ç±»å‹è€Œå®š
      * <pre>
      * diffDate("03-09-02", "03-09-04", "yy-MM-dd") = 2
      * </pre>
@@ -364,7 +364,7 @@ public class DateUtil {
 
     /**
      * <p>Adds the specified (signed) amount of day to the given date, based on the calendar's rules</p>
-     * ±¾·½·¨ÊµÏÖ¶ÔÈÕÆÚµÄÔö¼Ó£¬´«ÈëµÄ²ÎÊıÎªDateĞÍµÄºÍintĞÍµÄ±äÁ¿
+     * æœ¬æ–¹æ³•å®ç°å¯¹æ—¥æœŸçš„å¢åŠ ï¼Œä¼ å…¥çš„å‚æ•°ä¸ºDateå‹çš„å’Œintå‹çš„å˜é‡
      * <pre>
      * addDaysToDate(dt1, 2) = dt // if dt1="03-09-02" then dt="03-09-04"
      * </pre>
@@ -382,7 +382,7 @@ public class DateUtil {
 
     /**
      * <p>Adds the specified (signed) amount of day to the given date, based on the calendar's rules</p>
-     * ±¾·½·¨ÊµÏÖÈÕÆÚµÄÔö¼Ó£¬´«ÈëµÄ²ÎÊıÎªÒ»¸ö±ê×¼ÈÕÆÚÀàĞÍ(yyyyMMdd)µÄString²ÎÊıºÍÒ»¸öintĞÍ²ÎÊı
+     * æœ¬æ–¹æ³•å®ç°æ—¥æœŸçš„å¢åŠ ï¼Œä¼ å…¥çš„å‚æ•°ä¸ºä¸€ä¸ªæ ‡å‡†æ—¥æœŸç±»å‹(yyyyMMdd)çš„Stringå‚æ•°å’Œä¸€ä¸ªintå‹å‚æ•°
      * <pre>
      * addDaysToDate("20030902", 2) = dt // dt="20030904"
      * </pre>
@@ -398,7 +398,7 @@ public class DateUtil {
 
     /**
      * <p>Adds the specified (signed) amount of day to the given date, based on the calendar's rules</p>
-     * ±¾·½·¨ÊµÏÖ¶ÔÈÕÆÚµÄÔö¼Ó£¬ÆäÖĞÈÕÆÚ¸ñÊ½ÒªÓëformat¶¨ÒåµÄÀàĞÍÒ»ÖÂ
+     * æœ¬æ–¹æ³•å®ç°å¯¹æ—¥æœŸçš„å¢åŠ ï¼Œå…¶ä¸­æ—¥æœŸæ ¼å¼è¦ä¸formatå®šä¹‰çš„ç±»å‹ä¸€è‡´
      * <pre>
      * addDaysToDate("03-09-02", "yy-MM-dd", 2) = dt // dt="03-09-04"
      * </pre>
@@ -415,7 +415,7 @@ public class DateUtil {
 
     /**
      * <p>get the system current date</p>
-     * ±¾·½·¨ÊµÏÖ»ñÈ¡Ò»¸ö±ê×¼ÈÕÆÚyyyyMMdd
+     * æœ¬æ–¹æ³•å®ç°è·å–ä¸€ä¸ªæ ‡å‡†æ—¥æœŸyyyyMMdd
      * <pre>
      * getCurrentDate() = "20030908"
      * </pre>
@@ -429,7 +429,7 @@ public class DateUtil {
 
     /**
      * <p>get the system current date</p>
-     * ±¾·½·¨ÊµÏÖ»ñÈ¡Ò»¸ö±ê×¼ÈÕÆÚyyyy-MM-dd
+     * æœ¬æ–¹æ³•å®ç°è·å–ä¸€ä¸ªæ ‡å‡†æ—¥æœŸyyyy-MM-dd
      * <pre>
      * getCurrentDate() = "20030908"
      * </pre>
@@ -443,7 +443,7 @@ public class DateUtil {
 
     /**
      * <p>get the system current time</p>
-     * ±¾·½·¨ÊµÏÖ»ñÈ¡Ò»¸ö±ê×¼¸ñÊ½µÄÊ±¼äHHmmss
+     * æœ¬æ–¹æ³•å®ç°è·å–ä¸€ä¸ªæ ‡å‡†æ ¼å¼çš„æ—¶é—´HHmmss
      * <pre>
      * getCurrentTime() = "121208"
      * </pre>
@@ -456,7 +456,7 @@ public class DateUtil {
 
     }
     /**
-     * ¼ÆËãÁ½¸öÊ±¼ä²î£»µ¥Î»minute
+     * è®¡ç®—ä¸¤ä¸ªæ—¶é—´å·®ï¼›å•ä½minute
      * @param startDate
      * @param endDate
      * @param type
@@ -469,7 +469,7 @@ public class DateUtil {
         	SimpleDateFormat dfs = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date begin=dfs.parse(startDate);
             Date end = dfs.parse(endDate);
-            long between=(end.getTime()-begin.getTime())/1000;//³ıÒÔ1000ÊÇÎªÁË×ª»»³ÉÃë
+            long between=(end.getTime()-begin.getTime())/1000;//é™¤ä»¥1000æ˜¯ä¸ºäº†è½¬æ¢æˆç§’
             minutes=between/60;
         }catch (Exception e){
         	LogCvt.error(e.getMessage(),e);
@@ -478,7 +478,7 @@ public class DateUtil {
     }
     /**
      * <p>get the system current date and time</p>
-     * ±¾·½·¨ÊµÏÖ»ñÈ¡Ò»¸ö±ê×¼¸ñÊ½µÄÈÕÆÚºÍÊ±¼äyyyyMMdd HHmmss(ÈÕÆÚÓëÊ±¼äÖĞ¼äÓĞ¿Õ¸ñ¸ô¿ª)
+     * æœ¬æ–¹æ³•å®ç°è·å–ä¸€ä¸ªæ ‡å‡†æ ¼å¼çš„æ—¥æœŸå’Œæ—¶é—´yyyyMMdd HHmmss(æ—¥æœŸä¸æ—¶é—´ä¸­é—´æœ‰ç©ºæ ¼éš”å¼€)
      * <pre>
      * getCurrentTime() = "20030912 121208"
      * </pre>
@@ -493,8 +493,8 @@ public class DateUtil {
     /**
      * <p>get the system current date and time</p>
      * <p/>
-     * ËµÃ÷: format¸ñÊ½¿ÉÒÔÓĞÒÔÏÂ¼¸ÖÖ¸ñÊ½: yyyyMMdd,yyMMdd,yy-MM-dd,yy/MM/dd,yyyy-MM-dd,yyyy/MM/dd,
-     * yyyyMMdd HHmmssÈÕÆÚ¸ñÊ½,yyyyMMddHHmmssÈÕÆÚ¸ñÊ½,HHmmssÊ±¼ä¸ñÊ½,HH:mm:ssÊ±¼ä¸ñÊ½
+     * è¯´æ˜: formatæ ¼å¼å¯ä»¥æœ‰ä»¥ä¸‹å‡ ç§æ ¼å¼: yyyyMMdd,yyMMdd,yy-MM-dd,yy/MM/dd,yyyy-MM-dd,yyyy/MM/dd,
+     * yyyyMMdd HHmmssæ—¥æœŸæ ¼å¼,yyyyMMddHHmmssæ—¥æœŸæ ¼å¼,HHmmssæ—¶é—´æ ¼å¼,HH:mm:ssæ—¶é—´æ ¼å¼
      * <p/>
      * <pre>
      * getCurrentTime("yy-MM-dd HH:mm:ss") = "03-09-12 12:12:08"
@@ -534,15 +534,15 @@ public class DateUtil {
     }
     
     /**
-	 * ÈÕÆÚÏà¼õ
+	 * æ—¥æœŸç›¸å‡
 	 * 
 	 * @param date
-	 *            Ô­ÈÕÆÚ
+	 *            åŸæ—¥æœŸ
 	 * @param days
-	 *            ĞèÒª¼õÈ¥µÄÌìÊı
+	 *            éœ€è¦å‡å»çš„å¤©æ•°
 	 * @param format
-	 *            ÈÕÆÚµÄ¸ñÊ½
-	 * @return ·µ»Ø¼õÈ¥ºóµÄÈÕÆÚ£¬¸ñÊ½ÓëÔ­ÈÕÆÚµÄ¸ñÊ½ÏàÍ¬
+	 *            æ—¥æœŸçš„æ ¼å¼
+	 * @return è¿”å›å‡å»åçš„æ—¥æœŸï¼Œæ ¼å¼ä¸åŸæ—¥æœŸçš„æ ¼å¼ç›¸åŒ
 	 * @throws Exception
 	 */
     public static String subDateByDays(String date, int days, String format)
@@ -557,7 +557,7 @@ public class DateUtil {
 	}
     
     /**
-	 * »ñÈ¡Ç°¼¸ÌìµÄÈÕÆÚ
+	 * è·å–å‰å‡ å¤©çš„æ—¥æœŸ
 	 *
 	 * @param count
 	 * @param format
@@ -573,10 +573,10 @@ public class DateUtil {
 	}
 	
 	/**
-	 * Ğ£ÑéÈÕÆÚÊÇ·ñÖÜÄ©
+	 * æ ¡éªŒæ—¥æœŸæ˜¯å¦å‘¨æœ«
 	 * @Title: CheckWeekend
-	 * @author: yangchao 2017Äê4ÔÂ27ÈÕ
-	 * @modify: yangchao 2017Äê4ÔÂ27ÈÕ
+	 * @author: yangchao 2017å¹´4æœˆ27æ—¥
+	 * @modify: yangchao 2017å¹´4æœˆ27æ—¥
 	 * @param date
 	 * @param format
 	 * @return
@@ -595,10 +595,10 @@ public class DateUtil {
 	}
 	
 	/**
-	 * »ñÈ¡Á½¸öÈÕÆÚÖ®¼äµÄÈÕÆÚlist
+	 * è·å–ä¸¤ä¸ªæ—¥æœŸä¹‹é—´çš„æ—¥æœŸlist
 	 * @Title: getCoverDates
-	 * @author: yangchao 2017Äê4ÔÂ29ÈÕ
-	 * @modify: yangchao 2017Äê4ÔÂ29ÈÕ
+	 * @author: yangchao 2017å¹´4æœˆ29æ—¥
+	 * @modify: yangchao 2017å¹´4æœˆ29æ—¥
 	 * @param startDate
 	 * @param endDate
 	 * @return
@@ -617,11 +617,11 @@ public class DateUtil {
 		return getCoverDates(startDay, endDay, true, true);
 	}
 	/***
-	 * »ñÈ¡Á½¸öÈÕÆÚÖ®¼äµÄÈÕÆÚ¼¯ºÏ
+	 * è·å–ä¸¤ä¸ªæ—¥æœŸä¹‹é—´çš„æ—¥æœŸé›†åˆ
 	  * @Title: getCoverDates
 	  * @Description: TODO
-	  * @author: froad-duandewei 2017Äê8ÔÂ8ÈÕ
-	  * @modify: froad-duandewei 2017Äê8ÔÂ8ÈÕ
+	  * @author: froad-duandewei 2017å¹´8æœˆ8æ—¥
+	  * @modify: froad-duandewei 2017å¹´8æœˆ8æ—¥
 	  * @param startDate
 	  * @param endDate
 	  * @return
@@ -665,11 +665,11 @@ public class DateUtil {
 	}
 	
 	/**
-	 * ÈÕÆÚ±È½Ï
-	 * <li>date1Ğ¡ÓÚdate2Ôò -1  date1´óÓÚdate2Ôò 1 ÏàµÈ·µ»Ø 0
+	 * æ—¥æœŸæ¯”è¾ƒ
+	 * <li>date1å°äºdate2åˆ™ -1  date1å¤§äºdate2åˆ™ 1 ç›¸ç­‰è¿”å› 0
 	 * @Title: compareToDates
-	 * @author: yangchao 2017Äê4ÔÂ30ÈÕ
-	 * @modify: yangchao 2017Äê4ÔÂ30ÈÕ
+	 * @author: yangchao 2017å¹´4æœˆ30æ—¥
+	 * @modify: yangchao 2017å¹´4æœˆ30æ—¥
 	 * @param date1
 	 * @param date2
 	 * @return 
@@ -689,10 +689,10 @@ public class DateUtil {
 	}
 	
 	/**
-	 * »ñÈ¡ÈÕÆÚ×Ö·û´®µÄÇ°Ò»ÌìÈÕÆÚ
+	 * è·å–æ—¥æœŸå­—ç¬¦ä¸²çš„å‰ä¸€å¤©æ—¥æœŸ
 	 * @Title: getUpDate
-	 * @author: yangchao 2017Äê5ÔÂ3ÈÕ
-	 * @modify: yangchao 2017Äê5ÔÂ3ÈÕ
+	 * @author: yangchao 2017å¹´5æœˆ3æ—¥
+	 * @modify: yangchao 2017å¹´5æœˆ3æ—¥
 	 * @param cleardate
 	 * @return
 	 * @throws Exception
@@ -708,10 +708,10 @@ public class DateUtil {
 	}
 
 	/**
-	 * »ñÈ¡ÈÕÆÚ×Ö·û´®µÄºóÒ»ÌìÈÕÆÚ
+	 * è·å–æ—¥æœŸå­—ç¬¦ä¸²çš„åä¸€å¤©æ—¥æœŸ
 	 * @Title: getDownDate
-	 * @author: yangchao 2017Äê5ÔÂ3ÈÕ
-	 * @modify: yangchao 2017Äê5ÔÂ3ÈÕ
+	 * @author: yangchao 2017å¹´5æœˆ3æ—¥
+	 * @modify: yangchao 2017å¹´5æœˆ3æ—¥
 	 * @param settleDate
 	 * @return
 	 * @throws Exception
@@ -726,20 +726,20 @@ public class DateUtil {
 		return da.format(date);
 	}
 	/**
-	 * ÈÕÆÚ¸ñÊ½×ª»»
+	 * æ—¥æœŸæ ¼å¼è½¬æ¢
 	 * @param date
-	 			ĞèÒª×ª»»µÄÈÕÆÚ
+	 			éœ€è¦è½¬æ¢çš„æ—¥æœŸ
 	 * @param srcFormat
-	 			ÎªÔ­À´µÄÈÕÆÚ¸ñÊ½
+	 			ä¸ºåŸæ¥çš„æ—¥æœŸæ ¼å¼
 	 * @param format
-	 			×ª»»ºóµÄÈÕÆÚ¸ñÊ½
+	 			è½¬æ¢åçš„æ—¥æœŸæ ¼å¼
 	 * @return
 	 * @throws Exception
 	 */
 	public static String convertDateFormat(String date, String srcFormat,
 			String format) throws Exception {
 		SimpleDateFormat srcSdf = new SimpleDateFormat(srcFormat);
-		// ½«Ô­ÈÕÆÚ×ª»»³ÉºÁÃë
+		// å°†åŸæ—¥æœŸè½¬æ¢æˆæ¯«ç§’
 		long srcDateTimes = srcSdf.parse(date).getTime();
 		Date d = new Date();
 		d.setTime(srcDateTimes);
@@ -747,12 +747,12 @@ public class DateUtil {
 		return sdf.format(d).toString();
 	}
 	/***
- 	 * ÈÕÆÚ¸ñÊ½×ª»»+Ê±¼ä×·¼Ó(ÓÃÓÚÊı¾İµ¼³ö)
+ 	 * æ—¥æœŸæ ¼å¼è½¬æ¢+æ—¶é—´è¿½åŠ (ç”¨äºæ•°æ®å¯¼å‡º)
  	  * @Title: exportDatePare
  	  * @Description: TODO
- 	  * @author: froad-duandewei 2017Äê9ÔÂ16ÈÕ
- 	  * @modify: froad-duandewei 2017Äê9ÔÂ16ÈÕ
- 	  * @param tranDate£¨yyyymmdd£©
+ 	  * @author: froad-duandewei 2017å¹´9æœˆ16æ—¥
+ 	  * @modify: froad-duandewei 2017å¹´9æœˆ16æ—¥
+ 	  * @param tranDateï¼ˆyyyymmddï¼‰
  	  * @return
  	 */
  	public static String exportBeginDatePare(String tranDate,String addTime){
@@ -761,17 +761,16 @@ public class DateUtil {
  			beginDate = convertDateFormat(tranDate, "yyyyMMdd", "yyyy-MM-dd");
  			beginDate = beginDate + addTime;
  		} catch (Exception e) {
- 			LogCvt.error("ÈÕÆÚ¸ñÊ½×ª»»´íÎó",e);
+ 			LogCvt.error("æ—¥æœŸæ ¼å¼è½¬æ¢é”™è¯¯",e);
  		}
  		return beginDate;
  	}
 	
     public static void main(String[] args) throws ParseException {
-    	/*Calendar c = Calendar.getInstance();//¿ÉÒÔ¶ÔÃ¿¸öÊ±¼äÓòµ¥¶ÀĞŞ¸Ä 
+    	/*Calendar c = Calendar.getInstance();//å¯ä»¥å¯¹æ¯ä¸ªæ—¶é—´åŸŸå•ç‹¬ä¿®æ”¹ 
     	int month = c.get(Calendar.MONTH); 
     	int date = c.get(Calendar.DATE); 
     	 System.out.println("ssssssssssssssss"+date);*/
 //    	System.out.println(DateUtil.getPrefixDate(-1,"yyyyMMdd"));
 	}
 }
-

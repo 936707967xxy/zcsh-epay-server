@@ -1,6 +1,3 @@
-/**
- * Copyright www.hoomsun.com ºìÉÏ½ğÈÚĞÅÏ¢·şÎñ£¨ÉÏº££©ÓĞÏŞ¹«Ë¾
- */
 package com.zcsh.epay.util;
 
 import java.io.ByteArrayInputStream;
@@ -11,25 +8,20 @@ import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-
 import net.sf.json.JSONSerializer;
 import net.sf.json.xml.XMLSerializer;
-
 import org.springframework.util.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-
-import com.alibaba.fastjson.JSON;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.zcsh.epay.log.LogCvt;
@@ -37,9 +29,9 @@ import com.zcsh.epay.log.LogCvt;
 
 
 /**
- * ×÷Õß£ºAdministrator <br>
- * ´´½¨Ê±¼ä£º2018Äê6ÔÂ4ÈÕ <br>
- * ÃèÊö£º
+ * ä½œè€…ï¼šAdministrator <br>
+ * åˆ›å»ºæ—¶é—´ï¼š2018å¹´6æœˆ4æ—¥ <br>
+ * æè¿°ï¼š
  */
 public class XmlUtil {
 
@@ -116,13 +108,13 @@ public class XmlUtil {
 	    public static Map<String,Object> getMapFromXML(String xmlString) throws ParserConfigurationException, IOException, SAXException {
 			InputStream is = null;
 			try{
-		        //ÕâÀïÓÃDomµÄ·½Ê½½âÎö»Ø°üµÄ×îÖ÷ÒªÄ¿µÄÊÇ·ÀÖ¹APIĞÂÔö»Ø°ü×Ö¶Î
+		        //è¿™é‡Œç”¨Domçš„æ–¹å¼è§£æå›åŒ…çš„æœ€ä¸»è¦ç›®çš„æ˜¯é˜²æ­¢APIæ–°å¢å›åŒ…å­—æ®µ
 		        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		        DocumentBuilder builder = factory.newDocumentBuilder();
 		        is = XmlUtil.getStringStream(xmlString);
 		        Document document = builder.parse(is);
 		
-		        //»ñÈ¡µ½documentÀïÃæµÄÈ«²¿½áµã
+		        //è·å–åˆ°documenté‡Œé¢çš„å…¨éƒ¨ç»“ç‚¹
 		        NodeList allNodes = document.getFirstChild().getChildNodes();
 		        Node node;
 		        Map<String, Object> map = new HashMap<String, Object>();
@@ -178,8 +170,6 @@ public class XmlUtil {
     public static String json2xml(String jsonString) {
     	XMLSerializer xmlSerializer = new XMLSerializer();
         return xmlSerializer.write(JSONSerializer.toJSON(jsonString));
-        // return xmlSerializer.write(JSONArray.fromObject(jsonString));//ÕâÖÖ·½Ê½Ö»Ö§³ÖJSONÊı×é
+        // return xmlSerializer.write(JSONArray.fromObject(jsonString));//è¿™ç§æ–¹å¼åªæ”¯æŒJSONæ•°ç»„
     }
 }
-
-

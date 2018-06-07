@@ -1,5 +1,5 @@
 /**
- * Copyright www.hoomsun.com ºìÉÏ½ğÈÚĞÅÏ¢·şÎñ£¨ÉÏº££©ÓĞÏŞ¹«Ë¾
+ * Copyright www.hoomsun.com çº¢ä¸Šé‡‘èä¿¡æ¯æœåŠ¡ï¼ˆä¸Šæµ·ï¼‰æœ‰é™å…¬å¸
  */
 package com.zcsh.epay.framework.filter;
 
@@ -13,9 +13,9 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
 /**
- * ×÷Õß£ºAdministrator <br>
- * ´´½¨Ê±¼ä£º2018Äê6ÔÂ4ÈÕ <br>
- * ÃèÊö£º
+ * ä½œè€…ï¼šAdministrator <br>
+ * åˆ›å»ºæ—¶é—´ï¼š2018å¹´6æœˆ4æ—¥ <br>
+ * æè¿°ï¼š
  */
 public class SetCharacterEncodingFilter implements Filter {
 

@@ -1,6 +1,3 @@
-/**
- * Copyright www.hoomsun.com 红上金融信息服务（上海）有限公司
- */
 package com.zcsh.epay.db.interceptor;
 import java.util.Properties;
 
@@ -60,4 +57,3 @@ public class SqlStatementInterceptor implements Interceptor {
 		this.properties = arg0;
 	}
 }
-

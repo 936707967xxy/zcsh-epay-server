@@ -1,6 +1,3 @@
-/**
- * Copyright www.hoomsun.com ºìÉÏ½ğÈÚĞÅÏ¢·şÎñ£¨ÉÏº££©ÓĞÏŞ¹«Ë¾
- */
 package com.zcsh.epay.util;
 
 import java.util.Map;
@@ -8,22 +5,17 @@ import java.util.Map;
 import com.alibaba.fastjson.JSON;
 
 /**
- * ×÷Õß£ºAdministrator <br>
- * ´´½¨Ê±¼ä£º2018Äê6ÔÂ4ÈÕ <br>
- * ÃèÊö£º
- */
-/**
- * JSONUtil Ìá¹©JsonºÍ¶ÔÏóÖ®¼äµÄ×ª»»¡£
- *
+ * ä½œè€…ï¼šAdministrator <br>
+ * åˆ›å»ºæ—¶é—´ï¼š2018å¹´6æœˆ4æ—¥ <br>
+ * æè¿°ï¼šJSONUtil æä¾›Jsonå’Œå¯¹è±¡ä¹‹é—´çš„è½¬æ¢ã€‚
  */
 public class JSONUtil {
 
 	/**
-	 * °Ñ¶ÔÏó×ª»»³ÉJson×Ö·û´®¡£
-	 * 
+	 * æŠŠå¯¹è±¡è½¬æ¢æˆJsonå­—ç¬¦ä¸²ã€‚
 	 * @param obj
-	 *            ĞèÒª×ª»»µÄ¶ÔÏó¡£
-	 * @return ×ª»»ºÃµÄ×Ö·û´®¡£Èç¹û³ö´í»áÅ×³öRuntimeException
+	 *            éœ€è¦è½¬æ¢çš„å¯¹è±¡ã€‚
+	 * @return è½¬æ¢å¥½çš„å­—ç¬¦ä¸²ã€‚å¦‚æœå‡ºé”™ä¼šæŠ›å‡ºRuntimeException
 	 */
 	public static String toJSonString(Object obj) {
 		try {
@@ -34,15 +26,15 @@ public class JSONUtil {
 	}
 
 	/**
-	 * °ÑJson×Ö·û´®×ª»»³É¶ÔÏó
+	 * æŠŠJsonå­—ç¬¦ä¸²è½¬æ¢æˆå¯¹è±¡
 	 * 
 	 * @param <T>
-	 *            ËùÒª×ª»»µÄ¶ÔÏóÀàĞÍ
+	 *            æ‰€è¦è½¬æ¢çš„å¯¹è±¡ç±»å‹
 	 * @param json
-	 *            Json×Ö·û´®
+	 *            Jsonå­—ç¬¦ä¸²
 	 * @param clazz
-	 *            ×ª»»¶ÔÏóÓĞÀàĞÍ
-	 * @return ×ª»»ºÃµÄ¶ÔÏó£¬Èç¹û³ö´í»áÅ×³öRuntimeException
+	 *            è½¬æ¢å¯¹è±¡æœ‰ç±»å‹
+	 * @return è½¬æ¢å¥½çš„å¯¹è±¡ï¼Œå¦‚æœå‡ºé”™ä¼šæŠ›å‡ºRuntimeException
 	 */
 	public static <T> T toObject(String json, Class<T> clazz) {
 		T t = null;
@@ -54,7 +46,7 @@ public class JSONUtil {
 		return t;
 	}
 	/**
-	 *  ½«jsonstr ×ª»»³ÉMap¶ÔÏó
+	 *  å°†jsonstr è½¬æ¢æˆMapå¯¹è±¡
 	  * @Title: toMap
 	  * @Description: TODO
 	  * @param object
@@ -68,7 +60,7 @@ public class JSONUtil {
 	}
 	
 	/**
-	 * ½«jsonstr ×ª»»³ÉMap¶ÔÏó
+	 * å°†jsonstr è½¬æ¢æˆMapå¯¹è±¡
 	* @return
 	 */
 	@SuppressWarnings("unchecked")

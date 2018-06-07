@@ -17,14 +17,14 @@ import com.alibaba.fastjson.JSON;
 import com.zcsh.epay.log.LogCvt;
 /**
 * <p>Title: RequestUtil</p>  
-* <p>Description:HttpServletRequestÇëÇó¸¨ÖúÀà </p>  
+* <p>Description:HttpServletRequestè¯·æ±‚è¾…åŠ©ç±» </p>  
 * @author xinyuan.xu@hoomsun.com  
-* @date 2018Äê3ÔÂ13ÈÕ
+* @date 2018å¹´3æœˆ13æ—¥
  */
 public class RequestUtil {
 	
 	/**
-	 * ½«requestÖĞµÄËùÓĞ²ÎÊıÉèÖÃµ½entityClassÀàĞÍµÄ¶ÔÏóÉÏ
+	 * å°†requestä¸­çš„æ‰€æœ‰å‚æ•°è®¾ç½®åˆ°entityClassç±»å‹çš„å¯¹è±¡ä¸Š
 	 * 
 	 * @param entityClass
 	 * @param request
@@ -35,11 +35,11 @@ public class RequestUtil {
 			Object entity = entityClass.newInstance();
 
 			request.setCharacterEncoding("UTF-8");
-			// °ÑÇëÇóÖĞµÄ²ÎÊıÈ¡³ö
+			// æŠŠè¯·æ±‚ä¸­çš„å‚æ•°å–å‡º
 			Map<?, ?> allParams = request.getParameterMap();
 
 			if (EmptyChecker.isNotEmpty(allParams)) {
-				LogCvt.info("ÇëÇó²ÎÊı(Key-Value)Îª£º" + allParams.toString());
+				LogCvt.info("è¯·æ±‚å‚æ•°(Key-Value)ä¸ºï¼š" + allParams.toString());
 				Set<?> entries = allParams.entrySet();
 				for (Iterator<?> iterator = entries.iterator(); iterator.hasNext();) {
 					Map.Entry<?, ?> entry = (Map.Entry<?, ?>) iterator.next();
@@ -55,7 +55,7 @@ public class RequestUtil {
 					}
 				}
 			} else {
-				// ÒÔkey-valueĞÎÊ½¶ÁÈ¡²ÎÊıÊ§°Ü£¬¸ÄÓÃjson
+				// ä»¥key-valueå½¢å¼è¯»å–å‚æ•°å¤±è´¥ï¼Œæ”¹ç”¨json
 				StringBuffer jb = new StringBuffer();
 				String line = null;
 				BufferedReader reader = request.getReader();
@@ -64,21 +64,21 @@ public class RequestUtil {
 				}
 
 				if(jb.toString().contains("soapenv:Envelope")){
-					//ÓÃxml½âÎö
-					LogCvt.info("ÇëÇó²ÎÊı(xml)Îª£º" + jb.toString());
+					//ç”¨xmlè§£æ
+					LogCvt.info("è¯·æ±‚å‚æ•°(xml)ä¸ºï¼š" + jb.toString());
 					String reqXml = jb.toString();
 					Map<String,Object> map = new HashMap<String, Object>();
 					
-					//±£´æ±¨ÎÄËùÓĞĞÅÏ¢,³ıÁËbizBody
+					//ä¿å­˜æŠ¥æ–‡æ‰€æœ‰ä¿¡æ¯,é™¤äº†bizBody
 					String respXml = reqXml.substring(0,reqXml.indexOf("<bizBody>")+9);
 					respXml += reqXml.substring(reqXml.indexOf("</bizBody>"),reqXml.length());
 					map.put("sopRespXml", respXml);
 					
-					//½ØÈ¡²ÎÊı
+					//æˆªå–å‚æ•°
 					reqXml = reqXml.substring(reqXml.indexOf("<soapenv:Body>"),reqXml.indexOf("</soapenv:Body>")+15);    	
 					String reqHeaderXml = reqXml.substring(reqXml.indexOf("<bizHeader>"),reqXml.indexOf("</bizHeader>")+12);
 					String reqBodyXml = reqXml.substring(reqXml.indexOf("<bizBody>"),reqXml.indexOf("</bizBody>")+10);
-					//´æ·Åbody¼¯ºÏ
+					//å­˜æ”¾bodyé›†åˆ
 					List<String> listXml = new ArrayList<String>();
 					listXml = getXmlList(reqBodyXml,"list");
 					reqBodyXml = listXml.get(0);
@@ -96,21 +96,21 @@ public class RequestUtil {
 			    	
 			    	map.putAll(headerMap);
 			    	map.putAll(bodyMap);
-			    	//×ª³Éjson,ÔÙ×ª³Éjavabean
+			    	//è½¬æˆjson,å†è½¬æˆjavabean
 			    	String jsonXml = JSON.toJSONString(map);
 			    	LogCvt.info("json="+jsonXml);
 			    	entity = JSON.parseObject(jsonXml, entityClass);
 			    	
 				}else{
-					//ÓÃjson½âÎö
-					LogCvt.info("ÇëÇó²ÎÊı(JSON)Îª£º" + jb.toString());
+					//ç”¨jsonè§£æ
+					LogCvt.info("è¯·æ±‚å‚æ•°(JSON)ä¸ºï¼š" + jb.toString());
 					entity = JSON.parseObject(jb.toString(), entityClass);
 				}
 			}
 
 			return entity;
 		} catch (Exception e) {
-			LogCvt.error("ÇëÇó²ÎÊı·â×°Ê§°Ü", e);
+			LogCvt.error("è¯·æ±‚å‚æ•°å°è£…å¤±è´¥", e);
 		}
 
 		return null;
@@ -118,19 +118,19 @@ public class RequestUtil {
 	
 	public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
 		
-		String reqXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"><soapenv:Header><in:sysHeader xmlns:in=\"http://www.ahrcu.com/common/header/in\"><msgId>20170919180016ESBB0CCD2BF62D45AFESB0</msgId><msgDate>2017-09-19</msgDate><msgTime>18:00:16.509</msgTime><servCd>P00002005974</servCd><operation>AddCount</operation><sysCd>094</sysCd><serverCd>099</serverCd><bizId>EPAY005</bizId><bizType/><orgCd/><resCd/><resText/><bizResCd/><bizResText/><ver>100100100</ver><authId/><authPara/><authContext/><pinIndex/><pinValue/></in:sysHeader></soapenv:Header><soapenv:Body><r09:request xmlns:r09=\"http://www.ahrcu.com/service/bd/R09902005973\"><bizHeader><authCode/><channel>00</channel></bizHeader><bizBody><subMerchantId>94734081520001C</subMerchantId><list><accountName>test</accountName><accountNo>6217788302400000057</accountNo><openningBank>èÈÑôÅ©´åÉÌÒµÒøĞĞÓªÒµ²¿</openningBank><outletId>0</outletId></list><list><accountName>test</accountName><accountNo>6217788302400000057</accountNo><openningBank>èÈÑôÅ©´åÉÌÒµÒøĞĞÓªÒµ²¿1</openningBank><outletId>0</outletId></list><yyyy>94734081520001C</yyyy></bizBody></r09:request></soapenv:Body></soapenv:Envelope>";
+		String reqXml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"><soapenv:Header><in:sysHeader xmlns:in=\"http://www.ahrcu.com/common/header/in\"><msgId>20170919180016ESBB0CCD2BF62D45AFESB0</msgId><msgDate>2017-09-19</msgDate><msgTime>18:00:16.509</msgTime><servCd>P00002005974</servCd><operation>AddCount</operation><sysCd>094</sysCd><serverCd>099</serverCd><bizId>EPAY005</bizId><bizType/><orgCd/><resCd/><resText/><bizResCd/><bizResText/><ver>100100100</ver><authId/><authPara/><authContext/><pinIndex/><pinValue/></in:sysHeader></soapenv:Header><soapenv:Body><r09:request xmlns:r09=\"http://www.ahrcu.com/service/bd/R09902005973\"><bizHeader><authCode/><channel>00</channel></bizHeader><bizBody><subMerchantId>94734081520001C</subMerchantId><list><accountName>test</accountName><accountNo>6217788302400000057</accountNo><openningBank>æé˜³å†œæ‘å•†ä¸šé“¶è¡Œè¥ä¸šéƒ¨</openningBank><outletId>0</outletId></list><list><accountName>test</accountName><accountNo>6217788302400000057</accountNo><openningBank>æé˜³å†œæ‘å•†ä¸šé“¶è¡Œè¥ä¸šéƒ¨1</openningBank><outletId>0</outletId></list><yyyy>94734081520001C</yyyy></bizBody></r09:request></soapenv:Body></soapenv:Envelope>";
 		Map<String,Object> map = new HashMap<String, Object>();
 		
-		//±£´æ±¨ÎÄËùÓĞĞÅÏ¢,³ıÁËbizBody
+		//ä¿å­˜æŠ¥æ–‡æ‰€æœ‰ä¿¡æ¯,é™¤äº†bizBody
 		String respXml = reqXml.substring(0,reqXml.indexOf("<bizBody>")+9);
 		respXml += reqXml.substring(reqXml.indexOf("</bizBody>"),reqXml.length());
 		map.put("sopRespXml", respXml);
 		
-		//½ØÈ¡²ÎÊı
+		//æˆªå–å‚æ•°
 		reqXml = reqXml.substring(reqXml.indexOf("<soapenv:Body>"),reqXml.indexOf("</soapenv:Body>")+15);    	
 		String reqHeaderXml = reqXml.substring(reqXml.indexOf("<bizHeader>"),reqXml.indexOf("</bizHeader>")+12);
 		String reqBodyXml = reqXml.substring(reqXml.indexOf("<bizBody>"),reqXml.indexOf("</bizBody>")+10);
-		//´æ·Åbody¼¯ºÏ
+		//å­˜æ”¾bodyé›†åˆ
 		List<String> listXml = new ArrayList<String>();
 		listXml = getXmlList(reqBodyXml,"list");
 		reqBodyXml = listXml.get(0);
@@ -152,7 +152,7 @@ public class RequestUtil {
     	
     	map.putAll(headerMap);
     	map.putAll(bodyMap);
-    	//×ª³Éjson,ÔÙ×ª³Éjavabean
+    	//è½¬æˆjson,å†è½¬æˆjavabean
     	String jsonXml = JSON.toJSONString(map);
     	System.out.println(jsonXml);
 //    	entity = JSON.parseObject(jsonXml, entityClass);
@@ -160,9 +160,9 @@ public class RequestUtil {
 	}
 	
 	/**
-	 * ·µ»Ø¼¯ºÏÊı¾İÒÑ¾­È¥³ı¼¯ºÏxmlÊ£ÓàÊı¾İ
+	 * è¿”å›é›†åˆæ•°æ®å·²ç»å»é™¤é›†åˆxmlå‰©ä½™æ•°æ®
 	 * @param reqBodyXml
-	 * @param listkey ¼¯ºÏµÄ½ÚµãÃû
+	 * @param listkey é›†åˆçš„èŠ‚ç‚¹å
 	 * @return
 	 */
 	public static List<String> getXmlList(String reqBodyXml,String listkey){
@@ -174,7 +174,7 @@ public class RequestUtil {
 				
 				String listInfoStr = listStr.substring(listStr.indexOf("<"+listkey+">"),listStr.indexOf("</"+listkey+">")+7);
 				list.add(listInfoStr);
-				listStr = listStr.substring(listStr.indexOf("</"+listkey+">")+7,listStr.length());//»ñÈ¡µÚÒ»¸ö¼¯ºÏÖ®ºóµÄ¼¯ºÏxml
+				listStr = listStr.substring(listStr.indexOf("</"+listkey+">")+7,listStr.length());//è·å–ç¬¬ä¸€ä¸ªé›†åˆä¹‹åçš„é›†åˆxml
 				
 				String badyXml1 = reqBodyXml.substring(0, reqBodyXml.indexOf("<"+listkey+">"));
 				String badyXml2 = reqBodyXml.substring(reqBodyXml.indexOf("</"+listkey+">")+7, reqBodyXml.length());

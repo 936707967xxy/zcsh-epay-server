@@ -1,12 +1,9 @@
-/**
- * Copyright www.hoomsun.com ºìÉÏ½ğÈÚĞÅÏ¢·şÎñ£¨ÉÏº££©ÓĞÏŞ¹«Ë¾
- */
 package com.zcsh.epay.db.dialet;
 
 /**
- * ×÷Õß£ºAdministrator <br>
- * ´´½¨Ê±¼ä£º2018Äê6ÔÂ5ÈÕ <br>
- * ÃèÊö£º
+ * ä½œè€…ï¼šAdministrator <br>
+ * åˆ›å»ºæ—¶é—´ï¼š2018å¹´6æœˆ5æ—¥ <br>
+ * æè¿°ï¼š
  */
 public abstract class Dialect {
 
@@ -19,7 +16,7 @@ public abstract class Dialect {
 	 }
 
 	 /**
-	  * ½«sql±ä³É·ÖÒ³sqlÓï¾ä,Ö±½ÓÊ¹ÓÃoffset,limitµÄÖµ×÷ÎªÕ¼Î»·û.</br> Ô´´úÂëÎª:
+	  * å°†sqlå˜æˆåˆ†é¡µsqlè¯­å¥,ç›´æ¥ä½¿ç”¨offset,limitçš„å€¼ä½œä¸ºå ä½ç¬¦.</br> æºä»£ç ä¸º:
 	  * getLimitString(sql,offset
 	  * ,String.valueOf(offset),limit,String.valueOf(limit))
 	  */
@@ -29,19 +26,18 @@ public abstract class Dialect {
 	 }
 
 	 /**
-	  * ½«sql±ä³É·ÖÒ³sqlÓï¾ä,Ìá¹©½«offset¼°limitÊ¹ÓÃÕ¼Î»·û(placeholder)Ìæ»».
+	  * å°†sqlå˜æˆåˆ†é¡µsqlè¯­å¥,æä¾›å°†offsetåŠlimitä½¿ç”¨å ä½ç¬¦(placeholder)æ›¿æ¢.
 	  * 
 	  * <pre>
-	  * Èçmysql
-	  * dialect.getLimitString("select * from user", 12, ":offset",0,":limit") ½«·µ»Ø
+	  * å¦‚mysql
+	  * dialect.getLimitString("select * from user", 12, ":offset",0,":limit") å°†è¿”å›
 	  * select * from user limit :offset,:limit
 	  * </pre>
 	  * 
-	  * @return °üº¬Õ¼Î»·ûµÄ·ÖÒ³sql
+	  * @return åŒ…å«å ä½ç¬¦çš„åˆ†é¡µsql
 	  */
 	 public String getLimitString(String sql, int offset,
 	   String offsetPlaceholder, int limit, String limitPlaceholder) {
 	  throw new UnsupportedOperationException("paged queries not supported");
 	 }
 	}
-

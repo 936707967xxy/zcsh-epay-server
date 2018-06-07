@@ -1,12 +1,6 @@
-/**
- * Copyright www.hoomsun.com ºìÉÏ½ğÈÚĞÅÏ¢·şÎñ£¨ÉÏº££©ÓĞÏŞ¹«Ë¾
- */
 package com.zcsh.epay.modules.user.service;
-
 import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
-
 import com.zcsh.epay.db.OracleManager;
 import com.zcsh.epay.log.LogCvt;
 import com.zcsh.epay.message.ResBody;
@@ -15,9 +9,9 @@ import com.zcsh.epay.modules.user.vo.req.UserInfoReq;
 import com.zcsh.epay.util.Paging;
 
 /**
- * ×÷Õß£ºAdministrator <br>
- * ´´½¨Ê±¼ä£º2018Äê6ÔÂ5ÈÕ <br>
- * ÃèÊö£º
+ * ä½œè€…ï¼šAdministrator <br>
+ * åˆ›å»ºæ—¶é—´ï¼š2018å¹´6æœˆ5æ—¥ <br>
+ * æè¿°ï¼š
  */
 public class LoginUserService {
 
@@ -35,15 +29,15 @@ public class LoginUserService {
 			}
 			LoginUserMapper moreMapper = session.getMapper(LoginUserMapper.class);
 			list=moreMapper.queryMerchantList(page, req);
-			res = new ResBody(ResBody.SUCCESS_CODE, "²éÑ¯³É¹¦");
+			res = new ResBody(ResBody.SUCCESS_CODE, "æŸ¥è¯¢æˆåŠŸ");
 			res.setData(list);
 			res.setPage(page);
 			//session.commit(true);
 		} catch (Exception e) {
 			// TODO: handle exception
 			//session.rollback(true);
-			res = new ResBody(ResBody.ERROR_CODE, "²éÑ¯Ê§°Ü");
-			LogCvt.error("ĞÅÏ¢²éÑ¯Òì³££º" + e.getMessage(),e);
+			res = new ResBody(ResBody.ERROR_CODE, "æŸ¥è¯¢å¤±è´¥");
+			LogCvt.error("ä¿¡æ¯æŸ¥è¯¢å¼‚å¸¸ï¼š" + e.getMessage(),e);
 		}finally {
 			if(null != session)  
 				session.close(); 

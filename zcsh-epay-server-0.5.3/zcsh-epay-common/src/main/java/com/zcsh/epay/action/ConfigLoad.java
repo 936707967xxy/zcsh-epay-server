@@ -1,5 +1,5 @@
 /**
- * Copyright www.hoomsun.com ºìÉÏ½ğÈÚĞÅÏ¢·şÎñ£¨ÉÏº££©ÓĞÏŞ¹«Ë¾
+ * Copyright www.hoomsun.com çº¢ä¸Šé‡‘èä¿¡æ¯æœåŠ¡ï¼ˆä¸Šæµ·ï¼‰æœ‰é™å…¬å¸
  */
 package com.zcsh.epay.action;
 
@@ -13,14 +13,14 @@ import com.zcsh.epay.log.LogCvt;
 import com.zcsh.epay.util.Constants;
 
 /**
- * ×÷Õß£ºAdministrator <br>
- * ´´½¨Ê±¼ä£º2018Äê6ÔÂ4ÈÕ <br>
- * ÃèÊö£º¶ÁÈ¡ÅäÖÃÎÄ¼ş¹¤¾ßÀà
+ * ä½œè€…ï¼šAdministrator <br>
+ * åˆ›å»ºæ—¶é—´ï¼š2018å¹´6æœˆ4æ—¥ <br>
+ * æè¿°ï¼šè¯»å–é…ç½®æ–‡ä»¶å·¥å…·ç±»
  */
 public final class ConfigLoad {
 
 	/**
-	 * ¶ÁÈ¡ÅäÖÃÎÄ¼şÁ÷
+	 * è¯»å–é…ç½®æ–‡ä»¶æµ
 	 * 
 	 * @param filename
 	 * @return
@@ -31,13 +31,13 @@ public final class ConfigLoad {
 			if (null == in) {
 				File file = new File(Constants.CONFIG_URI + filename);
 				if (!file.exists()) {
-					throw new ZcshBusinessException("Ã»ÓĞÕÒµ½ÅäÖÃÎÄ¼ş£º" + filename);
+					throw new ZcshBusinessException("æ²¡æœ‰æ‰¾åˆ°é…ç½®æ–‡ä»¶ï¼š" + filename);
 				}
 				in = new FileInputStream(new File(Constants.CONFIG_URI + filename));
 
 			}
 		} catch (ZcshBusinessException e) {
-			LogCvt.error("ÎŞ·¨»ñÈ¡ÅäÖÃÎÄ¼ş.", e);
+			LogCvt.error("æ— æ³•è·å–é…ç½®æ–‡ä»¶.", e);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -45,4 +45,3 @@ public final class ConfigLoad {
 		return in;
 	}
 }
-

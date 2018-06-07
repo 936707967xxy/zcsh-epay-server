@@ -1,6 +1,3 @@
-/**
- * Copyright www.hoomsun.com ºìÉÏ½ğÈÚĞÅÏ¢·şÎñ£¨ÉÏº££©ÓĞÏŞ¹«Ë¾
- */
 package com.zcsh.epay.db.interceptor;
 
 import java.lang.reflect.Field;
@@ -15,7 +12,6 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import org.apache.commons.lang.reflect.FieldUtils;
 import org.apache.ibatis.builder.SqlSourceBuilder;
 import org.apache.ibatis.executor.statement.RoutingStatementHandler;
@@ -50,9 +46,9 @@ import com.zcsh.epay.util.Paging;
 import com.zcsh.epay.util.ReflectHelper;
 
 /**
- * ×÷Õß£ºAdministrator <br>
- * ´´½¨Ê±¼ä£º2018Äê6ÔÂ5ÈÕ <br>
- * ÃèÊö£º·ÖÒ³²å¼ş
+ * ä½œè€…ï¼šAdministrator <br>
+ * åˆ›å»ºæ—¶é—´ï¼š2018å¹´6æœˆ5æ—¥ <br>
+ * æè¿°ï¼šåˆ†é¡µæ’ä»¶
  */
 @Intercepts(@Signature(type = StatementHandler.class, method = "prepare", args = { Connection.class }))
 public class PageInterceptor implements Interceptor {
@@ -62,19 +58,19 @@ public class PageInterceptor implements Interceptor {
 	private static final ObjectFactory			DEFAULT_OBJECT_FACTORY			= new DefaultObjectFactory();
 	private static final ObjectWrapperFactory	DEFAULT_OBJECT_WRAPPER_FACTORY	= new DefaultObjectWrapperFactory();
 	private static final ReflectorFactory DEFAULT_REFLECTOR_FACTORY = new DefaultReflectorFactory();
-	private static Dialect						databaseDialect					=  new OracleDialect();														// Êı¾İ¿â·½
+	private static Dialect						databaseDialect					=  new OracleDialect();														// æ•°æ®åº“æ–¹
 
 	public Object intercept(Invocation invocation) throws Throwable {
 		
 		StatementHandler delegate = (StatementHandler) invocation.getTarget();
 		MetaObject metaStatementHandler = SystemMetaObject.forObject(delegate);
 
-		// ·ÖÀë´úÀí¶ÔÏóÁ´
+		// åˆ†ç¦»ä»£ç†å¯¹è±¡é“¾
 		while (metaStatementHandler.hasGetter("h")) {
 			Object object = metaStatementHandler.getValue("h");
 			metaStatementHandler = SystemMetaObject.forObject(object);
 		}
-		// ·ÖÀë×îºóÒ»¸ö´úÀí¶ÔÏóµÄÄ¿±êÀà
+		// åˆ†ç¦»æœ€åä¸€ä¸ªä»£ç†å¯¹è±¡çš„ç›®æ ‡ç±»
 		while (metaStatementHandler.hasGetter("target")) {
 			Object object = metaStatementHandler.getValue("target");
 
@@ -83,10 +79,10 @@ public class PageInterceptor implements Interceptor {
 
 		RoutingStatementHandler routingStatementHandler = (RoutingStatementHandler) metaStatementHandler.getOriginalObject();
 
-		// Í¨¹ı·´Éä»ñÈ¡µ½µ±Ç°RoutingStatementHandler¶ÔÏóµÄdelegateÊôĞÔ
+		// é€šè¿‡åå°„è·å–åˆ°å½“å‰RoutingStatementHandlerå¯¹è±¡çš„delegateå±æ€§
 		StatementHandler delegateNew = (StatementHandler) ReflectHelper.getFieldVal(routingStatementHandler, "delegate");
 
-		// Í¨¹ı·´Éä»ñÈ¡delegate¸¸ÀàBaseStatementHandlerµÄmappedStatementÊôĞÔ
+		// é€šè¿‡åå°„è·å–delegateçˆ¶ç±»BaseStatementHandlerçš„mappedStatementå±æ€§
 		MappedStatement mappedStatement = (MappedStatement) ReflectHelper.getFieldVal(delegateNew, "mappedStatement");
 
 		BoundSql boundSql = delegate.getBoundSql();
@@ -107,31 +103,31 @@ public class PageInterceptor implements Interceptor {
 				paging = (Paging) FieldUtils.readField(obj, "rowBounds", true);
 			}
 
-			// À¹½ØĞèÒª·ÖÒ³µÄSQL
+			// æ‹¦æˆªéœ€è¦åˆ†é¡µçš„SQL
 			if (null != paging && paging.getLimit() != paging.DEFAULT.getLimit()) {
 
-				// »ñÈ¡µ½µ±Ç°StatementHandlerµÄ boundSql
+				// è·å–åˆ°å½“å‰StatementHandlerçš„ boundSql
 				boundSql = delegate.getBoundSql();
 
-				// ÄÃµ½µ±Ç°°ó¶¨SqlµÄ²ÎÊı¶ÔÏó£¬¾ÍÊÇÎÒÃÇÔÚµ÷ÓÃ¶ÔÓ¦µÄMapperÓ³ÉäÓï¾äÊ±Ëù´«ÈëµÄ²ÎÊı¶ÔÏó
-				// ·ÖÒ³SQL<select>ÖĞparameterTypeÊôĞÔ¶ÔÓ¦µÄÊµÌå²ÎÊı£¬¼´Mapper½Ó¿ÚÖĞÖ´ĞĞ·ÖÒ³·½·¨µÄ²ÎÊı,¸Ã²ÎÊı²»µÃÎª¿Õ
+				// æ‹¿åˆ°å½“å‰ç»‘å®šSqlçš„å‚æ•°å¯¹è±¡ï¼Œå°±æ˜¯æˆ‘ä»¬åœ¨è°ƒç”¨å¯¹åº”çš„Mapperæ˜ å°„è¯­å¥æ—¶æ‰€ä¼ å…¥çš„å‚æ•°å¯¹è±¡
+				// åˆ†é¡µSQL<select>ä¸­parameterTypeå±æ€§å¯¹åº”çš„å®ä½“å‚æ•°ï¼Œå³Mapperæ¥å£ä¸­æ‰§è¡Œåˆ†é¡µæ–¹æ³•çš„å‚æ•°,è¯¥å‚æ•°ä¸å¾—ä¸ºç©º
 
-				// À¹½Øµ½µÄprepare·½·¨²ÎÊıÊÇÒ»¸öConnection¶ÔÏó
+				// æ‹¦æˆªåˆ°çš„prepareæ–¹æ³•å‚æ•°æ˜¯ä¸€ä¸ªConnectionå¯¹è±¡
 				Connection connection = (Connection) invocation.getArgs()[0];
 
-				// »ñÈ¡µ±Ç°ÒªÖ´ĞĞµÄSqlÓï¾ä£¬Ò²¾ÍÊÇÎÒÃÇÖ±½ÓÔÚMapperÓ³ÉäÓï¾äÖĞĞ´µÄSqlÓï¾ä
+				// è·å–å½“å‰è¦æ‰§è¡Œçš„Sqlè¯­å¥ï¼Œä¹Ÿå°±æ˜¯æˆ‘ä»¬ç›´æ¥åœ¨Mapperæ˜ å°„è¯­å¥ä¸­å†™çš„Sqlè¯­å¥
 				sql = boundSql.getSql();
-				// ¼ÇÂ¼Í³¼Æ
+				// è®°å½•ç»Ÿè®¡
 				@SuppressWarnings("static-access")
 				String countSql = this.getCountSql(sql);
 				
 				countSql = countSql.replaceAll("\t", " ");
 				countSql = countSql.replaceAll("\n", " ");
-				// Í¨¹ıconnection½¨Á¢Ò»¸öcountSql¶ÔÓ¦µÄPreparedStatement¶ÔÏó¡£
+				// é€šè¿‡connectionå»ºç«‹ä¸€ä¸ªcountSqlå¯¹åº”çš„PreparedStatementå¯¹è±¡ã€‚
 				PreparedStatement countStmt = connection.prepareStatement(countSql);
 				DefaultParameterHandler parameterHandler = new DefaultParameterHandler(mappedStatement, parameterObject, boundSql);
 				parameterHandler.setParameters(countStmt);
-				// Ö®ºó¾ÍÊÇÖ´ĞĞ»ñÈ¡×Ü¼ÇÂ¼ÊıµÄSqlÓï¾äºÍ»ñÈ¡½á¹ûÁË
+				// ä¹‹åå°±æ˜¯æ‰§è¡Œè·å–æ€»è®°å½•æ•°çš„Sqlè¯­å¥å’Œè·å–ç»“æœäº†
 				ResultSet rs = countStmt.executeQuery();
 				int count = 0;
 				if (rs.next()) {
@@ -144,16 +140,16 @@ public class PageInterceptor implements Interceptor {
 					paging.setHasNext(true);
 				}
 
-				// »ñÈ¡·ÖÒ³SqlÓï¾ä
+				// è·å–åˆ†é¡µSqlè¯­å¥
 				String pageSql = this.generatePageSql(paging, sql);
 				//
 				pageSql = pageSql.replaceAll("\t", " ");
 				pageSql = pageSql.replaceAll("\n", " ");
 				//
-				// ÀûÓÃ·´ÉäÉèÖÃµ±Ç°BoundSql¶ÔÓ¦µÄsqlÊôĞÔÎªÎÒÃÇ½¨Á¢ºÃµÄ·ÖÒ³SqlÓï¾ä
+				// åˆ©ç”¨åå°„è®¾ç½®å½“å‰BoundSqlå¯¹åº”çš„sqlå±æ€§ä¸ºæˆ‘ä»¬å»ºç«‹å¥½çš„åˆ†é¡µSqlè¯­å¥
 				ReflectHelper.setFieldVal(boundSql, "sql", pageSql);
 
-				// Ò»¶¨Òª»¹Ô­·ñÔò½«ÎŞ·¨µÃµ½ÏÂÒ»×éÊı¾İ(µÚÒ»´ÎµÄÊı¾İ±»»º´æÁË)£¬ºÃ´óÒ»¸ö¿Ó°¡¡£¡£¡£
+				// ä¸€å®šè¦è¿˜åŸå¦åˆ™å°†æ— æ³•å¾—åˆ°ä¸‹ä¸€ç»„æ•°æ®(ç¬¬ä¸€æ¬¡çš„æ•°æ®è¢«ç¼“å­˜äº†)ï¼Œå¥½å¤§ä¸€ä¸ªå‘å•Šã€‚ã€‚ã€‚
 				FieldUtils.writeField(rowBounds, "offset", RowBounds.NO_ROW_OFFSET, true);
 				FieldUtils.writeField(rowBounds, "limit", RowBounds.NO_ROW_LIMIT, true);
 			}
@@ -164,7 +160,7 @@ public class PageInterceptor implements Interceptor {
 
 	private Paging getPaging(Object parameterObject) throws NoSuchFieldException {
 		Paging page = null;
-		if (parameterObject instanceof Paging) { // ²ÎÊı¾ÍÊÇPageÊµÌå
+		if (parameterObject instanceof Paging) { // å‚æ•°å°±æ˜¯Pageå®ä½“
 			page = (Paging) parameterObject;
 		} else if (parameterObject instanceof Map) {
 			for (Entry entry : (Set<Entry>) ((Map) parameterObject).entrySet()) {
@@ -174,7 +170,7 @@ public class PageInterceptor implements Interceptor {
 				}
 			}
 		} else {
-			// ²ÎÊıÎªÄ³¸öÊµÌå£¬¸ÃÊµÌåÓµÓĞPageÊôĞÔ
+			// å‚æ•°ä¸ºæŸä¸ªå®ä½“ï¼Œè¯¥å®ä½“æ‹¥æœ‰Pageå±æ€§
 			Field pageField = ReflectHelper.getField(parameterObject, "paging");
 
 			if (pageField != null) {
@@ -189,14 +185,14 @@ public class PageInterceptor implements Interceptor {
 	}
 
 	/**
-	 * À¹½ØÆ÷¶ÔÓ¦µÄ·â×°Ô­Ê¼¶ÔÏóµÄ·½·¨
+	 * æ‹¦æˆªå™¨å¯¹åº”çš„å°è£…åŸå§‹å¯¹è±¡çš„æ–¹æ³•
 	 */
 	public Object plugin(Object target) {
 		return Plugin.wrap(target, this);
 	}
 
 	/**
-	 * ¸ù¾İÔ­SqlÓï¾ä»ñÈ¡¶ÔÓ¦µÄ²éÑ¯×Ü¼ÇÂ¼ÊıµÄSqlÓï¾ä
+	 * æ ¹æ®åŸSqlè¯­å¥è·å–å¯¹åº”çš„æŸ¥è¯¢æ€»è®°å½•æ•°çš„Sqlè¯­å¥
 	 * 
 	 * @param sql
 	 * @return
@@ -215,7 +211,7 @@ public class PageInterceptor implements Interceptor {
 	}
 	
 	/**
-     * Æ´½Ó»ñÈ¡ÌõÊıµÄsqlÓï¾ä
+     * æ‹¼æ¥è·å–æ¡æ•°çš„sqlè¯­å¥
      * <p>
      *
      * @param sqlPrimary
@@ -247,7 +243,7 @@ public class PageInterceptor implements Interceptor {
         }
         StringBuilder return_sql = new StringBuilder("SELECT COUNT(1) AS cnt ");
         StringBuilder common_count = new StringBuilder();
-        if (upperString.contains(" GROUP BY ")) {//¼òµ¥µÄgroup by·ÖÒ³ÓÅ»¯
+        if (upperString.contains(" GROUP BY ")) {//ç®€å•çš„group byåˆ†é¡µä¼˜åŒ–
         	common_count.append(" from (select count(1) ");
         }
         for (int j = index; j < paramsAndMethod.length; j++) {
@@ -261,7 +257,7 @@ public class PageInterceptor implements Interceptor {
     }
 
 	/**
-	 * ¸ù¾İÊı¾İ¿â·½ÑÔ£¬Éú³ÉÌØ¶¨µÄ·ÖÒ³sql
+	 * æ ¹æ®æ•°æ®åº“æ–¹è¨€ï¼Œç”Ÿæˆç‰¹å®šçš„åˆ†é¡µsql
 	 * 
 	 * @param page
 	 * @param sql
@@ -270,7 +266,7 @@ public class PageInterceptor implements Interceptor {
 	private String generatePageSql(Paging page, String sql) {
 
 		if (page != null && databaseDialect != null) {
-			// pageNumberÄ¬ÈÏÊÇ´Ó1£¬¶øÒÑÊı¾İ¿âÊÇ´Ó0¿ªÊ¼¼ÆËãµÄ£®ËùÒÔ(page.getPageNumber()-1)
+			// pageNumberé»˜è®¤æ˜¯ä»1ï¼Œè€Œå·²æ•°æ®åº“æ˜¯ä»0å¼€å§‹è®¡ç®—çš„ï¼æ‰€ä»¥(page.getPageNumber()-1)
 			return databaseDialect.getLimitString(sql, page.getOffset(), page.getLimit());
 		}
 		LogCvt.info(sql);
@@ -339,4 +335,3 @@ public class PageInterceptor implements Interceptor {
 
 	}
 }
-

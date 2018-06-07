@@ -6,9 +6,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.zcsh.epay.message.ResBody;
 
 /**
- * ×÷Õß£ºAdministrator <br>
- * ´´½¨Ê±¼ä£º2018Äê6ÔÂ4ÈÕ <br>
- * ÃèÊö£º
+ * ä½œè€…ï¼šAdministrator <br>
+ * åˆ›å»ºæ—¶é—´ï¼š2018å¹´6æœˆ7æ—¥ <br>
+ * æè¿°ï¼š  ServletåŠ¨ä½œæ¥å£ç±»
  */
 public interface Action {
 	

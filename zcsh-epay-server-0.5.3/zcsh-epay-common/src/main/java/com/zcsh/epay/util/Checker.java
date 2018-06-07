@@ -1,6 +1,3 @@
-/**
- * Copyright www.hoomsun.com ºìÉÏ½ğÈÚĞÅÏ¢·şÎñ£¨ÉÏº££©ÓĞÏŞ¹«Ë¾
- */
 package com.zcsh.epay.util;
 
 import java.math.BigDecimal;
@@ -9,17 +6,16 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Dictionary;
 import java.util.Map;
-
 import com.zcsh.epay.exceptions.ZcshBusinessException;
 import com.zcsh.epay.log.LogCvt;
 
 /**
- * ×÷Õß£ºAdministrator <br>
- * ´´½¨Ê±¼ä£º2018Äê6ÔÂ5ÈÕ <br>
- * ÃèÊö£º
+ * ä½œè€…ï¼šAdministrator <br>
+ * åˆ›å»ºæ—¶é—´ï¼š2018å¹´6æœˆ5æ—¥ <br>
+ * æè¿°ï¼š
  */
 public class Checker {
-	// ¶ÔÓÚCollection¡¢Dictionary¡¢Map£¬²»ÉîÈëµü´ú£¬ÅĞ¶ÏÓĞÃ»ÓĞ×ÓÔªËØ¡£
+	// å¯¹äºCollectionã€Dictionaryã€Mapï¼Œä¸æ·±å…¥è¿­ä»£ï¼Œåˆ¤æ–­æœ‰æ²¡æœ‰å­å…ƒç´ ã€‚
 	public static boolean isEmpty(Object obj) {
 		if (obj == null) {
 			return true;
@@ -41,7 +37,7 @@ public class Checker {
 		return false;
 	}
 
-	// Êı×éÀïÈÎºÎÒ»¸öÔªËØ·Ç¿Õ£¬·µ»Øfalse¡£
+	// æ•°ç»„é‡Œä»»ä½•ä¸€ä¸ªå…ƒç´ éç©ºï¼Œè¿”å›falseã€‚
 	public static boolean isEmpty(Object... array) {
 		if (array == null || array.length == 0) {
 			return true;
@@ -60,7 +56,7 @@ public class Checker {
 		return !isEmpty(obj);
 	}
 
-	// Êı×éÀïÈÎºÎÒ»¸öÔªËØÎª¿Õ£¬·µ»Øfalse¡£
+	// æ•°ç»„é‡Œä»»ä½•ä¸€ä¸ªå…ƒç´ ä¸ºç©ºï¼Œè¿”å›falseã€‚
 	public static boolean isNotEmpty(Object... array) {
 		if (array == null || array.length == 0) {
 			return false;
@@ -89,7 +85,7 @@ public class Checker {
 		return true;
 	}
 
-	// Îª¿ÕµÄÄ¬ÈÏÖµ×ª»»
+	// ä¸ºç©ºçš„é»˜è®¤å€¼è½¬æ¢
 	public static String emptyDefaultValue(String obj, String defaultValue) {
 		if (isEmpty(obj)) {
 			return defaultValue;
@@ -98,7 +94,7 @@ public class Checker {
 		}
 	}
 	
-	// Îª¿ÕµÄÄ¬ÈÏÖµ×ª»»
+	// ä¸ºç©ºçš„é»˜è®¤å€¼è½¬æ¢
 	public static Double emptyDefaultValue(String obj, Double defaultValue) {
 		if (isEmpty(obj)) {
 			return defaultValue;
@@ -107,7 +103,7 @@ public class Checker {
 		}
 	}
 	
-	// Îª¿ÕµÄÄ¬ÈÏÖµ×ª»»
+	// ä¸ºç©ºçš„é»˜è®¤å€¼è½¬æ¢
 	public static double emptyDefaultValue(Double obj, double defaultValue) {
 		if (isEmpty(obj)) {
 			return defaultValue;
@@ -116,7 +112,7 @@ public class Checker {
 		}
 	}
 	
-	// Îª¿ÕµÄÄ¬ÈÏÖµ×ª»»
+	// ä¸ºç©ºçš„é»˜è®¤å€¼è½¬æ¢
 	public static String emptyDefaultValue(String obj) {
 		if (isEmpty(obj)) {
 			return null;
@@ -226,7 +222,7 @@ public class Checker {
 				.matches("^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 	}
 	
-	//½«json×Ö·û´®²ğ½â£ºÈ¥µô¡°{¡± ¡¢ ¡°}¡±
+	//å°†jsonå­—ç¬¦ä¸²æ‹†è§£ï¼šå»æ‰â€œ{â€ ã€ â€œ}â€
 	public static String replaceJsonValue(String obj) {
 		if (isEmpty(obj)) {
 			return null;
@@ -242,13 +238,13 @@ public class Checker {
 	}
 	
 	/**
-	 * ¼ì²é×Ö¶ÎÊÇ·ñÎª¿Õ£¬Îª¿ÕÊ±Å×³öÒì³£ĞÅÏ¢
-	 * @param field ×Ö¶Î
-	 * @param errorMsg ´íÎóĞÅÏ¢
-	 * @throws ZcshBusinessException ×Ô¶¨ÒåÒµÎñÒì³£ĞÅÏ¢
+	 * æ£€æŸ¥å­—æ®µæ˜¯å¦ä¸ºç©ºï¼Œä¸ºç©ºæ—¶æŠ›å‡ºå¼‚å¸¸ä¿¡æ¯
+	 * @param field å­—æ®µ
+	 * @param errorMsg é”™è¯¯ä¿¡æ¯
+	 * @throws ZcshBusinessException è‡ªå®šä¹‰ä¸šåŠ¡å¼‚å¸¸ä¿¡æ¯
 	 */
 	public static void dataChecker(Object field, ResultCode errorCode) throws ZcshBusinessException {
-		//1.ÇëÇóÊı¾İĞ£Ñé
+		//1.è¯·æ±‚æ•°æ®æ ¡éªŒ
 		if(Checker.isEmpty(field)){
 			LogCvt.info(errorCode.getMsg());
 			throw new ZcshBusinessException(errorCode.getCode(), errorCode.getMsg());
@@ -256,13 +252,13 @@ public class Checker {
 	}
 	
 	/**
-	 * ¼ì²é×Ö¶ÎÊÇ·ñ²»Îª¿Õ£¬²»Îª¿ÕÊ±Å×³öÒì³£ĞÅÏ¢
-	 * @param field ×Ö¶Î
-	 * @param errorMsg ´íÎóĞÅÏ¢
-	 * @throws ZcshBusinessException ×Ô¶¨ÒåÒµÎñÒì³£ĞÅÏ¢
+	 * æ£€æŸ¥å­—æ®µæ˜¯å¦ä¸ä¸ºç©ºï¼Œä¸ä¸ºç©ºæ—¶æŠ›å‡ºå¼‚å¸¸ä¿¡æ¯
+	 * @param field å­—æ®µ
+	 * @param errorMsg é”™è¯¯ä¿¡æ¯
+	 * @throws ZcshBusinessException è‡ªå®šä¹‰ä¸šåŠ¡å¼‚å¸¸ä¿¡æ¯
 	 */
 	public static void dataNotEmptyChecker(Object field, ResultCode errorCode) throws ZcshBusinessException {
-		//1.ÇëÇóÊı¾İĞ£Ñé
+		//1.è¯·æ±‚æ•°æ®æ ¡éªŒ
 		if(Checker.isNotEmpty(field)){
 			LogCvt.info(errorCode.getMsg());
 			throw new ZcshBusinessException(errorCode.getCode(), errorCode.getMsg());
@@ -270,13 +266,13 @@ public class Checker {
 	}
 	
 	/**
-	 * ¼ì²é×Ö¶ÎÊÇ·ñÎª¿Õ£¬Îª¿ÕÊ±Å×³öÒì³£ĞÅÏ¢
-	 * @param field ×Ö¶Î
-	 * @param errorMsg ´íÎóĞÅÏ¢
-	 * @throws ZcshBusinessException ×Ô¶¨ÒåÒµÎñÒì³£ĞÅÏ¢
+	 * æ£€æŸ¥å­—æ®µæ˜¯å¦ä¸ºç©ºï¼Œä¸ºç©ºæ—¶æŠ›å‡ºå¼‚å¸¸ä¿¡æ¯
+	 * @param field å­—æ®µ
+	 * @param errorMsg é”™è¯¯ä¿¡æ¯
+	 * @throws ZcshBusinessException è‡ªå®šä¹‰ä¸šåŠ¡å¼‚å¸¸ä¿¡æ¯
 	 */
 	public static void dataChecker(Object field, String errorMsg) throws ZcshBusinessException {
-		//1.ÇëÇóÊı¾İĞ£Ñé
+		//1.è¯·æ±‚æ•°æ®æ ¡éªŒ
 		if(Checker.isEmpty(field)){
 			LogCvt.info(errorMsg);
 			throw new ZcshBusinessException(ResultCode.failed.getCode(), errorMsg);
@@ -284,13 +280,13 @@ public class Checker {
 	}
 	
 	/**
-	 * ¼ì²é×Ö¶Î<=0Ê±£¬Å×³öÒì³£ĞÅÏ¢
-	 * @param field ×Ö¶Î
-	 * @param errorMsg ´íÎóĞÅÏ¢
-	 * @throws ZcshBusinessException ×Ô¶¨ÒåÒµÎñÒì³£ĞÅÏ¢
+	 * æ£€æŸ¥å­—æ®µ<=0æ—¶ï¼ŒæŠ›å‡ºå¼‚å¸¸ä¿¡æ¯
+	 * @param field å­—æ®µ
+	 * @param errorMsg é”™è¯¯ä¿¡æ¯
+	 * @throws ZcshBusinessException è‡ªå®šä¹‰ä¸šåŠ¡å¼‚å¸¸ä¿¡æ¯
 	 */
 	public static void dataLteZero(Integer field, String errorMsg) throws ZcshBusinessException {
-		//1.ÇëÇóÊı¾İĞ£Ñé
+		//1.è¯·æ±‚æ•°æ®æ ¡éªŒ
 		if(Checker.isEmpty(field) || field <= 0){
 			LogCvt.info(errorMsg);
 			throw new ZcshBusinessException(ResultCode.failed.getCode(), errorMsg);
@@ -298,13 +294,13 @@ public class Checker {
 	}
 	
 	/**
-	 * ¼ì²é×Ö¶Î<=0Ê±£¬Å×³öÒì³£ĞÅÏ¢
-	 * @param field ×Ö¶Î
-	 * @param errorMsg ´íÎóĞÅÏ¢
-	 * @throws ZcshBusinessException ×Ô¶¨ÒåÒµÎñÒì³£ĞÅÏ¢
+	 * æ£€æŸ¥å­—æ®µ<=0æ—¶ï¼ŒæŠ›å‡ºå¼‚å¸¸ä¿¡æ¯
+	 * @param field å­—æ®µ
+	 * @param errorMsg é”™è¯¯ä¿¡æ¯
+	 * @throws ZcshBusinessException è‡ªå®šä¹‰ä¸šåŠ¡å¼‚å¸¸ä¿¡æ¯
 	 */
 	public static void dataLteZero(Double field, String errorMsg) throws ZcshBusinessException {
-		//1.ÇëÇóÊı¾İĞ£Ñé
+		//1.è¯·æ±‚æ•°æ®æ ¡éªŒ
 		if(Checker.isEmpty(field) || field <= 0){
 			LogCvt.info(errorMsg);
 			throw new ZcshBusinessException(ResultCode.failed.getCode(), errorMsg);
@@ -312,13 +308,13 @@ public class Checker {
 	}
 	
 	/**
-	 * ¼ì²é×Ö¶Î<=0Ê±£¬Å×³öÒì³£ĞÅÏ¢
-	 * @param field ×Ö¶Î
-	 * @param errorMsg ´íÎóĞÅÏ¢
-	 * @throws ZcshBusinessException ×Ô¶¨ÒåÒµÎñÒì³£ĞÅÏ¢
+	 * æ£€æŸ¥å­—æ®µ<=0æ—¶ï¼ŒæŠ›å‡ºå¼‚å¸¸ä¿¡æ¯
+	 * @param field å­—æ®µ
+	 * @param errorMsg é”™è¯¯ä¿¡æ¯
+	 * @throws ZcshBusinessException è‡ªå®šä¹‰ä¸šåŠ¡å¼‚å¸¸ä¿¡æ¯
 	 */
 	public static void dataLteZero(Long field, String errorMsg) throws ZcshBusinessException {
-		//1.ÇëÇóÊı¾İĞ£Ñé
+		//1.è¯·æ±‚æ•°æ®æ ¡éªŒ
 		if(Checker.isEmpty(field) || field <= 0){
 			LogCvt.info(errorMsg);
 			throw new ZcshBusinessException(ResultCode.failed.getCode(), errorMsg);
@@ -326,13 +322,13 @@ public class Checker {
 	}
 	
 	/**
-	 * ¼ì²é×Ö¶Î<0Ê±£¬Å×³öÒì³£ĞÅÏ¢
-	 * @param field ×Ö¶Î
-	 * @param errorMsg ´íÎóĞÅÏ¢
-	 * @throws ZcshBusinessException ×Ô¶¨ÒåÒµÎñÒì³£ĞÅÏ¢
+	 * æ£€æŸ¥å­—æ®µ<0æ—¶ï¼ŒæŠ›å‡ºå¼‚å¸¸ä¿¡æ¯
+	 * @param field å­—æ®µ
+	 * @param errorMsg é”™è¯¯ä¿¡æ¯
+	 * @throws ZcshBusinessException è‡ªå®šä¹‰ä¸šåŠ¡å¼‚å¸¸ä¿¡æ¯
 	 */
 	public static void dataLtZero(Long field, String errorMsg) throws ZcshBusinessException {
-		//1.ÇëÇóÊı¾İĞ£Ñé
+		//1.è¯·æ±‚æ•°æ®æ ¡éªŒ
 		if(Checker.isEmpty(field) || field < 0){
 			LogCvt.info(errorMsg);
 			throw new ZcshBusinessException(ResultCode.failed.getCode(), errorMsg);
@@ -340,13 +336,13 @@ public class Checker {
 	}
 	
 	/**
-	 * ¼ì²é×Ö¶Î<0Ê±£¬Å×³öÒì³£ĞÅÏ¢
-	 * @param field ×Ö¶Î
-	 * @param errorMsg ´íÎóĞÅÏ¢
-	 * @throws ZcshBusinessException ×Ô¶¨ÒåÒµÎñÒì³£ĞÅÏ¢
+	 * æ£€æŸ¥å­—æ®µ<0æ—¶ï¼ŒæŠ›å‡ºå¼‚å¸¸ä¿¡æ¯
+	 * @param field å­—æ®µ
+	 * @param errorMsg é”™è¯¯ä¿¡æ¯
+	 * @throws ZcshBusinessException è‡ªå®šä¹‰ä¸šåŠ¡å¼‚å¸¸ä¿¡æ¯
 	 */
 	public static void dataLtZero(Double field, String errorMsg) throws ZcshBusinessException {
-		//1.ÇëÇóÊı¾İĞ£Ñé
+		//1.è¯·æ±‚æ•°æ®æ ¡éªŒ
 		if(Checker.isEmpty(field) || field < 0){
 			LogCvt.info(errorMsg);
 			throw new ZcshBusinessException(ResultCode.failed.getCode(), errorMsg);
@@ -354,13 +350,13 @@ public class Checker {
 	}
 	
 	/**
-	 * ¼ì²é×Ö¶Î<0Ê±£¬Å×³öÒì³£ĞÅÏ¢
-	 * @param field ×Ö¶Î
-	 * @param errorMsg ´íÎóĞÅÏ¢
-	 * @throws ZcshBusinessException ×Ô¶¨ÒåÒµÎñÒì³£ĞÅÏ¢
+	 * æ£€æŸ¥å­—æ®µ<0æ—¶ï¼ŒæŠ›å‡ºå¼‚å¸¸ä¿¡æ¯
+	 * @param field å­—æ®µ
+	 * @param errorMsg é”™è¯¯ä¿¡æ¯
+	 * @throws ZcshBusinessException è‡ªå®šä¹‰ä¸šåŠ¡å¼‚å¸¸ä¿¡æ¯
 	 */
 	public static void dataLtZero(Long field, ResultCode errorCode) throws ZcshBusinessException {
-		//1.ÇëÇóÊı¾İĞ£Ñé
+		//1.è¯·æ±‚æ•°æ®æ ¡éªŒ
 		if(Checker.isEmpty(field) || field < 0){
 			LogCvt.info(errorCode.getMsg());
 			throw new ZcshBusinessException(errorCode.getCode(), errorCode.getMsg());
@@ -368,17 +364,17 @@ public class Checker {
 	}
 	
 	/**
-	  * @Description: ¼ì²é×Ö¶Î<0Ê±£¬Å×³öÒì³£ĞÅÏ¢
+	  * @Description: æ£€æŸ¥å­—æ®µ<0æ—¶ï¼ŒæŠ›å‡ºå¼‚å¸¸ä¿¡æ¯
 	  * @Author: open
-	  * @Date: 2017Äê1ÔÂ12ÈÕÏÂÎç8:19:06
+	  * @Date: 2017å¹´1æœˆ12æ—¥ä¸‹åˆ8:19:06
 	  * @param field
-	  * @param errorCode ´íÎóÂë¶ÔÏó
-	  * @param data Ğ¯´øÊı¾İ
-	  * @param objs Ìæ»»Êı¾İ
+	  * @param errorCode é”™è¯¯ç å¯¹è±¡
+	  * @param data æºå¸¦æ•°æ®
+	  * @param objs æ›¿æ¢æ•°æ®
 	  * @throws ZcshBusinessException
 	  */
 	public static void dataLtZero(Long field, ResultCode errorCode,Object[] replacement,Object data) throws ZcshBusinessException {
-		//1.ÇëÇóÊı¾İĞ£Ñé
+		//1.è¯·æ±‚æ•°æ®æ ¡éªŒ
 		String msg = MessageFormat.format(errorCode.getMsg(),replacement);
 		if(Checker.isEmpty(field) || field < 0){
 			LogCvt.info(msg);
@@ -387,13 +383,13 @@ public class Checker {
 	}
 	
 	/**
-	 * ¼ì²éĞ¡ÊıÎ»Êı
-	 * @param field ×Ö¶Î
-	 * @param errorMsg ´íÎóĞÅÏ¢
-	 * @throws ZcshBusinessException ×Ô¶¨ÒåÒµÎñÒì³£ĞÅÏ¢
+	 * æ£€æŸ¥å°æ•°ä½æ•°
+	 * @param field å­—æ®µ
+	 * @param errorMsg é”™è¯¯ä¿¡æ¯
+	 * @throws ZcshBusinessException è‡ªå®šä¹‰ä¸šåŠ¡å¼‚å¸¸ä¿¡æ¯
 	 */
 	public static void dataPrecisionChecker(double number,int n,String errorMsg) throws ZcshBusinessException {
-		//1.ÇëÇóÊı¾İĞ£Ñé
+		//1.è¯·æ±‚æ•°æ®æ ¡éªŒ
 		String s = number + "";
 		if(s.contains(".")){
 			int position = s.length() - (s.indexOf(".") + 1);
@@ -404,4 +400,3 @@ public class Checker {
 	}
 	
 }
-
