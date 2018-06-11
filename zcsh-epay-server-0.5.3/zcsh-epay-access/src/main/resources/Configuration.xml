@@ -3,29 +3,13 @@
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
- 	<typeAliases>
-		<typeAlias alias="FrMgUser" type="com.froad.agre.modules.user.po.FrMgUser" />
-		<typeAlias alias="UserVoReq" type="com.froad.agre.modules.user.vo.req.UserVoReq" />
-		<typeAlias alias="FrMgPermission" type="com.froad.agre.modules.menu.po.FrMgPermission" />
-		<typeAlias alias="FrOrg" type="com.froad.agre.modules.organization.po.FrOrg" />
-		<typeAlias alias="FrMgRole" type="com.froad.agre.modules.role.po.FrMgRole" />
-		<typeAlias alias="QueryOrgListVoReq" type="com.froad.agre.modules.organization.vo.req.QueryOrgListVoReq" />
-		<typeAlias alias="FrOrg" type="com.froad.agre.modules.organization.po.FrOrg" />
-		<typeAlias alias="FrMgLog" type="com.froad.agre.po.FrMgLog" />
-		<typeAlias alias="FrMgSession" type="com.froad.agre.modules.user.po.FrMgSession"/>
-		<typeAlias alias="QueryOrgVoResp" type="com.froad.agre.modules.organization.vo.resp.QueryOrgVoResp"/>
-		<typeAlias alias="QueryUserListVoResp" type="com.froad.agre.modules.user.vo.resp.QueryUserListVoResp"/>
-		<typeAlias alias="SQVoResp" type="com.froad.agre.modules.statistics.vo.resp.StatisticsQueryVoResp"/>
-		<typeAlias alias="SQVoReq" type="com.froad.agre.modules.statistics.vo.req.StatisticsQueryVoReq"/>
-		<typeAlias alias="QueryOrgTreeVoResp" type="com.froad.agre.modules.organization.vo.resp.QueryOrgTreeVoResp"/>
-	</typeAliases>
 	<plugins>
-       <plugin interceptor="com.froad.agre.db2.interceptor.PageInterceptor" />
+       <plugin interceptor="com.zcsh.epay.db.interceptor.PageInterceptor" />
     </plugins>
 	<environments default="development">
 		<environment id="dev">
 			<transactionManager type="JDBC" />
-			<dataSource type="com.froad.agre.db2.DruidDataSourceFactory">
+			<dataSource type="com.zcsh.epay.db.DruidDataSourceFactory">
 				<property name="driverClassName" value="${jdbc.driverClassName}" />
 				<property name="url" value="${jdbc.url}" />
 				<property name="username" value="${jdbc.username}" />
@@ -41,7 +25,7 @@
 				<property name="timeBetweenEvictionRunsMillis" value="30000" />
 				<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
 				<property name="minEvictableIdleTimeMillis" value="60000" />
-				<property name="validationQuery" value="select 1 from sysibm.sysdummy1" />
+				<property name="validationQuery" value="${validationQuery}" />
 				<property name="testWhileIdle" value="true" />
 				<property name="testOnBorrow" value="true" />
 				<property name="testOnReturn" value="false" />
@@ -53,7 +37,7 @@
 		</environment>
 		<environment id="test">
 			<transactionManager type="JDBC" />
-			<dataSource type="com.froad.agre.db2.DruidDataSourceFactory">
+			<dataSource type="com.zcsh.epay.db.DruidDataSourceFactory">
 				<property name="driverClassName" value="${jdbc.driverClassName}" />
 				<property name="url" value="${jdbc.url}" />
 				<property name="username" value="${jdbc.username}" />
@@ -68,9 +52,9 @@
 				<property name="timeBetweenEvictionRunsMillis" value="30000" />
 				<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
 				<property name="minEvictableIdleTimeMillis" value="60000" />
-				<property name="validationQuery" value="select 1 from sysibm.sysdummy1" />
+				<property name="validationQuery" value="${validationQuery}" />
 				<property name="testWhileIdle" value="true" />
-				<property name="testOnBorrow" value="true" />
+				<property name="testOnBorrow" value="false" />
 				<property name="testOnReturn" value="false" />
 
 				<!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
@@ -80,20 +64,6 @@
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="mappers/FrMgUserMapper.xml" />
-		<mapper resource="mappers/FrOrgMapper.xml" />
-		<mapper resource="mappers/FrMgPermissionMapper.xml" />
-		<mapper resource="mappers/FrMerchant.xml" />
-		<mapper resource="mappers/FrTradeQuery.xml" />
-		<mapper resource="mappers/FrMgSessionMapper.xml" />
-		<mapper resource="mappers/FrMgRoleMapper.xml" />
-		<mapper resource="mappers/FrRefundeQuery.xml" />
-		<mapper resource="mappers/FrBillQuery.xml" />
-		<mapper resource="mappers/FrErrorBillQuery.xml" />
-		<mapper resource="mappers/FrStatisticsQuery.xml" />
-		<mapper resource="mappers/FrSettlementQuery.xml" />
-		<mapper resource="mappers/FrMgLogQuery.xml" />
-		<mapper resource="mappers/FrConfig.xml" />
-		<mapper resource="mappers/ParameterMapper.xml" />
+		<mapper resource="mappers/LoginUserMapper.xml" />
 	</mappers>
 </configuration>  

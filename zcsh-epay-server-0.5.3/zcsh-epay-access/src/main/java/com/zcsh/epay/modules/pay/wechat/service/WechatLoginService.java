@@ -27,7 +27,7 @@ import com.zcsh.epay.util.StringUtil;
 import com.zcsh.epay.util.wechat.IpUtils;
 import com.zcsh.epay.util.wechat.WechatPayUtil;
 import com.zcsh.epay.util.wechat.vo.OAuthJsToken;
-import com.zcsh.epay.utils.wx.ResultCode;
+import com.zcsh.epay.utils.wx.ResultCodeAccess;
 import com.zcsh.epay.utils.wx.WechatConstants;
 /**
  * 作者：Administrator <br>
@@ -60,7 +60,7 @@ public class WechatLoginService extends WeixinSupport{
         //根据请求结果判定，是否验证成功
         JSONObject jsonObj = res.asJSONObject();
         if (jsonObj != null) {
-            Object errcode = jsonObj.get(ResultCode.ERRCODE);
+            Object errcode = jsonObj.get(ResultCodeAccess.ERRCODE);
             if (errcode != null) {
                 //返回异常信息
                 throw new WeixinException(getCause(Integer.parseInt(errcode.toString())));
@@ -81,7 +81,7 @@ public class WechatLoginService extends WeixinSupport{
 	 * @param request
 	 * @return
 	 */
-    public ResBody wechatPay(String openid, HttpServletRequest request){
+	public ResBody wechatPay(String openid, HttpServletRequest request){
     	ResBody res = new ResBody();
         try{
             //生成的随机字符串
@@ -136,7 +136,7 @@ public class WechatLoginService extends WeixinSupport{
             String return_code = (String) map.get("return_code");//返回状态码
             //返回给移动端需要的参数
             Map<String, Object> response = new HashMap<String, Object>();
-            if(return_code == ResultCode.SUCCESS || return_code.equals(return_code)){
+            if(return_code == ResultCodeAccess.SUCCESS || return_code.equals(return_code)){
                 // 业务结果
                 String prepay_id = (String) map.get("prepay_id");//返回的预付单信息
                 response.put("nonceStr", nonce_str);

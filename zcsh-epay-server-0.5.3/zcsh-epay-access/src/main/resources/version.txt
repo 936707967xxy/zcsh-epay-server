@@ -1,48 +1,6 @@
-===============================V1.2.1================================================
-|version      |:V1.2.1           |V1.0 1主版本   1次版本   有重大模式改变的时候升主版本, 然后次版本从0开始.
-|Author       |: ll	   |
-|Modify time  |: 2017-08-16   |
-|upgrade time |: 2017-09-27
-|Description  |:
-1.将SourceChannelEnum替换成TradeChannelEnum
-
-froad-agre-access\src\main\java\com\froad\agre\controller\AgreAuthController.java
-froad-agre-access\src\main\java\com\froad\agre\controller\AgreLogicController.java
-froad-agre-access\src\main\java\com\froad\agre\service\CookieService.java
-froad-agre-access\src\main\java\com\froad\agre\service\UnionQueryService.java
-froad-agre-access\src\main\resources\logback.xml
-froad-agre-access\src\main\resources\version.txt
-
-===============================V1.2================================================
-|version      |:V1.2           |V1.0 1主版本   1次版本   有重大模式改变的时候升主版本, 然后次版本从0开始.
-|Author       |: luoli	   |
-|Modify time  |: 2017-08-16   |
-|upgrade time |:  
-|Description  |:
-/froad-agre-access/src/main/java/com/froad/agre/util/MultiHttpClient.java
-/froad-agre-access/src/main/java/com/froad/agre/util/HttpUrl.java
-/froad-agre-access/src/main/resources/version.txt
-
- ===============================V1.1================================================
-|version      |:V1.1           |V1.0 1主版本   1次版本   有重大模式改变的时候升主版本, 然后次版本从0开始.
-|Author       |: fzz	   |
-|Modify time  |: 2017-07-22    |
-|upgrade time |: 2017-07-28
-|Description  |:
-1. /froad-agre-access/src/main/resources/version.txt
-2. /froad-agre-access/src/main/java/com/froad/agre/controller/AgreAuthController.java
-3. /froad-agre-access/src/main/java/com/froad/agre/controller/AgreLogicController.java
-4. /froad-agre-access/src/main/java/com/froad/agre/controller/BossQueryController.java
-5. /froad-agre-access/src/main/java/com/froad/agre/controller/QrCodeController.java
-6. /froad-agre-access/src/main/java/com/froad/agre/controller/ThirdPlatController.java
-7  /froad-agre-access/src/main/java/com/froad/agre/log/LogCvt.java
-8. /froad-agre-access/src/main/java/com/froad/agre/service/CheckLoginService.java
-9. /froad-agre-access/src/main/java/com/froad/agre/service/CookieService.java
-10./froad-agre-access/src/main/java/com/froad/agre/service/UnionQueryService.java
-11./froad-agre-access/src/main/java/com/froad/agre/util/HttpUrl.java
-12./froad-agre-access/src/main/java/com/froad/agre/util/MD5.java
-13./froad-agre-access/src/main/java/com/froad/agre/util/MultiHttpClient.java
-14./froad-agre-access/src/main/java/com/froad/agre/util/Signature.java
-15./froad-agre-access/src/main/java/com/froad/agre/util/WxPayUtils.java
-16./froad-agre-access/src/main/resources/public.properties
-17./froad-agre-access/src/main/resources/public-online.properties
+==============================V1.0==================================================
+|version      |:V1.0|
+|dev version  |:V1.0	 |
+|Author       |:Xu xinyuan      |
+|Modify time  |:2018-06-04 	|
+|Description  |: 

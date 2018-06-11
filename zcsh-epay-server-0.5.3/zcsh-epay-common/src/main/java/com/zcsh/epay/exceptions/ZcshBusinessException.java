@@ -88,6 +88,4 @@ public class ZcshBusinessException extends Exception {
 	public void setData(Object data) {
 		this.data = data;
 	}
-
-    
 }

@@ -1,11 +1,13 @@
 <!-- 对于ant如有疑问，可参见ant使用说明 -->
 <project name="froad-agre-access" default="post-clean" basedir=".">
-	<!--
-	====================================================================== 
-		project		    :	froad-agre-access
-		description	:	信e付接入前置
-	======================================================================
-	-->
+<!--
+====================================================================== 
+Project		    :zcsh-epay-access
+Description	    :小程序核心
+Author          :xxy
+Date            :2018-06-11
+======================================================================
+-->
 
 	<tstamp>
 		<!-- 该参数用来将war包生成到指定日期目录 -->
@@ -14,10 +16,10 @@
 
 	<property name="target" value="1.6" />
 	<property name="source" value="1.6" />
-	<property name="version" value="0.0.1-SNAPSHOT" />
-	<property name="vendor" value="froad" />
-	<property name="author" value="froad" />
-	<property name="project" value="froad-agre-access" />
+	<property name="version" value="0.5.3-SNAPSHOT" />
+	<property name="vendor" value="zcsh" />
+	<property name="author" value="zcsh" />
+	<property name="project" value="zcsh-epay-access" />
 
 	<!-- 默认当前目录为.即build.xml所在目录，所有其它目录都基于此 -->
 	<property name="project.home" value="." />
@@ -35,7 +37,7 @@
 	<property name="lib.home" value="${web.home}/WEB-INF/lib" />
 
 	<!-- 生成的war包名称 -->
-	<property name="war.name" value="froad-agre-access.war" />
+	<property name="war.name" value="zcsh-epay-access.war" />
 
 	<!-- 生成的war包存放的目录，为了保存历史版本，该部署目录不应被清除 -->
 	<property name="deploy.home" value="${project.home}/../Build/${TODAY}" />
@@ -48,9 +50,9 @@
 
 	<!-- ******************************************************************************************************* -->
 	<!-- 首先打包项目需要依赖的common工程，以下的common工程配置 -->
-	<property name="common-project" value="froad-agre-common" />
+	<property name="common-project" value="zcsh-epay-common" />
 	<property name="common-version" value="0.0.1-SNAPSHOT" />
-	<property name="common.home" value="../froad-agre-common" />
+	<property name="common.home" value="../zcsh-epay-common" />
 	<property name="common.src.home" location="${common.home}/src/main/java" />
 	<property name="common.resource.home" location="${common.home}/src/main/resources" />
 	<property name="common.dist.home" location="${common.home}/dist" />
@@ -73,7 +75,7 @@
 	<!-- common工程执行编译 -->
 	<target name="common-build-project" depends="common-init">
 		<echo message="${ant.project.name}: ${ant.file}" />
-		<javac srcdir="${common.src.home}" destdir="${common.dist.home}/classes" debug="${debuglevel}" encoding="utf-8" includes="**/*.java" source="${source}" target="${target}">
+		<javac srcdir="${common.src.home}" destdir="${common.dist.home}/classes" debug="${debuglevel}" encoding="utf-8" includes="**/*.java" source="${source}" target="${target}" includeantruntime="on">
 			<compilerarg line="-Xlint:unchecked " />
 			<compilerarg line="-Xlint:deprecation" />
 			<classpath refid="common-classpath" />

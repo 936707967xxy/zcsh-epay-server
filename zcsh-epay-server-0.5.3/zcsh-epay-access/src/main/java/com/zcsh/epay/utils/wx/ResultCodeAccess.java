@@ -8,7 +8,7 @@ package com.zcsh.epay.utils.wx;
  * 创建时间：2018年6月7日 <br>
  * 描述：
  */
-public class ResultCode {
+public class ResultCodeAccess {
 
 	public static final String ERRCODE = "errcode";
 	public static final String SUCCESS = "SUCCESS";

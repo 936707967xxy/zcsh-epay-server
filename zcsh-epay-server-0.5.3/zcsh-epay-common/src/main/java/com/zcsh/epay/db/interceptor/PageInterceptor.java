@@ -12,6 +12,7 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import org.apache.commons.lang.reflect.FieldUtils;
 import org.apache.ibatis.builder.SqlSourceBuilder;
 import org.apache.ibatis.executor.statement.RoutingStatementHandler;
@@ -158,6 +159,7 @@ public class PageInterceptor implements Interceptor {
 		return invocation.proceed();
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes", "unused" })
 	private Paging getPaging(Object parameterObject) throws NoSuchFieldException {
 		Paging page = null;
 		if (parameterObject instanceof Paging) { // 参数就是Page实体

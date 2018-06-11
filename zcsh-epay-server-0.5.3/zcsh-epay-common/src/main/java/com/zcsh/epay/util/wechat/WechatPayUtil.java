@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -179,23 +180,24 @@ public class WechatPayUtil {
 	 * @throws JDOMException
 	 * @throws IOException
 	 */
-	public static Map doXMLParse(String strxml) throws Exception {
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static Map<String,String> doXMLParse(String strxml) throws Exception {
 		if(null == strxml || "".equals(strxml)) {
 			return null;
 		}
 		
-		Map m = new HashMap();
+		Map<String,String> m = new HashMap<String,String>();
 		InputStream in = String2Inputstream(strxml);
 		SAXBuilder builder = new SAXBuilder();
 		Document doc = builder.build(in);
 		Element root = doc.getRootElement();
-		List list = root.getChildren();
+		List<String> list = root.getChildren();
 		Iterator it = list.iterator();
 		while(it.hasNext()) {
 			Element e = (Element) it.next();
 			String k = e.getName();
 			String v = "";
-			List children = e.getChildren();
+			List<String> children = e.getChildren();
 			if(children.isEmpty()) {
 				v = e.getTextNormalize();
 			} else {
