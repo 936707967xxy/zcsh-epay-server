@@ -1,17 +1,25 @@
+/**
+ * Copyright www.hoomsun.com 红上金融信息服务（上海）有限公司
+ */
 package com.zcsh.epay.exceptions;
 
 import com.zcsh.epay.util.ResultCode;
 
 /**
  * 作者：Administrator <br>
- * 创建时间：2018年6月4日 <br>
+ * 创建时间：2018年6月11日 <br>
  * 描述：
  */
-public class ZcshBusinessException extends Exception {
+public class ZcshAccessException extends Exception{
 
-    private static final long serialVersionUID = 5730339086217985460L;
-
-    private String            code;
+	/**
+	 * 作者：Administrator <br>
+	 * 创建时间：2018年6月11日 <br>
+	 * 描述：微信小程序公共异常类
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private String            code;
     private String            msg;
     
     /**
@@ -19,47 +27,47 @@ public class ZcshBusinessException extends Exception {
 	 */
 	private Object data;
 
-    public ZcshBusinessException() {
+    public ZcshAccessException() {
         super();
     }
 
-    public ZcshBusinessException(Throwable e) {
+    public ZcshAccessException(Throwable e) {
         super(e);
     }
 
-    public ZcshBusinessException(String errorMsg) {
+    public ZcshAccessException(String errorMsg) {
     	super(errorMsg);
         this.code = ResultCode.failed.getCode();
         this.msg = errorMsg;
     }
     
     
-    public ZcshBusinessException(String code, Throwable e) {
+    public ZcshAccessException(String code, Throwable e) {
         super(e);
         this.code = code;
     }
 
-    public ZcshBusinessException(ResultCode resultCode) {
+    public ZcshAccessException(ResultCode resultCode) {
         super(resultCode.getMsg());
         this.msg = resultCode.getMsg();
         this.code = resultCode.getCode();
     }
     
     
-    public ZcshBusinessException(String code, String msg) {
+    public ZcshAccessException(String code, String msg) {
         super(msg);
         this.msg = msg;
         this.code = code;
     }
     
-    public ZcshBusinessException(String code,String msg,Object data) {
+    public ZcshAccessException(String code,String msg,Object data) {
         super(msg);
         this.msg = msg;
         this.code = code;
         this.data = data;
     }
 
-    public ZcshBusinessException(String code, String message, Throwable e) {
+    public ZcshAccessException(String code, String message, Throwable e) {
         super(message, e);
         this.code = code;
         this.msg = message;
@@ -89,5 +97,4 @@ public class ZcshBusinessException extends Exception {
 		this.data = data;
 	}
 
-    
 }

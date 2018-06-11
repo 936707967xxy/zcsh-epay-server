@@ -17,8 +17,6 @@
 			<artifactId>zcsh-epay-common</artifactId>
 			<version>0.5.3-SNAPSHOT</version>
 		</dependency>
-	
-		
 
 	</dependencies>
 </project>
