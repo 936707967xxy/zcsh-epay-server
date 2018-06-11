@@ -153,7 +153,7 @@ public class QrCodeUtil {
     public static void main(String[] args){
         File logoFile = new File("D://imtop_2.png");
         File QrCodeFile = new File("D://imtop_1.png");
-        String url = "https://www.baidu.com/";
+        String url = "http://192.168.1.100:8080/zcsh-epay-manager/userManager/queryUserList?pageNumber=1&pageSize=100";
         String note = "";
         //createLogoQRCode(logoFile, QrCodeFile, url, note);
         

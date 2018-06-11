@@ -9,8 +9,6 @@ public class Constants {
 	public static final String NEWLINE = System.getProperty("line.separator"); // 操作系统的回车字符串
 	public static final String CONFIG_URI = "./config/";
 	public static final String CONFIG_PATH_URI = "config";
-	public static final String DOWNLOAD_FILE_FIX = ".csv";//导出后缀
-	public static final String COMPRESS_FILE_FIX = ".gz";//压缩后缀
 	
 	/**
 	 * 系统变量

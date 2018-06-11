@@ -48,7 +48,11 @@ public class WechatConstants {
     /**
      * 微信统一下单接口地址
      */
-    public static final String PAY_URL = "https://api.mch.weixin.qq.com/pay/unifiedorder";
+    public static final String WX_PAY_URL = "https://api.mch.weixin.qq.com/pay/unifiedorder";
+    /**
+	 * 登录凭证校验
+	 */
+	public static final String WX_LOGIN = "https://api.weixin.qq.com/sns/jscode2session";
     
     
 }

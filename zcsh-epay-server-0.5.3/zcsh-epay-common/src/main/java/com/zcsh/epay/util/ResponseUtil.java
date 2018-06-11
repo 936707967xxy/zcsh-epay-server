@@ -12,13 +12,6 @@ import com.zcsh.epay.log.LogCvt;
  * 创建时间：2018年6月4日 <br>
  * 描述：
  */
-/**
- * HttpServletResponse响应辅助类
- * 
- * @author zhupengcheng@f-road.com.cn
- * @date 2016-11-02
- *
- */
 public class ResponseUtil {
 	
 	/**
