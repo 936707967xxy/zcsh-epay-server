@@ -19,7 +19,6 @@ public class WechatGetSessionService {
 	 * @return
 	 */
 	public ResBody getWechatSession(){
-		//https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code
 		ResBody res=null;
 		StringBuffer sb =new StringBuffer();
 		sb.append("appid=").append(WechatConstants.APPID)
