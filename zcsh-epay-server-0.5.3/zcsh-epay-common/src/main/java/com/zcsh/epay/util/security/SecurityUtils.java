@@ -12,7 +12,7 @@ public class SecurityUtils {
     /**
      * 作者：Administrator <br>
      * 创建时间：2018年6月11日 <br>
-     * 描述： 登录登录状态加密
+     * 描述： 登录状态加密
      * @param context [OPEN_ID+SESSION_KEY]组合
      * @param KEY 配置文件读取TOKEN_KEY
      * @return

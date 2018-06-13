@@ -14,7 +14,11 @@ public class WechatGetSessionAction extends BaseAction implements Action{
 
 	public ResBody perform(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
-		
+		try {
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		return null;
 	}
 

@@ -18,7 +18,7 @@ public class ResBody {
 	String						message			= "成功";
 	Paging						page;
 	Object						data;
-	String                      sopRespXml      ="";
+	String                      sopRespXml;
 
 	public ResBody() {
 		// TODO Auto-generated constructor stub

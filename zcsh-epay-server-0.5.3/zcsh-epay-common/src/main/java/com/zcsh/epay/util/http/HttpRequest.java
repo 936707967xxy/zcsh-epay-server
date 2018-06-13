@@ -74,12 +74,12 @@ public class HttpRequest {
 	   * @param param 请求参数，请求参数应该是 name1=value1&name2=value2 的形式。
 	   * @return 所代表远程资源的响应结果
 	   */
-	  public static String sendPost(String param) {
+	  public static String sendPost(String url,String param) {
 	    PrintWriter out = null;
 	    BufferedReader in = null;
 	    String result = "";
 	    try {
-	      URL realUrl = new URL("https://api.mch.weixin.qq.com/pay/unifiedorder");
+	      URL realUrl = new URL(url);
 	      // 打开和URL之间的连接
 	      URLConnection conn = realUrl.openConnection();
 	      // 设置通用的请求属性
@@ -138,6 +138,7 @@ public class HttpRequest {
                   + "<trade_type>" + "223123" + "</trade_type>"
                   + "<sign>" + "223123" + "</sign>"
                   + "</xml>";
-		  System.out.println(HttpRequest.sendPost(xml));
+		  String url="https://api.mch.weixin.qq.com/pay/unifiedorder";
+		  System.out.println(HttpRequest.sendPost(url,xml));
 	}
 	}
