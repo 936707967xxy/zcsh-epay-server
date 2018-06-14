@@ -1,16 +1,15 @@
 /**
  * Copyright www.hoomsun.com 红上金融信息服务（上海）有限公司
  */
-package com.zcsh.epay.modules.pay.login.vo.req;
+package com.zcsh.epay.modules.user.login.vo.resp;
 
 /**
  * 作者：Administrator <br>
  * 创建时间：2018年6月13日 <br>
- * 描述：客户端请求参数
+ * 描述：返回给前端的用户信息
  */
-public class WechatUserInfoReq {
+public class WechatUserInfoResp {
 
-	private String code;
 	/**
 	 * 登录状态key
 	 */
@@ -19,12 +18,7 @@ public class WechatUserInfoReq {
 	 * 用户唯一标识
 	 */
 	private String openid;
-	public String getCode() {
-		return code;
-	}
-	public void setCode(String code) {
-		this.code = code;
-	}
+	
 	public String getSessionKey() {
 		return sessionKey;
 	}
@@ -37,4 +31,5 @@ public class WechatUserInfoReq {
 	public void setOpenid(String openid) {
 		this.openid = openid;
 	}
+	
 }

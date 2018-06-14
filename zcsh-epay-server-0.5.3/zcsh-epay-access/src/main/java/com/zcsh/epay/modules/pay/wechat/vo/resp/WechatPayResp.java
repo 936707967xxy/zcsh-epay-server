@@ -42,12 +42,6 @@ public class WechatPayResp {
 	public void setNonceStr(String nonceStr) {
 		this.nonceStr = nonceStr;
 	}
-	public String getPrepay_id() {
-		return prepay_id;
-	}
-	public void setPrepay_id(String prepay_id) {
-		this.prepay_id = prepay_id;
-	}
 	public String getTimeStamp() {
 		return timeStamp;
 	}
@@ -71,5 +65,11 @@ public class WechatPayResp {
 	}
 	public void setAppid(String appid) {
 		this.appid = appid;
+	}
+	public String getPrepay_id() {
+		return prepay_id;
+	}
+	public void setPrepay_id(String prepay_id) {
+		this.prepay_id = prepay_id;
 	}
 }

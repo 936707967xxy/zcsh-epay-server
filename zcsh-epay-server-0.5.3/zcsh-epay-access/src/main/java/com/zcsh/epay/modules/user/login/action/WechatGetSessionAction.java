@@ -1,4 +1,8 @@
-package com.zcsh.epay.modules.pay.login.action;
+/**
+ * Copyright www.hoomsun.com 红上金融信息服务（上海）有限公司
+ */
+package com.zcsh.epay.modules.user.login.action;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.zcsh.epay.action.Action;

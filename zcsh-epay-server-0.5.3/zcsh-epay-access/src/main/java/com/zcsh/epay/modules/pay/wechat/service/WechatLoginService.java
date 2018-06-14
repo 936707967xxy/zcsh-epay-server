@@ -6,8 +6,7 @@ package com.zcsh.epay.modules.pay.wechat.service;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -19,10 +18,10 @@ import org.weixin4j.WeixinSupport;
 
 import com.zcsh.epay.log.LogCvt;
 import com.zcsh.epay.message.ResBody;
-import com.zcsh.epay.modules.pay.login.vo.req.WechatUserInfoReq;
-import com.zcsh.epay.modules.pay.login.vo.resp.WechatUserInfoResp;
 import com.zcsh.epay.modules.pay.wechat.vo.req.WechatPayReq;
 import com.zcsh.epay.modules.pay.wechat.vo.resp.WechatPayResp;
+import com.zcsh.epay.modules.user.login.vo.req.WechatUserInfoReq;
+import com.zcsh.epay.modules.user.login.vo.resp.WechatUserInfoResp;
 import com.zcsh.epay.util.PropertiesUtil;
 import com.zcsh.epay.util.StringUtil;
 import com.zcsh.epay.util.http.HttpRequest;
@@ -132,7 +131,7 @@ public class WechatLoginService extends WeixinSupport{
             String nonce_str = StringUtil.getRandomStringByLength(32);
             //获取本机的ip地址
             String spbill_create_ip = IpUtils.getIpAddr(request);
-            Map<String, String> packageParams = new HashMap<String, String>();
+            ConcurrentHashMap<String, String>packageParams = new ConcurrentHashMap<String, String>();
             packageParams.put("appid", WechatConstants.APPID);
             packageParams.put("mch_id", WechatConstants.MCH_ID);
             packageParams.put("nonce_str", nonce_str);
@@ -171,13 +170,13 @@ public class WechatLoginService extends WeixinSupport{
             LogCvt.info("调用统一下单接口 返回XML数据：" + result);
 
             // 将解析结果存储在HashMap中
-            Map<String,String> map = WechatPayUtil.doXMLParse(result);
-            String return_code = (String) map.get("return_code");//返回状态码
+            ConcurrentHashMap<String,String> map = WechatPayUtil.doXMLParse(result);
+            String return_code = String.valueOf(map.get("return_code"));//返回状态码
             //返回给移动端需要的参数
             WechatPayResp resp =new WechatPayResp();
             if(return_code == ResultCodeAccess.SUCCESS || return_code.equals(return_code)){
                 // 业务结果
-                String prepay_id = (String) map.get("prepay_id");//返回的预付单信息
+                String prepay_id = String.valueOf(map.get("prepay_id"));//返回的预付单信息
                 Long timeStamp = System.currentTimeMillis() / 1000;
 
                 String stringSignTemp = "appId=" + WechatConstants.APPID + "&nonceStr=" + nonce_str + "&package=prepay_id=" + prepay_id+ "&signType=" + WechatConstants.SIGNTYPE + "&timeStamp=" + timeStamp;
@@ -224,7 +223,7 @@ public class WechatLoginService extends WeixinSupport{
         String resXml = "";
         LogCvt.info("接收报文参数："+notityXml);
 
-        Map<String,String> map = WechatPayUtil.doXMLParse(notityXml);
+        ConcurrentHashMap<String,String> map = WechatPayUtil.doXMLParse(notityXml);
 
         String returnCode = (String) map.get("return_code");
         if("SUCCESS".equals(returnCode)){

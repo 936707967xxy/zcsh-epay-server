@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.jdom.Document;
@@ -79,7 +80,8 @@ public class WechatPayUtil {
         }   
         return code;   
     }   
-    private static boolean isValidChar(char ch) {   
+    @SuppressWarnings("unused")
+	private static boolean isValidChar(char ch) {   
         if ((ch >= '0' && ch <= '9') || (ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z'))   
             return true;   
         if ((ch >= 0x4e00 && ch <= 0x7fff) || (ch >= 0x8000 && ch <= 0x952f))   
@@ -91,8 +93,8 @@ public class WechatPayUtil {
      * @param sArray 签名参数组  
      * @return 去掉空值与签名参数后的新签名参数组  
      */   
-    public static Map<String, String> paraFilter(Map<String, String> sArray) {   
-        Map<String, String> result = new HashMap<String, String>();   
+    public static ConcurrentHashMap<String, String> paraFilter(ConcurrentHashMap<String, String> sArray) {   
+    	ConcurrentHashMap<String, String> result = new ConcurrentHashMap<String, String>();   
         if (sArray == null || sArray.size() <= 0) {   
             return result;   
         }   
@@ -181,12 +183,12 @@ public class WechatPayUtil {
 	 * @throws IOException
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static Map<String,String> doXMLParse(String strxml) throws Exception {
+	public static ConcurrentHashMap<String,String> doXMLParse(String strxml) throws Exception {
 		if(null == strxml || "".equals(strxml)) {
 			return null;
 		}
 		
-		Map<String,String> m = new HashMap<String,String>();
+		ConcurrentHashMap<String,String> m = new ConcurrentHashMap<String,String>();
 		InputStream in = String2Inputstream(strxml);
 		SAXBuilder builder = new SAXBuilder();
 		Document doc = builder.build(in);

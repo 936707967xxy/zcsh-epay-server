@@ -1,6 +1,6 @@
-package com.zcsh.epay.modules.pay.login.service;
+package com.zcsh.epay.modules.user.login.service;
 import com.zcsh.epay.message.ResBody;
-import com.zcsh.epay.modules.pay.login.vo.req.WechatUserInfoReq;
+import com.zcsh.epay.modules.user.login.vo.req.WechatUserInfoReq;
 
 /**
  * 作者：Administrator <br>
