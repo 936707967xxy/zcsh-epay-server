@@ -1,7 +1,10 @@
 package com.zcsh.epay.modules.user.source.mapper;
 
+import java.util.List;
+
 import com.zcsh.epay.modules.user.source.vo.req.UserDetailsInfoReq;
 import com.zcsh.epay.modules.user.source.vo.resp.UserDetailsInfoResp;
+import com.zcsh.epay.modules.user.source.vo.resp.UserDetailsInfoResp.DistributionCustomer;
 
 /**
  * 作者：Administrator <br>
@@ -11,4 +14,6 @@ import com.zcsh.epay.modules.user.source.vo.resp.UserDetailsInfoResp;
 public interface UserDetailsInfoMapper {
 
 	public UserDetailsInfoResp queryUserDetailsInfo(UserDetailsInfoReq req);
+	
+	public List<DistributionCustomer>queryDistributionInfo(UserDetailsInfoReq req);
 }
