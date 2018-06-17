@@ -23,4 +23,11 @@ public interface ProductInfoMapper {
 	 * @return
 	 */
 	ProductInfoResp queryProductDetailsInfo(ProductInfoReq req);
+	/**
+	 * 购物车列表查询
+	 * @param page
+	 * @param req
+	 * @return
+	 */
+	List<ProductInfoResp>queryProductCartList(Paging page,ProductInfoReq req);
 }

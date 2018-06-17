@@ -64,6 +64,7 @@
 		</environment>
 	</environments>
 	<mappers>
-		<mapper resource="mappers/LoginUserMapper.xml" />
+		<mapper resource="mappers/SystemHomeMapper.xml" />
+		<mapper resource="mappers/ProductInfoMapper.xml" />
 	</mappers>
 </configuration>  

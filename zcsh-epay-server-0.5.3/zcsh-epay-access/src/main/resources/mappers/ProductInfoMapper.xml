@@ -31,4 +31,63 @@
 	 </where>
 </sql>
 
-</mapper>  
+
+<!-- 商品详细信息查询 -->
+<select id="queryProductDetailsInfo" resultMap="com.zcsh.epay.modules.product.vo.req.ProductInfoReq"
+        resultType="com.zcsh.epay.modules.product.vo.resp.ProductInfoResp">
+        SELECT 
+        fzp.PRODUCT_NAME AS productName,
+        fzp.productName AS productDetails,
+        fzp.PRODUCT_NODE AS productImg,
+        fzp.PRODUCT_ONE_IMG AS productOneImg,
+        fzp.PRODUCT_TOW_IMG AS productTwoImg,
+        fzp.PRODUCT_ID AS productId,
+        fzp.PRODUCT_TYPE_ID AS productSpecification,
+        fzp.REAL_PRICE AS realPrice,
+        fzp.ORIGINAL_PRICE AS originalPrice,
+        fzp.IS_ACTICITY AS isActivity,
+        fzp.DISCOUNT AS disCount,
+        (
+        SELECT 
+        COUNT(fzod.ID)
+        FROM FFT_ZCSH_ORDER_DETAILS fzod
+        LEFT JOIN FFT_ZCSH_ORDER fzo ON fzod.ORDER_ID=fzo.ORDER_ID
+        WHERE
+        fzod.ORDER_STATUS='3'
+        AND PRODUCT_ID =#{productId}
+        )AS monthSale
+        FROM 
+        FFT_ZCSH_PRODUCT fzp
+        WHERE 
+        fzp.PRODUCT_ID =#{productId}
+</select>
+
+<!-- 购物车列表查询 -->
+<select id="queryProductCartList" resultMap="com.zcsh.epay.modules.product.vo.req.ProductInfoReq"
+        resultType="com.zcsh.epay.modules.product.vo.resp.ProductInfoResp">
+        SELECT
+        fzpPRODUCT_NAME AS productName,
+        fzpPRODUCT_HEAD_IMG AS productImg,
+        fzpc.PRODUCT_ID AS productId,
+        fzpREAL_PRICE AS realPrice,
+        fzpORIGINAL_PRICE AS originalPrice,
+        fzpc.PRODUCT_NUM AS productNum,
+        fzp.IS_ACTICITY AS isActivity,
+        fzpDISCOUNT AS disCount,
+        fzpc.PRODUCT_SPECIFICATION AS productSpecification,
+        (
+        SELECT 
+        COUNT(fzod.ID)
+        FROM FFT_ZCSH_ORDER_DETAILS fzod
+        LEFT JOIN FFT_ZCSH_ORDER fzo ON fzod.ORDER_ID=fzo.ORDER_ID
+        WHERE
+        fzod.ORDER_STATUS='3'
+        AND PRODUCT_ID =#{productId}
+        )AS monthSale
+        
+        FROM FFT_ZCSH_PRODUCT_CART fzpc
+        LEFT JOIN FFT_ZCSH_PRODUCT fzp ON fzpc.PRODUCT_ID=fzp.PRODUCT_ID
+        WHERE
+        fzpc.USER_ID=#{userId}
+</select>
+</mapper>

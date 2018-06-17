@@ -68,4 +68,35 @@ public class ProductInfoService {
 		}
 		return res;
 	}
+	
+	/**
+	 * 查询购物车产品信息
+	 * @param req
+	 * @return
+	 */
+	public ResBody queryProductCartList(ProductInfoReq req){
+		ResBody res=null;
+		SqlSession session = OracleManager.getSession().openSession();
+		try {
+			List<ProductInfoResp>list=null;
+			Paging page = new Paging();
+			if(req.getPageNumber()!=0){
+				page.setPageNumber(req.getPageNumber());
+			}
+			if(req.getPageSize()!=0){
+				page.setPageSize(req.getPageSize());
+			}
+			ProductInfoMapper mapper=session.getMapper(ProductInfoMapper.class);
+			list=mapper.queryProductCartList(page, req);
+			
+			res=new ResBody(ResBody.SUCCESS_CODE,"查询成功！");
+			res.setData(list);
+			res.setPage(page);
+		} catch (Exception e) {
+			// TODO: handle exception
+			LogCvt.error("数据库查询异常！");
+			res=new ResBody(ResBody.ERROR_CODE,"数据库查询异常！");
+		}
+		return res;
+	}
 }

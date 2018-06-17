@@ -21,6 +21,10 @@ public class ProductInfoReq {
 	 * 产品状态
 	 */
 	private String status;
+	/**
+	 * 用户编号
+	 */
+	private String userId;
 	
     private Integer pageNumber;
 	
@@ -72,5 +76,13 @@ public class ProductInfoReq {
 
 	public void setPageSize(Integer pageSize) {
 		this.pageSize = pageSize;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 }

@@ -79,6 +79,10 @@ public class ProductInfoResp {
 	 * 商品库存
 	 */
 	private String stockNum;
+	/**
+	 * 月销量
+	 */
+	private String monthSale;
 	
 	public String getProductId() {
 		return productId;
@@ -199,5 +203,11 @@ public class ProductInfoResp {
 	}
 	public void setStockNum(String stockNum) {
 		this.stockNum = stockNum;
+	}
+	public String getMonthSale() {
+		return monthSale;
+	}
+	public void setMonthSale(String monthSale) {
+		this.monthSale = monthSale;
 	}
 }
