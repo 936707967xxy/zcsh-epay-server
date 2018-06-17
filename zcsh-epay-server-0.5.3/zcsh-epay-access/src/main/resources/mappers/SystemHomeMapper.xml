@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+  
+<mapper namespace="com.zcsh.epay.modules.product.mapper.SystemHomeMapper">
+
+<!-- 查询商品全部分类 -->
+<select id="queryProductType" resultType="com.zcsh.epay.utils.vo.ProductTypeVo">
+		SELECT 
+		fzpt.PRODUCT_TYPE_ID AS productTypeId,
+		fzpt.PRODUCT_TYPE_NAME AS productTypeName,
+		fzpt.PRODUCT_TYPE_IMG AS productTypeImg,
+		fzpt.TYPE_LEVEL AS typeLevel
+		FROM FFT_ZCSH_PRODUCT_TYPE fzpt
+		WHERE
+		fzpt.PRODUCT_TYPE_STATUS='1'
+</select>
+
+<!-- 查询热销产品和精选产品 -->
+<select id="queryHomeProduct" resultType="com.zcsh.epay.modules.product.vo.resp.ProductInfoResp">
+		SELECT
+		fzsp.PRODUCT_ID AS productId,
+		fzsp.PRODUCT_NAME AS productName,
+		fzsp.PRODUCT_HOME_IMG AS productImg,
+		fzsp.SHOW_TYPE AS showType
+		FROM FFT_ZCSH_SPECIAL_PRODUCT fzsp
+</select>
+</mapper>  
