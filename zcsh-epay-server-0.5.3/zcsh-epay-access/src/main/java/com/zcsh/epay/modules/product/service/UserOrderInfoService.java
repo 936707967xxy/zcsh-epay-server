@@ -1,11 +1,15 @@
 package com.zcsh.epay.modules.product.service;
 import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
+
 import com.zcsh.epay.db.OracleManager;
 import com.zcsh.epay.log.LogCvt;
 import com.zcsh.epay.message.ResBody;
 import com.zcsh.epay.modules.product.mapper.UserOrderMapper;
+import com.zcsh.epay.modules.product.vo.req.OrderPayInfoReq;
 import com.zcsh.epay.modules.product.vo.req.UserOrderReq;
+import com.zcsh.epay.modules.product.vo.resp.OrderPayInfoResp;
 import com.zcsh.epay.modules.product.vo.resp.UserOrderResp;
 import com.zcsh.epay.util.Paging;
 import com.zcsh.epay.utils.enums.QueryTypeEnum;
@@ -60,5 +64,28 @@ public class UserOrderInfoService {
 		return res;
 	}
 	
+	/**
+	 * 作者：Administrator <br>
+	 * 创建时间：2018年6月19日 <br>
+	 * 描述： 支付页面查询
+	 * @param req
+	 * @return
+	 */
+	public ResBody queryOrderPayInfo(OrderPayInfoReq req){
+		ResBody res=null;
+		SqlSession session = OracleManager.getSession().openSession();
+		try {
+			UserOrderMapper mapper=session.getMapper(UserOrderMapper.class);
+			OrderPayInfoResp pay=mapper.queryOrderPayInfo(req);
+			
+			res=new ResBody(ResBody.SUCCESS_CODE,"查询成功");
+			res.setData(pay);
+		} catch (Exception e) {
+			// TODO: handle exception
+			LogCvt.error("数据库查询异常"+e.getMessage());
+			res=new ResBody(ResBody.ERROR_CODE,"数据库查询异常");
+		}
+		return res;
+	}
 	
 }
