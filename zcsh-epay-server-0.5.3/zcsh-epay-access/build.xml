@@ -1,5 +1,5 @@
 <!-- 对于ant如有疑问，可参见ant使用说明 -->
-<project name="froad-agre-access" default="post-clean" basedir=".">
+<project name="zcsh-epay-access" default="post-clean" basedir=".">
 <!--
 ====================================================================== 
 Project		    :zcsh-epay-access
