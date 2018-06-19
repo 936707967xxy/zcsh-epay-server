@@ -1,0 +1,8 @@
+# Java class files
+*.class
+# Log Files
+*.log
+ 
+*/.settings/
+*/Build/
+*.project
