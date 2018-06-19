@@ -14,7 +14,7 @@ import com.zcsh.epay.utils.SessionUtils;
 import com.zcsh.epay.utils.UserSession;
 
 /**
- * 购物车列表
+ * 购物车列表信息查询
  * @author Administrator
  */
 public class ProductCartAction extends BaseAction implements Action{
