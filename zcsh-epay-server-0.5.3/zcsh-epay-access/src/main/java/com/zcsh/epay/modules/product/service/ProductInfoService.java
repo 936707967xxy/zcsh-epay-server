@@ -1,13 +1,16 @@
 package com.zcsh.epay.modules.product.service;
 
 import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
+
 import com.zcsh.epay.db.OracleManager;
 import com.zcsh.epay.log.LogCvt;
 import com.zcsh.epay.message.ResBody;
 import com.zcsh.epay.modules.product.mapper.ProductInfoMapper;
 import com.zcsh.epay.modules.product.vo.req.ProductInfoReq;
 import com.zcsh.epay.modules.product.vo.resp.ProductInfoResp;
+import com.zcsh.epay.modules.product.vo.resp.UserOrderResp;
 import com.zcsh.epay.util.Paging;
 
 /**
@@ -130,6 +133,38 @@ public class ProductInfoService {
 			if(null!=session){
 				session.close();
 			}
+		}
+		return res;
+	}
+	
+	/**
+	 * 作者：Administrator <br>
+	 * 创建时间：2018年6月19日 <br>
+	 * 描述： 查询客户端结算页面
+	 * @return
+	 */
+	public ResBody queryProductSettleList(ProductInfoReq req){
+		ResBody res=null;
+		SqlSession session = OracleManager.getSession().openSession();
+		try {
+			Paging page = new Paging();
+			if(req.getPageNumber()!=0){
+				page.setPageNumber(req.getPageNumber());
+			}
+			if(req.getPageSize()!=0){
+				page.setPageSize(req.getPageSize());
+			}
+			List<UserOrderResp>list=null;
+			ProductInfoMapper mapper=session.getMapper(ProductInfoMapper.class);
+			list=mapper.queryProductSettleList(page,req);
+			
+			res = new ResBody(ResBody.SUCCESS_CODE,"查询成功");
+			res.setData(list);
+			res.setPage(page);
+		} catch (Exception e) {
+			// TODO: handle exception
+			LogCvt.error("数据库查询异常"+e.getMessage());
+			res = new ResBody(ResBody.ERROR_CODE,"数据库查询异常");
 		}
 		return res;
 	}

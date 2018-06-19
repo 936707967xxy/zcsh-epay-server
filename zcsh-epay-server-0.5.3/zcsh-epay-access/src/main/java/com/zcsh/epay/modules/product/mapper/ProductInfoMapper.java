@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.zcsh.epay.modules.product.vo.req.ProductInfoReq;
 import com.zcsh.epay.modules.product.vo.resp.ProductInfoResp;
+import com.zcsh.epay.modules.product.vo.resp.UserOrderResp;
 import com.zcsh.epay.util.Paging;
 
 /**
@@ -40,4 +41,12 @@ public interface ProductInfoMapper {
 	 * @return
 	 */
 	Integer addProductCartInfo(ProductInfoReq req);
+	/**
+	 * 作者：Administrator <br>
+	 * 创建时间：2018年6月19日 <br>
+	 * 描述： 查询客户端结算页面
+	 * @param req
+	 * @return
+	 */
+	List<UserOrderResp>queryProductSettleList(Paging page,ProductInfoReq req);
 }
