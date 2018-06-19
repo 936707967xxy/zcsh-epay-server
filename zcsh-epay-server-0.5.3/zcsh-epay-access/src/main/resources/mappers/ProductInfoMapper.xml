@@ -5,7 +5,7 @@
 <mapper namespace="com.zcsh.epay.modules.product.mapper.ProductInfoMapper">
 
 <!-- 商品列表查询 -->
-<select id="queryProductInfoList" resultMap="com.zcsh.epay.modules.product.vo.req.ProductInfoReq"
+<select id="queryProductInfoList" parameterType="com.zcsh.epay.modules.product.vo.req.ProductInfoReq"
         resultType="com.zcsh.epay.modules.product.vo.resp.ProductInfoResp">
         <include refid="selectProductList"/>
         <include refid="fromProductList"/>
@@ -33,7 +33,7 @@
 
 
 <!-- 商品详细信息查询 -->
-<select id="queryProductDetailsInfo" resultMap="com.zcsh.epay.modules.product.vo.req.ProductInfoReq"
+<select id="queryProductDetailsInfo" parameterType="com.zcsh.epay.modules.product.vo.req.ProductInfoReq"
         resultType="com.zcsh.epay.modules.product.vo.resp.ProductInfoResp">
         SELECT 
         fzp.PRODUCT_NAME AS productName,
@@ -63,7 +63,7 @@
 </select>
 
 <!-- 购物车列表查询 -->
-<select id="queryProductCartList" resultMap="com.zcsh.epay.modules.product.vo.req.ProductInfoReq"
+<select id="queryProductCartList" parameterType="com.zcsh.epay.modules.product.vo.req.ProductInfoReq"
         resultType="com.zcsh.epay.modules.product.vo.resp.ProductInfoResp">
         SELECT
         fzpPRODUCT_NAME AS productName,
@@ -90,4 +90,20 @@
         WHERE
         fzpc.USER_ID=#{userId}
 </select>
+
+<!-- 添加购物车信息 -->
+<insert id="addProductCartInfo" parameterType="com.zcsh.epay.modules.product.vo.req.ProductInfoReq">
+        INSERT INTO FFT_ZCSH_PRODUCT_CART
+        (ID,CREATE_TIME,USER_ID,PRODUCT_ID,
+         PRODUCT_NUM,PRODUCT_SPECIFICATION)
+         VALUES
+        #{id,jdbcType=VARCHAR},
+         sysdate,
+        #{userId,jdbcType=VARCHAR},
+        #{productId,jdbcType=VARCHAR},
+        #{productNum,jdbcType=VARCHAR},
+        #{productSpecification,jdbcType=VARCHAR}
+        )
+</insert>
+
 </mapper>

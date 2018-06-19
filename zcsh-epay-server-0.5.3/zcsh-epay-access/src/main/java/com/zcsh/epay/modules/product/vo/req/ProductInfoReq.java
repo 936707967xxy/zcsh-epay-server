@@ -5,10 +5,19 @@ package com.zcsh.epay.modules.product.vo.req;
  */
 public class ProductInfoReq {
 
+	private String id;
 	/**
 	 * 商品编号
 	 */
 	private String productId;
+	/**
+	 * 商品数量
+	 */
+	private String productNum;
+	/**
+	 * 商品规格
+	 */
+	private String productSpecification;
 	/**
 	 * 展示类型
 	 */

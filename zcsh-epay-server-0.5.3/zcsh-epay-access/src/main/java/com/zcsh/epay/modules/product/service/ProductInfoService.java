@@ -99,4 +99,38 @@ public class ProductInfoService {
 		}
 		return res;
 	}
+	
+	/**
+	 * 作者：Administrator <br>
+	 * 创建时间：2018年6月19日 <br>
+	 * 描述： 添加购物车信息
+	 * @param req
+	 * @return
+	 */
+	public ResBody addProductCartInfo(ProductInfoReq req){
+		ResBody res=null;
+		SqlSession session = OracleManager.getSession().openSession();
+		try {
+			ProductInfoMapper mapper=session.getMapper(ProductInfoMapper.class);
+			Integer count=mapper.addProductCartInfo(req);
+			session.commit(true);
+			if(count>=1){
+				res =new ResBody(ResBody.SUCCESS_CODE,"购物车添加成功");
+			}else{
+				res =new ResBody(ResBody.ERROR_CODE,"购物车添加失败");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			if(null!=session){
+				session.rollback(true);
+			}
+			LogCvt.error("数据库操作异常:"+e.getMessage());
+			res =new ResBody(ResBody.ERROR_CODE,"数据库操作异常");
+		}finally{
+			if(null!=session){
+				session.close();
+			}
+		}
+		return res;
+	}
 }

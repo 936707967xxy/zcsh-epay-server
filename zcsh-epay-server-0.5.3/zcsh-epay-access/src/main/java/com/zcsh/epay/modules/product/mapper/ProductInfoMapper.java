@@ -1,6 +1,7 @@
 package com.zcsh.epay.modules.product.mapper;
 
 import java.util.List;
+
 import com.zcsh.epay.modules.product.vo.req.ProductInfoReq;
 import com.zcsh.epay.modules.product.vo.resp.ProductInfoResp;
 import com.zcsh.epay.util.Paging;
@@ -30,4 +31,13 @@ public interface ProductInfoMapper {
 	 * @return
 	 */
 	List<ProductInfoResp>queryProductCartList(Paging page,ProductInfoReq req);
+	/**
+	 * 添加购物车信息
+	 * 作者：Administrator <br>
+	 * 创建时间：2018年6月19日 <br>
+	 * 描述： 
+	 * @param req
+	 * @return
+	 */
+	Integer addProductCartInfo(ProductInfoReq req);
 }
