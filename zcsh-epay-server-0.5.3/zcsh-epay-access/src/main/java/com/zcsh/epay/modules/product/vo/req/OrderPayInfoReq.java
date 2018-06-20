@@ -21,6 +21,12 @@ public class OrderPayInfoReq {
 	 * 订单号
 	 */
 	private String orderNo;
+	/**
+	 * 当前用户编号
+	 */
+	private String userId;
+	
+	
 	public String getIsSelf() {
 		return isSelf;
 	}
@@ -38,5 +44,11 @@ public class OrderPayInfoReq {
 	}
 	public void setOrderNo(String orderNo) {
 		this.orderNo = orderNo;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 }

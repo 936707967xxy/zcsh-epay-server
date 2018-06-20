@@ -5,8 +5,15 @@
 <mapper namespace="com.zcsh.epay.modules.product.mapper.UserOrderMapper">
 
 <!-- 支付页面查询 -->
-<select id="queryOrderPayInfo">
-
+<select id="queryOrderPayInfo" parameterType="com.zcsh.epay.modules.product.vo.req.OrderPayInfoReq"
+        resultType="com.zcsh.epay.modules.product.vo.resp.OrderPayInfoResp">
+        SELECT
+        fzu.AMOUNT_AVAILABLE AS amountAvailable,
+        fzu.AMOUNT_BONUS AS amountBonus,
+        fzu.AMOUNT_VOUCHER AS amountVoucher
+        FROM FFT_ZCSH_USERS fzu
+        WHERE
+        fzu.USER_ID=#{userId}
 </select>
 
 
