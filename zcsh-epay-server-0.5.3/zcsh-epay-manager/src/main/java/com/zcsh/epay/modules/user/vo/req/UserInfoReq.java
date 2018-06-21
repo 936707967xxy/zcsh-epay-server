@@ -7,11 +7,15 @@ package com.zcsh.epay.modules.user.vo.req;
  */
 public class UserInfoReq {
 
-	private String userId;
+	private String sessionManagerKey;
 	
+	
+	private String userId;
 	private String userName;
 	private String loginName;
 	private String loginPwd;
+	
+	
 	public int  pageNumber;
 	public int pageSize;
 
@@ -61,5 +65,13 @@ public class UserInfoReq {
 
 	public void setLoginPwd(String loginPwd) {
 		this.loginPwd = loginPwd;
+	}
+
+	public String getSessionManagerKey() {
+		return sessionManagerKey;
+	}
+
+	public void setSessionManagerKey(String sessionManagerKey) {
+		this.sessionManagerKey = sessionManagerKey;
 	}
 }
