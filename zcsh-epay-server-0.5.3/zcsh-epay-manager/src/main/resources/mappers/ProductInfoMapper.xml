@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+  
+<mapper namespace="com.zcsh.epay.modules.product.mapper.ProductInfoMapper">
+
+<!-- 系统首页信息统计 -->
+<select id="queryStatisticsData" parameterType="com.zcsh.epay.modules.user.vo.req.UserInfoReq"
+        resultType="com.zcsh.epay.modules.product.vo.resp.SystemHomeResp">
+		
+		SELECT
+		fzo.AMT,
+		fzo.CREATE_TIME
+		FROM FFT_ZCSH_ORDER fzo
+		WHERE
+		<![CDATA[ fzo.CREATE_TIME <= #{monthDay,jdbcType=TIMESTAMP}]]>
+		<![CDATA[ AND fzo.CREATE_TIME >= #{day,jdbcType=TIMESTAMP}]]>
+		AND fzo.ORDER_STATUS='3'
+</select>
+</mapper>  

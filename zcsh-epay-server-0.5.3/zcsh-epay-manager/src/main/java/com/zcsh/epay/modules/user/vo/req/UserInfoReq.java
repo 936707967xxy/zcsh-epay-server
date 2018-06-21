@@ -1,5 +1,7 @@
 package com.zcsh.epay.modules.user.vo.req;
 
+import java.util.Date;
+
 /**
  * 作者：Administrator <br>
  * 创建时间：2018年6月5日 <br>
@@ -7,8 +9,22 @@ package com.zcsh.epay.modules.user.vo.req;
  */
 public class UserInfoReq {
 
+	/**
+	 * 用户标识
+	 */
 	private String sessionManagerKey;
-	
+	/**
+	 * 当前日期
+	 */
+	private Date day;
+	/**
+	 * 周日期
+	 */
+	private Date weekDay;
+	/**
+	 * 月日期
+	 */
+	private Date monthDay;
 	
 	private String userId;
 	private String userName;
@@ -73,5 +89,29 @@ public class UserInfoReq {
 
 	public void setSessionManagerKey(String sessionManagerKey) {
 		this.sessionManagerKey = sessionManagerKey;
+	}
+
+	public Date getDay() {
+		return day;
+	}
+
+	public void setDay(Date day) {
+		this.day = day;
+	}
+
+	public Date getWeekDay() {
+		return weekDay;
+	}
+
+	public void setWeekDay(Date weekDay) {
+		this.weekDay = weekDay;
+	}
+
+	public Date getMonthDay() {
+		return monthDay;
+	}
+
+	public void setMonthDay(Date monthDay) {
+		this.monthDay = monthDay;
 	}
 }

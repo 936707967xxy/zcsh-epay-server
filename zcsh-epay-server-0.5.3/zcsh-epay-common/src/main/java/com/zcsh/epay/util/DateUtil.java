@@ -766,11 +766,38 @@ public class DateUtil {
  		return beginDate;
  	}
 	
+ 	/**
+	 * @param date
+	 * @param type
+	 * @return
+	 * @Description:字符串转日期
+	 * @param
+	 */
+	public static Date stringToDate(String date, String type) {
+		Date newDate = null;
+		SimpleDateFormat sdf = new SimpleDateFormat(type);
+		try {
+			newDate = sdf.parse(date);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return newDate;
+	}
+
+	/**
+	 * @param date
+	 * @param type
+	 * @return
+	 * @Description:日期转字符串
+	 * @param
+	 */
+	public static String dateToString(Date date, String type) {
+		SimpleDateFormat sdf = new SimpleDateFormat(type);
+		return sdf.format(date);
+	}
+	
     public static void main(String[] args) throws ParseException {
-    	/*Calendar c = Calendar.getInstance();//可以对每个时间域单独修改 
-    	int month = c.get(Calendar.MONTH); 
-    	int date = c.get(Calendar.DATE); 
-    	 System.out.println("ssssssssssssssss"+date);*/
-//    	System.out.println(DateUtil.getPrefixDate(-1,"yyyyMMdd"));
+    	System.out.println(dateToString(DateUtil.addDaysToDate(new Date(), -7),anotherByte20Format));
 	}
 }
