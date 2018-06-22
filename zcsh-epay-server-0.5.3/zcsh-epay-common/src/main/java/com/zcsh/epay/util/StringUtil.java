@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.lang.Character.UnicodeBlock;
+import java.math.BigDecimal;
 import java.sql.Clob;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
@@ -906,5 +907,30 @@ public final class StringUtil {
         return sb.toString();
     }
 
+    /**
+	 * 作者：Administrator <br>
+	 * 创建时间：2018年4月20日 <br>
+	 * 描述： 金额相加 
+	 * @param value1
+	 * @param value2
+	 * @param scale 小数点后保留几位
+	 * @return
+	 */
+	public static double amountAdd(double value1,double value2,int scale){
+		double result=new BigDecimal(Double.toString(value1))
+		.add(new BigDecimal(Double.toString(value2)))
+		.setScale(scale, BigDecimal.ROUND_HALF_UP).doubleValue();
+		return result;
+	}
+	/**
+	 * 作者：Administrator <br>
+	 * 创建时间：2018年4月26日 <br>
+	 * 描述： 字符串转金额
+	 * @param value
+	 * @return
+	 */
+	public static BigDecimal StringToBigDecimal(String value){
+		return new BigDecimal(Double.parseDouble(value)).setScale(2,BigDecimal.ROUND_HALF_UP);
+	}
     
 }

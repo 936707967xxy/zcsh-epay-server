@@ -8,6 +8,14 @@ package com.zcsh.epay.modules.product.vo.resp;
 public class SystemHomeResp {
 
 	/**
+	 * 订单金额
+	 */
+	private String amt;
+	/**
+	 * 时间
+	 */
+	private String createTime;
+	/**
 	 * 日交易额
 	 */
 	private String dayTradingAmount;
@@ -48,5 +56,17 @@ public class SystemHomeResp {
 	}
 	public void setSystemNotice(String systemNotice) {
 		SystemNotice = systemNotice;
+	}
+	public String getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+	public String getAmt() {
+		return amt;
+	}
+	public void setAmt(String amt) {
+		this.amt = amt;
 	}
 }

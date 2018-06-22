@@ -5,7 +5,7 @@
 	<artifactId>zcsh-epay-server</artifactId>
 	<version>0.5.3-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>Froad Epay Payment</name>
+	<name>ZCSH Epay Payment</name>
 	<modules>
 		<module>zcsh-epay-common</module>
 		<module>zcsh-epay-manager</module>

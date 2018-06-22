@@ -9,8 +9,8 @@
         resultType="com.zcsh.epay.modules.product.vo.resp.SystemHomeResp">
 		
 		SELECT
-		fzo.AMT,
-		fzo.CREATE_TIME
+		NVL(fzo.AMT,0) AS amt,
+		TO_CHAR(fzo.CREATE_TIME,'yyyyMMdd') AS createTime
 		FROM FFT_ZCSH_ORDER fzo
 		WHERE
 		<![CDATA[ fzo.CREATE_TIME <= #{monthDay,jdbcType=TIMESTAMP}]]>

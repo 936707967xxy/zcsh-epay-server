@@ -796,8 +796,18 @@ public class DateUtil {
 		SimpleDateFormat sdf = new SimpleDateFormat(type);
 		return sdf.format(date);
 	}
-	
+	/**
+	 * 作者：Administrator <br>
+	 * 创建时间：2018年6月22日 <br>
+	 * 描述： 获取当前时间号数
+	 * @return
+	 */
+	public static Integer getDays(){
+		String date=dateToString(new Date(),standardFormat);
+		return Integer.parseInt(date.substring((date.length()-2),date.length()));
+	}
     public static void main(String[] args) throws ParseException {
-    	System.out.println(dateToString(DateUtil.addDaysToDate(new Date(), -7),anotherByte20Format));
+    	//System.out.println(dateToString(DateUtil.addDaysToDate(new Date(), -7),anotherByte20Format));
+    	System.out.println(getDays());
 	}
 }

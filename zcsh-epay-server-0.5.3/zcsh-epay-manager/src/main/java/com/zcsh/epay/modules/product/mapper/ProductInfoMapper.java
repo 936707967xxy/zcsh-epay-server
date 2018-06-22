@@ -1,5 +1,7 @@
 package com.zcsh.epay.modules.product.mapper;
 
+import java.util.List;
+
 import com.zcsh.epay.modules.product.vo.resp.SystemHomeResp;
 import com.zcsh.epay.modules.user.vo.req.UserInfoReq;
 
@@ -17,5 +19,5 @@ public interface ProductInfoMapper {
 	 * @param req
 	 * @return
 	 */
-	public SystemHomeResp queryStatisticsData(UserInfoReq req);
+	public List<SystemHomeResp> queryStatisticsData(UserInfoReq req);
 }
