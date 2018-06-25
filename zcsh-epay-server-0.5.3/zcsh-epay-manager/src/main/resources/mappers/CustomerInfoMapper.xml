@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+  
+<mapper namespace="com.zcsh.epay.modules.user.mapper.CustomerInfoMapper">
+<!--  会员信息查询 -->
+<select id="queryCustomerInfo" parameterType="com.zcsh.epay.modules.user.vo.req.CustomerInfoReq"
+        resultType="com.zcsh.epay.modules.user.vo.resp.CustomerInfoResp">
+		SELECT 
+		USER_ID,
+		OPEN_ID
+		FROM FFT_ZCSH_USERS user
+		WHERE
+		user
+</select>
+</mapper>  
